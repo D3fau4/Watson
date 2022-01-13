@@ -59,5 +59,15 @@ namespace Watson.Lib.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Byte[].
+        /// </summary>
+        internal static byte[] classdata {
+            get {
+                object obj = ResourceManager.GetObject("classdata", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

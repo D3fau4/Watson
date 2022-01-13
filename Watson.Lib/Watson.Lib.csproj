@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Yarhl" Version="3.1.1-preview.55" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AssetsTools.NET\AssetTools.NET\AssetsTools.NET.csproj" />
   </ItemGroup>
 

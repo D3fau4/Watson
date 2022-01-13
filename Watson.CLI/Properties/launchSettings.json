@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Watson.CLI": {
+      "commandName": "Project",
+      "commandLineArgs": "\"E:\\Games\\The Silver Case\\TheSilverCase_Data\\level0\""
+    }
+  }
+}
