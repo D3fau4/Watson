@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Watson.Lib", "Watson.Lib\Wa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Watson.CLI", "Watson.CLI\Watson.CLI.csproj", "{033278A0-32B4-4F0A-820E-F575981FEAA1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssetsTools.NET", "AssetsTools.NET\AssetTools.NET\AssetsTools.NET.csproj", "{86A1CEE2-4694-4217-8FA1-FA0E57D488DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{033278A0-32B4-4F0A-820E-F575981FEAA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{033278A0-32B4-4F0A-820E-F575981FEAA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{033278A0-32B4-4F0A-820E-F575981FEAA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86A1CEE2-4694-4217-8FA1-FA0E57D488DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86A1CEE2-4694-4217-8FA1-FA0E57D488DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86A1CEE2-4694-4217-8FA1-FA0E57D488DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86A1CEE2-4694-4217-8FA1-FA0E57D488DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
