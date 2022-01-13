@@ -11,11 +11,6 @@ namespace Watson.Program
         public static void Main(string[] args)
         {
             UnityAssets file = new UnityAssets(args[0]);
-
-            foreach (var asset in file.GetAssetsOfType(1))
-            {
-                Console.WriteLine(asset.ReadName());
-            }
         }
     }
 }

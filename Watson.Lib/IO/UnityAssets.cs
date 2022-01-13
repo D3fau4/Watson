@@ -35,7 +35,7 @@ namespace Watson.Lib.IO
             }
         }
 
-        public List<AssetFileInfoEx> GetAssetsOfType(int ID)
+        public List<AssetFileInfoEx> GetAssetsOfType(AssetClassID ID)
         {
             List<AssetFileInfoEx> list = new List<AssetFileInfoEx>();
             foreach (var inf in Assets.table.GetAssetsOfType((int)ID))
