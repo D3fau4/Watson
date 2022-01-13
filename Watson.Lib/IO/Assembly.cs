@@ -16,8 +16,9 @@ namespace Watson.Lib.IO
         }
 
         public AssemblyType assemblyType;
+        public string AssemblyFolder;
 
-        public Assembly(string DataFolder)
+        public Assembly(string DataFolder, Stream assetstream = null, string exepath = null, string metadatapath = null)
         {
             if (Directory.Exists(Path.Combine(DataFolder, "Managed")))
                 assemblyType = AssemblyType.Mono;
@@ -27,10 +28,27 @@ namespace Watson.Lib.IO
 
             if (assemblyType == AssemblyType.IL2CPP)
             {
-                Cpp2IlApi.InitializeLibCpp2Il("", "", new int[] { 1, 2, 3 }, false);
-            }
+                Cpp2IlApi.InitializeLibCpp2Il(exepath, metadatapath, Cpp2IlApi.GetVersionFromDataUnity3D(assetstream), false);
+                var Dlls = Cpp2IlApi.MakeDummyDLLs();
+                
+                foreach (var Dll in Dlls)
+                {
+                    string tmp = $"{Path.GetTempPath()}{Path.PathSeparator}Assembly{Path.PathSeparator}";
 
-            throw new NotImplementedException();
+                    if (Directory.Exists(tmp))
+                        Directory.Delete(tmp, true);
+
+                    Directory.CreateDirectory(tmp);
+
+                    Dll.Write(Path.Combine(tmp, Dll.FullName));
+
+                    AssemblyFolder = tmp;
+                }
+            } 
+            else
+            {
+                AssemblyFolder = Path.Combine(DataFolder, "Managed");
+            }
         }
     }
 }
