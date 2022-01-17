@@ -10,28 +10,34 @@ namespace Watson.Lib.IO
         private BundleFileInstance Bundle;
 
         public UnityAssets(Stream stream, bool IsBundle = false) => throw new NotImplementedException();
+        public void Close() => AM.UnloadAll();
 
-        public UnityAssets(string file, bool IsBundle = false)
+        public UnityAssets(string file)
         {
-            if (!IsBundle)
+            AM = new AssetsManager();
+            try
             {
-                AM = new AssetsManager();
-
                 Assets = AM.LoadAssetsFile(file, true);
 
                 AM.LoadClassPackage(new MemoryStream(Resources.Resources.classdata));
                 AM.LoadClassDatabaseFromPackage(Assets.file.typeTree.unityVersion);
-            }
-            else
+            } 
+            catch(Exception ex)
             {
-                AM = new AssetsManager();
+                // Si recibe un error de que el archivo es muy pequeño intentar abrir como AssetBundle. 
+                if (ex.Message.Contains("too small"))
+                {
+                    // Descargar lo que haya conseguido cargar.
+                    AM.UnloadAll();
 
-                Bundle = AM.LoadBundleFile(file, true);
-                // Siempre index 0 ya que es el que contiene todos los archivos
-                Assets = AM.LoadAssetsFileFromBundle(Bundle, 0, true);
+                    Bundle = AM.LoadBundleFile(file, true);
 
-                AM.LoadClassPackage(new MemoryStream(Resources.Resources.classdata));
-                AM.LoadClassDatabaseFromPackage(Assets.file.typeTree.unityVersion);
+                    // Siempre index 0 ya que es el que contiene todos los archivos
+                    Assets = AM.LoadAssetsFileFromBundle(Bundle, 0, true);
+
+                    AM.LoadClassPackage(new MemoryStream(Resources.Resources.classdata));
+                    AM.LoadClassDatabaseFromPackage(Assets.file.typeTree.unityVersion);
+                }
             }
         }
 
@@ -43,11 +49,6 @@ namespace Watson.Lib.IO
                 list.Add(inf);
             }
             return list;
-        }
-
-        public void Close()
-        {
-            AM.UnloadAll();
         }
     }
 }
