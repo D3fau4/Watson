@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Watson.Lib
+﻿namespace Watson.Lib
 {
     public class UnityManager
     {
-
+        public static void Init()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

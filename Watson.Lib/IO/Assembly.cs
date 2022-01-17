@@ -1,9 +1,4 @@
 ﻿using Cpp2IL.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Watson.Lib.IO
 {
@@ -30,7 +25,7 @@ namespace Watson.Lib.IO
             {
                 Cpp2IlApi.InitializeLibCpp2Il(exepath, metadatapath, Cpp2IlApi.GetVersionFromDataUnity3D(assetstream), false);
                 var Dlls = Cpp2IlApi.MakeDummyDLLs();
-                
+
                 foreach (var Dll in Dlls)
                 {
                     string tmp = $"{Path.GetTempPath()}{Path.PathSeparator}Assembly{Path.PathSeparator}";
@@ -44,7 +39,7 @@ namespace Watson.Lib.IO
 
                     AssemblyFolder = tmp;
                 }
-            } 
+            }
             else
             {
                 AssemblyFolder = Path.Combine(DataFolder, "Managed");

@@ -2,7 +2,7 @@
   "profiles": {
     "Watson.CLI": {
       "commandName": "Project",
-      "commandLineArgs": "\"E:\\Games\\The Silver Case\\TheSilverCase_Data\\level0\""
+      "commandLineArgs": "\"E:\\Games\\AI The Somnium Files\\AI_TheSomniumFiles_Data\\StreamingAssets\\AssetBundles\\StandaloneWindows64\\fonts\""
     }
   }
 }

@@ -5,7 +5,7 @@ namespace Watson.Lib.IO
 {
     public class UnityAssets
     {
-        private AssetsManager AM;
+        public AssetsManager AM;
         public  AssetsFileInstance Assets;
         private BundleFileInstance Bundle;
 
@@ -43,6 +43,11 @@ namespace Watson.Lib.IO
                 list.Add(inf);
             }
             return list;
+        }
+
+        public void Close()
+        {
+            AM.UnloadAll();
         }
     }
 }
