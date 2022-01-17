@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/nesrak1/AssetsTools.NET.git
 	branch = master
-	commit = 8a22a83174b16202ade1e3030f62375f3c23dbbe
-	parent = 943fd0455ed66d04b7c830a2950eac2c8bb40203
+	commit = 8aa732e0a2351ac9ded2721830cdc6f60bb4099b
+	parent = e7faad45567c19f26aa52e5818c11a860a1162c9
 	method = merge
 	cmdver = 0.4.3
