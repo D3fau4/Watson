@@ -82,5 +82,11 @@ namespace Watson.Lib.Utils
 
             return ToImport;
         }
+
+        public void Close()
+        {
+            _old.Close();
+            _new.Close();
+        }
     }
 }
