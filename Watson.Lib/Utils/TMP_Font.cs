@@ -1,4 +1,5 @@
-﻿using AssetsTools.NET.Extra;
+﻿using AssetsTools.NET;
+using AssetsTools.NET.Extra;
 using Watson.Lib.IO;
 
 namespace Watson.Lib.Utils
@@ -10,9 +11,11 @@ namespace Watson.Lib.Utils
         private Assembly _oldDLL;
         private Assembly _newDLL;
 
-        public List<string> OldFontNames = new List<string>();
-        public List<string> NewFontNames = new List<string>();
+        public Dictionary<long, Tuple<string, AssetTypeValueField>> OldFontNames = new Dictionary<long, Tuple<string, AssetTypeValueField>>();
+        public Dictionary<long, Tuple<string, AssetTypeValueField>> NewFontNames = new Dictionary<long, Tuple<string, AssetTypeValueField>>();
         
+        public Dictionary<long, Tuple<string, AssetTypeValueField>> OldFontTextures = new Dictionary<long, Tuple<string, AssetTypeValueField>>();
+        public Dictionary<long, Tuple<string, AssetTypeValueField>> NewFontTextures = new Dictionary<long, Tuple<string, AssetTypeValueField>>();
 
         public TMP_Font(string FontBundleOld, string FontBundleNew, Assembly Oldassembly, Assembly Newassembly)
         {
@@ -33,7 +36,7 @@ namespace Watson.Lib.Utils
 
                 if (asset != null)
                     // Almacenar el nombre de asset que contiene la fuente.
-                    OldFontNames.Add(deserialized.Get("m_Name").GetValue().AsString());
+                    OldFontNames.Add(oldassets.index, Tuple.Create(deserialized.Get("m_Name").GetValue().AsString(), deserialized));
             }
 
             // Listar todas las fuentes de OLD
@@ -44,10 +47,21 @@ namespace Watson.Lib.Utils
 
                 if (asset != null)
                     // Almacenar el nombre de asset que contiene la fuente.
-                    NewFontNames.Add(deserialized.Get("m_Name").GetValue().AsString());
+                    NewFontNames.Add(newassets.index, Tuple.Create(deserialized.Get("m_Name").GetValue().AsString(), deserialized));
             }
 
             // Buscar Texture2D
+            foreach (var oldtextures in _old.GetAssetsOfType(AssetClassID.Texture2D))
+            {
+                var baseField = _old.AM.GetTypeInstance(_old.Assets, oldtextures).GetBaseField();
+                OldFontTextures.Add(oldtextures.index, Tuple.Create(baseField["m_Name"].value.AsString(), baseField));
+            }
+
+            foreach (var newtextures in _new.GetAssetsOfType(AssetClassID.Texture2D))
+            {
+                var baseField = _new.AM.GetTypeInstance(_new.Assets, newtextures).GetBaseField();
+                NewFontTextures.Add(newtextures.index, Tuple.Create(baseField["m_Name"].value.AsString(), baseField));
+            }
         }
 
         public List<string> GetToImportList()
@@ -56,8 +70,14 @@ namespace Watson.Lib.Utils
             // Buscar fuentes compatibles para importar
             foreach (var font in OldFontNames)
             {
-                if (NewFontNames.Contains(font))
-                    ToImport.Add(font);
+                foreach (var fontnew in NewFontNames)
+                {
+                    if (font.Value.Item1.Contains(fontnew.Value.Item1))
+                    {
+                        ToImport.Add(font.Value.Item1);
+                        break;
+                    }
+                }
             }
 
             return ToImport;

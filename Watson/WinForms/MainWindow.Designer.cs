@@ -39,7 +39,7 @@
             // 
             // button_ImportTMPfont
             // 
-            this.button_ImportTMPfont.Location = new System.Drawing.Point(238, 123);
+            this.button_ImportTMPfont.Location = new System.Drawing.Point(251, 123);
             this.button_ImportTMPfont.Name = "button_ImportTMPfont";
             this.button_ImportTMPfont.Size = new System.Drawing.Size(278, 47);
             this.button_ImportTMPfont.TabIndex = 1;
@@ -82,7 +82,7 @@
             // 
             this.labelTitleInfo.AutoSize = true;
             this.labelTitleInfo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelTitleInfo.Location = new System.Drawing.Point(293, 55);
+            this.labelTitleInfo.Location = new System.Drawing.Point(299, 55);
             this.labelTitleInfo.Name = "labelTitleInfo";
             this.labelTitleInfo.Size = new System.Drawing.Size(184, 25);
             this.labelTitleInfo.TabIndex = 3;

@@ -19,7 +19,7 @@ namespace Watson.Program
                 var name = MonoDeserializer.GetMonoBaseField(file.AM, file.Assets, da, $"E:\\Games\\AI The Somnium Files\\AI_TheSomniumFiles_Data\\Managed");
                 var font = name.Get("m_fontInfo");
                 if (font != null)
-                    Console.WriteLine(font.Get("Name").GetValue().AsString());
+                    Console.WriteLine(name.Get("m_Name").GetValue().AsString());
             }
             
             /*foreach (AssetFileInfoEx info in file.Assets.table.assetFileInfo)
