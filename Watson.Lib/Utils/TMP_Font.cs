@@ -83,6 +83,38 @@ namespace Watson.Lib.Utils
             return ToImport;
         }
 
+        public void Import()
+        {
+            foreach(var font in NewFontNames)
+            {
+                foreach(var fontold in OldFontNames)
+                {
+                    if (font.Value.Item1.Contains(fontold.Value.Item1))
+                    {
+                        /* Remplazar m_Script */
+                        // Establece el FileID
+                        font.Value.Item2["m_Script"]["m_FileID"].GetValue().Set(fontold.Value.Item2["m_Script"]["m_FileID"].GetValue().AsInt64());
+                        // Establece el PathID
+                        font.Value.Item2["m_Script"]["m_PathID"].GetValue().Set(fontold.Value.Item2["m_Script"]["m_PathID"].GetValue().AsInt64());
+                        /* Remplazar Material */
+                        // Establece el FileID
+                        font.Value.Item2["material"]["m_FileID"].GetValue().Set(fontold.Value.Item2["material"]["m_FileID"].GetValue().AsInt64());
+                        // Establece el PathID
+                        font.Value.Item2["material"]["m_PathID"].GetValue().Set(fontold.Value.Item2["material"]["m_PathID"].GetValue().AsInt64());
+                        /* Remplazar Material */
+                        // Establece el FileID
+                        font.Value.Item2["atlas"]["m_FileID"].GetValue().Set(fontold.Value.Item2["atlas"]["m_FileID"].GetValue().AsInt64());
+                        // Establece el PathID
+                        font.Value.Item2["atlas"]["m_PathID"].GetValue().Set(fontold.Value.Item2["atlas"]["m_PathID"].GetValue().AsInt64());
+                        
+                        var newMonoBytes = font.Value.Item2.WriteToByteArray();
+
+                        break;
+                    }
+                }
+            }
+        }
+
         public void Close()
         {
             _old.Close();

@@ -83,6 +83,9 @@ namespace Watson {
                 message += str + "\n";
             }
             MessageBox.Show(message);
+
+            import.Import();
+            MessageBox.Show("Done!");
         }
     }
 }
