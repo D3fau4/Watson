@@ -70,7 +70,7 @@ namespace Watson {
                 return;
             }
 
-            TMP_Font import = new TMP_Font(OldAssettextBox.Text, NewAssettextBox.Text,
+            /*TMPFont_Importer import = new TMPFont_Importer(OldAssettextBox.Text, NewAssettextBox.Text,
                 new Lib.IO.Assembly(OldDataFoldertextBox.Text), 
                 new Lib.IO.Assembly(NewDataFoldertextBox.Text));
 
@@ -85,7 +85,7 @@ namespace Watson {
             MessageBox.Show(message);
 
             import.Import();
-            MessageBox.Show("Done!");
+            MessageBox.Show("Done!");*/
         }
     }
 }
