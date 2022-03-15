@@ -2,9 +2,9 @@
 using AssetsTools.NET.Extra;
 using Watson.Lib.IO;
 
-namespace Watson.Lib.Utils
+namespace Watson.Lib.Utils.Helpers
 {
-    public static class Helpers
+    public static class AssetHelper
     {
         public static void Save(UnityAssets OldFontAssets, List<AssetsReplacer> m, AssetBundleCompressionType Compression = AssetBundleCompressionType.NONE)
         {
@@ -64,6 +64,37 @@ namespace Watson.Lib.Utils
             }
 
             return ToImport;
+        }
+    }
+
+    /// <summary>
+    /// Code from https://github.com/nesrak1/UABEA/blob/72a9912ea3909a670bdb7754e85588760448c0bd/TexturePlugin/Program.cs#L16-L53
+    /// </summary>
+    public static class TextureHelper
+    {
+        public static byte[] GetRawTextureBytes(TextureFile texFile, AssetsFileInstance inst)
+        {
+            string rootPath = Path.GetDirectoryName(inst.path);
+            if (texFile.m_StreamData.size != 0 && texFile.m_StreamData.path != string.Empty)
+            {
+                string fixedStreamPath = texFile.m_StreamData.path;
+                if (!Path.IsPathRooted(fixedStreamPath) && rootPath != null)
+                {
+                    fixedStreamPath = Path.Combine(rootPath, fixedStreamPath);
+                }
+                if (File.Exists(fixedStreamPath))
+                {
+                    Stream stream = File.OpenRead(fixedStreamPath);
+                    stream.Position = (long)texFile.m_StreamData.offset;
+                    texFile.pictureData = new byte[texFile.m_StreamData.size];
+                    stream.Read(texFile.pictureData, 0, (int)texFile.m_StreamData.size);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            return texFile.pictureData;
         }
     }
 }

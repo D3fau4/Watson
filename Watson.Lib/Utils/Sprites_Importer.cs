@@ -43,7 +43,31 @@ namespace Watson.Lib.Utils
                 {
                     if (sprite.Value.Item1.Equals(spriteold.Value.Item1))
                     {
+                        var encImageBytes = Helpers.TextureHelper.GetRawTextureBytes(TextureFile.ReadTextureFile(sprite.Value.Item2), sprite.Value.Item4);
+
+                        AssetTypeValueField m_StreamData = sprite.Value.Item2.Get("m_StreamData");
+                        // Limpiar referencias a la textura
+                        m_StreamData.Get("offset").GetValue().Set(0);
+                        m_StreamData.Get("size").GetValue().Set(0);
+                        m_StreamData.Get("path").GetValue().Set("");
+
+                        sprite.Value.Item2["m_StreamData"] = m_StreamData;
+
+                        /* Escribe la texture en assets */
+                        AssetTypeValueField image_data = sprite.Value.Item2.Get("image data");
+                        image_data.GetValue().type = EnumValueTypes.ByteArray;
+                        image_data.templateField.valueType = EnumValueTypes.ByteArray;
+                        AssetTypeByteArray byteArray = new AssetTypeByteArray()
+                        {
+                            size = (uint)encImageBytes.Length,
+                            data = encImageBytes
+                        };
+                        image_data.GetValue().Set(byteArray);
+                        sprite.Value.Item2["image data"] = image_data;
+
                         var Texture2Data = sprite.Value.Item2.WriteToByteArray();
+
+                        File.WriteAllBytes("sprite.bin", encImageBytes);
 
                         m.Add(new AssetsReplacerFromMemory(
                             0, spriteold.Value.Item3.index, (int)spriteold.Value.Item3.curFileType,

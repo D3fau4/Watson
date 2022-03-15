@@ -1,6 +1,7 @@
 ﻿using AssetsTools.NET;
 using Watson.Lib.IO;
 using Watson.Lib.Utils;
+using Watson.Lib.Utils.Helpers;
 
 namespace Watson {
     public partial class TMPFontImportWindow : Form
@@ -81,7 +82,7 @@ namespace Watson {
             }
 
             var asset = TMPFont_Importer.Import(m_tmpnew.m_FontNames, m_tmpold.m_FontNames, m_tmpnew.m_FontTextures, m_tmpold.m_FontTextures);
-            Helpers.Save(m_tmpold.m_Assets, asset, compression);
+            AssetHelper.Save(m_tmpold.m_Assets, asset, compression);
 
             MessageBox.Show("Done!");
         }

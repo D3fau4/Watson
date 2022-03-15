@@ -1,6 +1,7 @@
 ﻿using AssetsTools.NET;
 using Watson.Lib.IO;
 using Watson.Lib.Utils;
+using Watson.Lib.Utils.Helpers;
 
 namespace Watson {
     public partial class SpriteImportWindow : Form
@@ -82,7 +83,7 @@ namespace Watson {
 
             var m = Sprites_Importer.Import(m_new.m_Sprites, m_old.m_Sprites, m_new.m_Texture2D, m_old.m_Texture2D);
 
-            Helpers.Save(m_old.m_Assets, m, compression);
+            AssetHelper.Save(m_old.m_Assets, m, compression);
 
             MessageBox.Show("Done!");
         }
