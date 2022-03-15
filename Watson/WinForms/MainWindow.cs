@@ -27,5 +27,11 @@ namespace Watson
             TMPFontImportWindow tMPFontImportWindow = new TMPFontImportWindow();
             tMPFontImportWindow.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SpriteImportWindow tSpriteImportWindow = new SpriteImportWindow();
+            tSpriteImportWindow.ShowDialog();
+        }
     }
 }

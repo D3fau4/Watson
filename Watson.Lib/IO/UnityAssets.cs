@@ -28,7 +28,7 @@ namespace Watson.Lib.IO
             catch(Exception ex)
             {
                 // Si recibe un error de que el archivo es muy pequeño intentar abrir como AssetBundle. 
-                if (ex.Message.Contains("too small"))
+                if (ex.Message.Contains("too small") || ex.Message.Contains("Unable to read beyond the end"))
                 {
                     // Descargar lo que haya conseguido cargar.
                     AM.UnloadAll();

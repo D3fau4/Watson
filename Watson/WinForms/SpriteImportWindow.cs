@@ -3,9 +3,9 @@ using Watson.Lib.IO;
 using Watson.Lib.Utils;
 
 namespace Watson {
-    public partial class TMPFontImportWindow : Form
+    public partial class SpriteImportWindow : Form
     {
-        public TMPFontImportWindow()
+        public SpriteImportWindow()
         {
             InitializeComponent();
         }
@@ -63,12 +63,12 @@ namespace Watson {
                 return;
             }
 
-            TMPFont m_tmpold = new TMPFont(OldAssettextBox.Text, new Assembly(OldDataFoldertextBox.Text));
-            TMPFont m_tmpnew = new TMPFont(NewAssettextBox.Text, new Assembly(NewDataFoldertextBox.Text));
+            Sprites m_old = new Sprites(OldAssettextBox.Text);
+            Sprites m_new = new Sprites(NewAssettextBox.Text);
 
             AssetBundleCompressionType compression = AssetBundleCompressionType.NONE;
 
-            if (m_tmpold.m_Assets.IsBundle)
+            if (m_old.m_Assets.IsBundle)
             {
                 CustomMessageBox message = new CustomMessageBox("", "You want compress the final bundle?", "With LZ4", "With LZMA", "No");
                 var result = message.ShowDialog();
@@ -80,8 +80,9 @@ namespace Watson {
                     compression = AssetBundleCompressionType.NONE;
             }
 
-            var asset = TMPFont_Importer.Import(m_tmpnew.m_FontNames, m_tmpold.m_FontNames, m_tmpnew.m_FontTextures, m_tmpold.m_FontTextures);
-            Helpers.Save(m_tmpold.m_Assets, asset, compression);
+            var m = Sprites_Importer.Import(m_new.m_Sprites, m_old.m_Sprites, m_new.m_Texture2D, m_old.m_Texture2D);
+
+            Helpers.Save(m_old.m_Assets, m, compression);
 
             MessageBox.Show("Done!");
         }
