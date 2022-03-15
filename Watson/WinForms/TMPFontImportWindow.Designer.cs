@@ -91,7 +91,7 @@
             this.NewAssettextBox.Name = "NewAssettextBox";
             this.NewAssettextBox.Size = new System.Drawing.Size(207, 23);
             this.NewAssettextBox.TabIndex = 5;
-            this.NewAssettextBox.Text = "F:\\Unity\\AI\\Builds\\AI_Data\\sharedassets0.assets";
+            this.NewAssettextBox.Text = "F:\\Unity\\AI\\Builds\\win64\\AI_Data\\sharedassets0.assets";
             // 
             // OpenNewFilebutton
             // 
@@ -145,7 +145,7 @@
             this.NewDataFoldertextBox.Name = "NewDataFoldertextBox";
             this.NewDataFoldertextBox.Size = new System.Drawing.Size(207, 23);
             this.NewDataFoldertextBox.TabIndex = 11;
-            this.NewDataFoldertextBox.Text = "F:\\Unity\\AI\\Builds\\AI_Data";
+            this.NewDataFoldertextBox.Text = "F:\\Unity\\AI\\Builds\\win64\\AI_Data";
             // 
             // OpenNewDatabutton
             // 

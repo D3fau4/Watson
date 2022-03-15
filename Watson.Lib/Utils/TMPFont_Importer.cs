@@ -11,11 +11,12 @@ namespace Watson.Lib.Utils
         {
             List<string> ToImport = new List<string>();
             // Buscar fuentes compatibles para importar
-            foreach (var font in OldFontNames)
+            foreach (var font in NewFontNames)
             {
-                foreach (var fontnew in NewFontNames)
+                foreach (var fontold in OldFontNames)
                 {
-                    if (font.Value.Item1.Contains(fontnew.Value.Item1))
+                    // Puede que cambie en otras versiones
+                    if (font.Value.Item1.Replace(" Atlas", "-tex").Contains(fontold.Value.Item1))
                     {
                         ToImport.Add(font.Value.Item1);
                         break;
@@ -26,8 +27,11 @@ namespace Watson.Lib.Utils
             return ToImport;
         }
 
-        public static List<AssetsReplacer> Import(Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewFontNames, 
-            Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldFontNames)
+        public static List<AssetsReplacer> Import(
+            Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewFontNames, 
+            Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldFontNames, 
+            Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewFontTextures2D,
+            Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldFontTextures2D)
         {
             List<AssetsReplacer> m = new List<AssetsReplacer>();
 
@@ -68,8 +72,47 @@ namespace Watson.Lib.Utils
                     }
                 }
             }
+
+            foreach (var font in NewFontTextures2D)
+            {
+                foreach (var fontold in OldFontTextures2D)
+                {
+                    if (font.Value.Item1.Replace(" Atlas", "-tex").Contains(fontold.Value.Item1))
+                    {
+                        var Texture2Data = font.Value.Item2.WriteToByteArray();
+
+                        m.Add(new AssetsReplacerFromMemory(
+                            0, fontold.Value.Item3.index, (int)fontold.Value.Item3.curFileType,
+                            AssetHelper.GetScriptIndex(fontold.Value.Item4.file, fontold.Value.Item3), Texture2Data
+                        ));
+                    }
+                }
+            }
             return m;
         }
+
+        /*public static List<AssetsReplacer> ImportTexture2D(Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewFontTextures2D,
+            Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldFontTextures2D)
+        {
+            List<AssetsReplacer> m = new List<AssetsReplacer>();
+
+            foreach (var font in NewFontTextures2D)
+            {
+                foreach (var fontold in OldFontTextures2D)
+                {
+                    if (font.Value.Item1.Replace(" Atlas", "-tex").Contains(fontold.Value.Item1))
+                    {
+                        var Texture2Data = font.Value.Item2.WriteToByteArray();
+
+                        m.Add(new AssetsReplacerFromMemory(
+                            0, fontold.Value.Item3.index, (int)fontold.Value.Item3.curFileType,
+                            AssetHelper.GetScriptIndex(fontold.Value.Item4.file, fontold.Value.Item3), Texture2Data
+                        ));
+                    }
+                }
+            }
+            return m;
+        }*/
 
         public static void Save(UnityAssets OldFontAssets, List<AssetsReplacer> m)
         {
@@ -98,6 +141,7 @@ namespace Watson.Lib.Utils
                     {
                         // hacer esto seleccionable
                         bun.file.Pack(bun.file.reader, writer, AssetBundleCompressionType.LZ4);
+                        am.UnloadAll(true);
                     }
                 }
             } 
