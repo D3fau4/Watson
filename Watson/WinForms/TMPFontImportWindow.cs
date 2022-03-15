@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AssetsTools.NET;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -50,7 +51,7 @@ namespace Watson {
             }
         }
 
-        private void Submitbutton_Click(object sender, EventArgs e)
+        private async void Submitbutton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(NewAssettextBox.Text) || string.IsNullOrEmpty(OldAssettextBox.Text) || 
                 string.IsNullOrEmpty(NewDataFoldertextBox.Text) || string.IsNullOrEmpty(OldDataFoldertextBox.Text))
@@ -74,9 +75,22 @@ namespace Watson {
             TMPFont m_tmpold = new TMPFont(OldAssettextBox.Text, new Assembly(OldDataFoldertextBox.Text));
             TMPFont m_tmpnew = new TMPFont(NewAssettextBox.Text, new Assembly(NewDataFoldertextBox.Text));
 
-            var asset = TMPFont_Importer.Import(m_tmpnew.m_FontNames, m_tmpold.m_FontNames, m_tmpnew.m_FontTextures, m_tmpold.m_FontTextures);
+            AssetBundleCompressionType compression = AssetBundleCompressionType.NONE;
 
-            TMPFont_Importer.Save(m_tmpold.m_Assets, asset);
+            if (m_tmpold.m_Assets.IsBundle)
+            {
+                CustomMessageBox message = new CustomMessageBox("", "You want compress the final bundle?", "With LZ4", "With LZMA", "No");
+                var result = message.ShowDialog();
+                if (result == DialogResult.Yes)
+                    compression = AssetBundleCompressionType.LZ4;
+                else if (result == DialogResult.No)
+                    compression = AssetBundleCompressionType.LZMA;
+                else if (result == DialogResult.Cancel)
+                    compression = AssetBundleCompressionType.NONE;
+            }
+
+            var asset = TMPFont_Importer.Import(m_tmpnew.m_FontNames, m_tmpold.m_FontNames, m_tmpnew.m_FontTextures, m_tmpold.m_FontTextures);
+            TMPFont_Importer.Save(m_tmpold.m_Assets, asset, compression);
 
             MessageBox.Show("Done!");
         }

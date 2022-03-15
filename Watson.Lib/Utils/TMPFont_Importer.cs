@@ -27,6 +27,7 @@ namespace Watson.Lib.Utils
             return ToImport;
         }
 
+        // Esto es mas feo que pegar a un padre
         public static List<AssetsReplacer> Import(
             Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewFontNames, 
             Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldFontNames, 
@@ -91,30 +92,7 @@ namespace Watson.Lib.Utils
             return m;
         }
 
-        /*public static List<AssetsReplacer> ImportTexture2D(Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewFontTextures2D,
-            Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldFontTextures2D)
-        {
-            List<AssetsReplacer> m = new List<AssetsReplacer>();
-
-            foreach (var font in NewFontTextures2D)
-            {
-                foreach (var fontold in OldFontTextures2D)
-                {
-                    if (font.Value.Item1.Replace(" Atlas", "-tex").Contains(fontold.Value.Item1))
-                    {
-                        var Texture2Data = font.Value.Item2.WriteToByteArray();
-
-                        m.Add(new AssetsReplacerFromMemory(
-                            0, fontold.Value.Item3.index, (int)fontold.Value.Item3.curFileType,
-                            AssetHelper.GetScriptIndex(fontold.Value.Item4.file, fontold.Value.Item3), Texture2Data
-                        ));
-                    }
-                }
-            }
-            return m;
-        }*/
-
-        public static void Save(UnityAssets OldFontAssets, List<AssetsReplacer> m)
+        public static void Save(UnityAssets OldFontAssets, List<AssetsReplacer> m, AssetBundleCompressionType Compression = AssetBundleCompressionType.NONE)
         {
             //write changes to memory
             byte[] newAssetData;
@@ -133,6 +111,8 @@ namespace Watson.Lib.Utils
                 var bunWriter = new AssetsFileWriter(File.OpenWrite("TMP.unity3d"));
                 OldFontAssets.Bundle.file.Write(bunWriter, new List<BundleReplacer>() { bunRepl });
                 bunWriter.Close();
+
+                if (Compression != AssetBundleCompressionType.NONE)
                 {
                     var am = new AssetsManager();
                     var bun = am.LoadBundleFile("TMP.unity3d");
@@ -140,7 +120,7 @@ namespace Watson.Lib.Utils
                     using (var writer = new AssetsFileWriter(stream))
                     {
                         // hacer esto seleccionable
-                        bun.file.Pack(bun.file.reader, writer, AssetBundleCompressionType.LZ4);
+                        bun.file.Pack(bun.file.reader, writer, Compression);
                         am.UnloadAll(true);
                     }
                 }
