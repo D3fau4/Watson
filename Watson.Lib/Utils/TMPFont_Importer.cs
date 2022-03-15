@@ -87,8 +87,19 @@ namespace Watson.Lib.Utils
                 //rename this asset name from boring to cool when saving
                 var bunRepl = new BundleReplacerFromMemory(OldFontAssets.Assets.name, null, true, newAssetData, 0);
 
-                var bunWriter = new AssetsFileWriter(File.OpenWrite("coolbundle.unity3d"));
+                var bunWriter = new AssetsFileWriter(File.OpenWrite("TMP.unity3d"));
                 OldFontAssets.Bundle.file.Write(bunWriter, new List<BundleReplacer>() { bunRepl });
+                bunWriter.Close();
+                {
+                    var am = new AssetsManager();
+                    var bun = am.LoadBundleFile("TMP.unity3d");
+                    using (var stream = File.OpenWrite(OldFontAssets.AssetName))
+                    using (var writer = new AssetsFileWriter(stream))
+                    {
+                        // hacer esto seleccionable
+                        bun.file.Pack(bun.file.reader, writer, AssetBundleCompressionType.LZ4);
+                    }
+                }
             } 
             else
             {
