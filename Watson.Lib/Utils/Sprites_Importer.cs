@@ -24,8 +24,16 @@ namespace Watson.Lib.Utils
                 {
                     if (sprite.Value.Item1.Equals(spriteold.Value.Item1))
                     {
-                        sprite.Value.Item2["m_RenderDataKey"] = spriteold.Value.Item2["m_RenderDataKey"];
-                        sprite.Value.Item2["m_RD"]["texture"] = spriteold.Value.Item2["m_RD"]["texture"];
+
+                        sprite.Value.Item2["m_RenderDataKey"]["first"][0].GetValue().Set(spriteold.Value.Item2["m_RenderDataKey"]["first"][0].GetValue().AsUInt());
+                        sprite.Value.Item2["m_RenderDataKey"]["first"][1].GetValue().Set(spriteold.Value.Item2["m_RenderDataKey"]["first"][1].GetValue().AsUInt());
+                        sprite.Value.Item2["m_RenderDataKey"]["first"][2].GetValue().Set(spriteold.Value.Item2["m_RenderDataKey"]["first"][2].GetValue().AsUInt());
+                        sprite.Value.Item2["m_RenderDataKey"]["first"][3].GetValue().Set(spriteold.Value.Item2["m_RenderDataKey"]["first"][0].GetValue().AsUInt());
+
+                        sprite.Value.Item2["m_RenderDataKey"]["second"].GetValue().Set(spriteold.Value.Item2["m_RenderDataKey"]["second"].GetValue().AsInt64());
+
+                        sprite.Value.Item2["m_RD"]["texture"]["m_FileID"].GetValue().Set(spriteold.Value.Item2["m_RD"]["texture"]["m_FileID"].GetValue().AsInt());
+                        sprite.Value.Item2["m_RD"]["texture"]["m_PathID"].GetValue().Set(spriteold.Value.Item2["m_RD"]["texture"]["m_PathID"].GetValue().AsInt64());
 
                         var SpriteData = sprite.Value.Item2.WriteToByteArray();
 
