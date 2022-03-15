@@ -10,15 +10,15 @@ namespace Watson.Lib.IO
 {
     public class TMPFont
     {
-        private UnityAssets m_Assets;
+        public UnityAssets m_Assets;
         private Assembly m_DLL;
-        public Dictionary<long, Tuple<string, AssetTypeValueField>> m_FontNames;
-        public Dictionary<long, Tuple<string, AssetTypeValueField>> m_FontTextures;
+        public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> m_FontNames;
+        public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> m_FontTextures;
 
         public TMPFont(string FontBundle, Assembly assembly)
         {
-            m_FontNames = new Dictionary<long, Tuple<string, AssetTypeValueField>>();
-            m_FontTextures = new Dictionary<long, Tuple<string, AssetTypeValueField>>();
+            m_FontNames = new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>>();
+            m_FontTextures = new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>>();
 
             m_Assets = new UnityAssets(FontBundle);
             m_DLL = assembly;
@@ -31,17 +31,16 @@ namespace Watson.Lib.IO
             {
                 var deserialized = MonoDeserializer.GetMonoBaseField(m_Assets.AM, m_Assets.Assets, Asset, m_DLL.AssemblyFolder);
                 var asset = deserialized.Get("m_fontInfo");
-
                 if (asset != null)
                     // Almacenar el nombre de asset que contiene la fuente.
-                    m_FontNames.Add(Asset.index, Tuple.Create(deserialized.Get("m_Name").GetValue().AsString(), deserialized));
+                    m_FontNames.Add(Asset.index, Tuple.Create(deserialized.Get("m_Name").GetValue().AsString(), deserialized, Asset, m_Assets.Assets));
             }
 
             // Buscar Texture2D
             foreach (var Texture in m_Assets.GetAssetsOfType(AssetClassID.Texture2D))
             {
                 var baseField = m_Assets.AM.GetTypeInstance(m_Assets.Assets, Texture).GetBaseField();
-                m_FontTextures.Add(Texture.index, Tuple.Create(baseField["m_Name"].value.AsString(), baseField));
+                m_FontTextures.Add(Texture.index, Tuple.Create(baseField["m_Name"].value.AsString(), baseField, Texture, m_Assets.Assets));
             }
         }
     }

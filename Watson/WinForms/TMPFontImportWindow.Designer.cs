@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.OldAssettextBox = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -44,24 +42,7 @@
             this.NewDataFoldertextBox = new System.Windows.Forms.TextBox();
             this.OpenNewDatabutton = new System.Windows.Forms.Button();
             this.Submitbutton = new System.Windows.Forms.Button();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivoToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(340, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // archivoToolStripMenuItem
-            // 
-            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.archivoToolStripMenuItem.Text = "Archivo";
             // 
             // label1
             // 
@@ -78,6 +59,8 @@
             this.OldAssettextBox.Name = "OldAssettextBox";
             this.OldAssettextBox.Size = new System.Drawing.Size(207, 23);
             this.OldAssettextBox.TabIndex = 2;
+            this.OldAssettextBox.Text = "E:\\Games\\AI The Somnium Files\\AI_TheSomniumFiles_Data\\StreamingAssets\\AssetBundle" +
+    "s\\StandaloneWindows64\\fonts";
             // 
             // openFileDialog1
             // 
@@ -108,6 +91,7 @@
             this.NewAssettextBox.Name = "NewAssettextBox";
             this.NewAssettextBox.Size = new System.Drawing.Size(207, 23);
             this.NewAssettextBox.TabIndex = 5;
+            this.NewAssettextBox.Text = "F:\\Unity\\AI\\Builds\\AI_Data\\sharedassets0.assets";
             // 
             // OpenNewFilebutton
             // 
@@ -134,6 +118,7 @@
             this.OldDataFoldertextBox.Name = "OldDataFoldertextBox";
             this.OldDataFoldertextBox.Size = new System.Drawing.Size(207, 23);
             this.OldDataFoldertextBox.TabIndex = 8;
+            this.OldDataFoldertextBox.Text = "E:\\Games\\AI The Somnium Files\\AI_TheSomniumFiles_Data";
             // 
             // OpenOldDatabutton
             // 
@@ -160,6 +145,7 @@
             this.NewDataFoldertextBox.Name = "NewDataFoldertextBox";
             this.NewDataFoldertextBox.Size = new System.Drawing.Size(207, 23);
             this.NewDataFoldertextBox.TabIndex = 11;
+            this.NewDataFoldertextBox.Text = "F:\\Unity\\AI\\Builds\\AI_Data";
             // 
             // OpenNewDatabutton
             // 
@@ -199,22 +185,15 @@
             this.Controls.Add(this.OpenOldFilebutton);
             this.Controls.Add(this.OldAssettextBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "TMPFontImportWindow";
             this.Text = "Watson - TMPFontImportWindow";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem archivoToolStripMenuItem;
         private Label label1;
         private TextBox OldAssettextBox;
         private OpenFileDialog openFileDialog1;

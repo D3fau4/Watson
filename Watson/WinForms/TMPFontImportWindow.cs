@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Watson.Lib.IO;
 using Watson.Lib.Utils;
 
 namespace Watson {
@@ -70,22 +71,14 @@ namespace Watson {
                 return;
             }
 
-            /*TMPFont_Importer import = new TMPFont_Importer(OldAssettextBox.Text, NewAssettextBox.Text,
-                new Lib.IO.Assembly(OldDataFoldertextBox.Text), 
-                new Lib.IO.Assembly(NewDataFoldertextBox.Text));
+            TMPFont m_tmpold = new TMPFont(OldAssettextBox.Text, new Assembly(OldDataFoldertextBox.Text));
+            TMPFont m_tmpnew = new TMPFont(NewAssettextBox.Text, new Assembly(NewDataFoldertextBox.Text));
 
-            var meme = import.GetToImportList();
+            var asset = TMPFont_Importer.Import(m_tmpnew.m_FontNames, m_tmpold.m_FontNames);
 
-            string message = "";
+            TMPFont_Importer.Save(m_tmpold.m_Assets, asset);
 
-            foreach (var str in meme)
-            {
-                message += str + "\n";
-            }
-            MessageBox.Show(message);
-
-            import.Import();
-            MessageBox.Show("Done!");*/
+            MessageBox.Show("Done!");
         }
     }
 }

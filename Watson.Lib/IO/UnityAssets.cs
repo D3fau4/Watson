@@ -7,13 +7,16 @@ namespace Watson.Lib.IO
     {
         public AssetsManager AM;
         public  AssetsFileInstance Assets;
-        private BundleFileInstance Bundle;
+        public BundleFileInstance Bundle;
+        public bool IsBundle = false;
+        public string AssetName;
 
         public UnityAssets(Stream stream, bool IsBundle = false) => throw new NotImplementedException();
         public void Close() => AM.UnloadAll();
 
         public UnityAssets(string file)
         {
+            AssetName = Path.GetFileName(file);
             AM = new AssetsManager();
             try
             {
@@ -37,6 +40,7 @@ namespace Watson.Lib.IO
 
                     AM.LoadClassPackage(new MemoryStream(Resources.Resources.classdata));
                     AM.LoadClassDatabaseFromPackage(Assets.file.typeTree.unityVersion);
+                    IsBundle = true;
                 }
             }
         }
