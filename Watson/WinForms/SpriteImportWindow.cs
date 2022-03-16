@@ -60,6 +60,15 @@ namespace Watson {
 
             var m = Sprites_Importer.Import(m_new.m_Sprites, m_old.m_Sprites, m_new.m_Texture2D, m_old.m_Texture2D);
 
+            List<long> tmp = new List<long>();
+            foreach (var a in m.ToList())
+            {
+                if (!tmp.Contains(a.GetPathID()))
+                    tmp.Add(a.GetPathID());
+                else
+                    m.RemoveAt(m.IndexOf(a));
+            }
+
             AssetHelper.Save(m_old.m_Assets, m, compression);
 
             AssetHelper.Close(m_old.m_Assets);
