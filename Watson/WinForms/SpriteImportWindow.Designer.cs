@@ -35,12 +35,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.NewAssettextBox = new System.Windows.Forms.TextBox();
             this.OpenNewFilebutton = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.OldDataFoldertextBox = new System.Windows.Forms.TextBox();
-            this.OpenOldDatabutton = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.NewDataFoldertextBox = new System.Windows.Forms.TextBox();
-            this.OpenNewDatabutton = new System.Windows.Forms.Button();
             this.Submitbutton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -79,7 +73,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 114);
+            this.label2.Location = new System.Drawing.Point(12, 72);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(184, 15);
             this.label2.TabIndex = 4;
@@ -87,7 +81,7 @@
             // 
             // NewAssettextBox
             // 
-            this.NewAssettextBox.Location = new System.Drawing.Point(27, 132);
+            this.NewAssettextBox.Location = new System.Drawing.Point(27, 90);
             this.NewAssettextBox.Name = "NewAssettextBox";
             this.NewAssettextBox.Size = new System.Drawing.Size(207, 23);
             this.NewAssettextBox.TabIndex = 5;
@@ -95,67 +89,13 @@
             // 
             // OpenNewFilebutton
             // 
-            this.OpenNewFilebutton.Location = new System.Drawing.Point(240, 132);
+            this.OpenNewFilebutton.Location = new System.Drawing.Point(240, 90);
             this.OpenNewFilebutton.Name = "OpenNewFilebutton";
             this.OpenNewFilebutton.Size = new System.Drawing.Size(75, 23);
             this.OpenNewFilebutton.TabIndex = 6;
             this.OpenNewFilebutton.Text = "Examinar";
             this.OpenNewFilebutton.UseVisualStyleBackColor = true;
             this.OpenNewFilebutton.Click += new System.EventHandler(this.OpenNewFilebutton_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 68);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(123, 15);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Carpeta Original Data:";
-            // 
-            // OldDataFoldertextBox
-            // 
-            this.OldDataFoldertextBox.Location = new System.Drawing.Point(27, 86);
-            this.OldDataFoldertextBox.Name = "OldDataFoldertextBox";
-            this.OldDataFoldertextBox.Size = new System.Drawing.Size(207, 23);
-            this.OldDataFoldertextBox.TabIndex = 8;
-            this.OldDataFoldertextBox.Text = "E:\\Games\\AI The Somnium Files\\AI_TheSomniumFiles_Data";
-            // 
-            // OpenOldDatabutton
-            // 
-            this.OpenOldDatabutton.Location = new System.Drawing.Point(240, 86);
-            this.OpenOldDatabutton.Name = "OpenOldDatabutton";
-            this.OpenOldDatabutton.Size = new System.Drawing.Size(75, 23);
-            this.OpenOldDatabutton.TabIndex = 9;
-            this.OpenOldDatabutton.Text = "Examinar";
-            this.OpenOldDatabutton.UseVisualStyleBackColor = true;
-            this.OpenOldDatabutton.Click += new System.EventHandler(this.OpenOldDatabutton_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 158);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(130, 15);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Carpeta Nueva Original";
-            // 
-            // NewDataFoldertextBox
-            // 
-            this.NewDataFoldertextBox.Location = new System.Drawing.Point(27, 176);
-            this.NewDataFoldertextBox.Name = "NewDataFoldertextBox";
-            this.NewDataFoldertextBox.Size = new System.Drawing.Size(207, 23);
-            this.NewDataFoldertextBox.TabIndex = 11;
-            this.NewDataFoldertextBox.Text = "F:\\Unity\\AI\\Builds\\win64\\AI_Data";
-            // 
-            // OpenNewDatabutton
-            // 
-            this.OpenNewDatabutton.Location = new System.Drawing.Point(240, 176);
-            this.OpenNewDatabutton.Name = "OpenNewDatabutton";
-            this.OpenNewDatabutton.Size = new System.Drawing.Size(75, 23);
-            this.OpenNewDatabutton.TabIndex = 12;
-            this.OpenNewDatabutton.Text = "Examinar";
-            this.OpenNewDatabutton.UseVisualStyleBackColor = true;
-            this.OpenNewDatabutton.Click += new System.EventHandler(this.OpenNewDatabutton_Click);
             // 
             // Submitbutton
             // 
@@ -173,12 +113,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(340, 257);
             this.Controls.Add(this.Submitbutton);
-            this.Controls.Add(this.OpenNewDatabutton);
-            this.Controls.Add(this.NewDataFoldertextBox);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.OpenOldDatabutton);
-            this.Controls.Add(this.OldDataFoldertextBox);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.OpenNewFilebutton);
             this.Controls.Add(this.NewAssettextBox);
             this.Controls.Add(this.label2);
@@ -201,12 +135,6 @@
         private Label label2;
         private TextBox NewAssettextBox;
         private Button OpenNewFilebutton;
-        private Label label3;
-        private TextBox OldDataFoldertextBox;
-        private Button OpenOldDatabutton;
-        private Label label4;
-        private TextBox NewDataFoldertextBox;
-        private Button OpenNewDatabutton;
         private Button Submitbutton;
     }
 }

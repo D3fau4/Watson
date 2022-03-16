@@ -27,26 +27,9 @@ namespace Watson {
             }
         }
 
-        private void OpenOldDatabutton_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                OldDataFoldertextBox.Text = openFileDialog1.FileName;
-            }
-        }
-
-        private void OpenNewDatabutton_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                NewDataFoldertextBox.Text = openFileDialog1.FileName;
-            }
-        }
-
         private void Submitbutton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(NewAssettextBox.Text) || string.IsNullOrEmpty(OldAssettextBox.Text) || 
-                string.IsNullOrEmpty(NewDataFoldertextBox.Text) || string.IsNullOrEmpty(OldDataFoldertextBox.Text))
+            if (string.IsNullOrEmpty(NewAssettextBox.Text) || string.IsNullOrEmpty(OldAssettextBox.Text))
             {
                 MessageBox.Show("Porfavor rellene todos los campos");
                 return;
@@ -55,12 +38,6 @@ namespace Watson {
             if (!File.Exists(NewAssettextBox.Text) || !File.Exists(OldAssettextBox.Text))
             {
                 MessageBox.Show("Porfavor establece un asset.");
-                return;
-            }
-
-            if (!Directory.Exists(NewDataFoldertextBox.Text) || !Directory.Exists(OldDataFoldertextBox.Text))
-            {
-                MessageBox.Show("Porfavor estable la carpeta Data");
                 return;
             }
 
@@ -84,6 +61,9 @@ namespace Watson {
             var m = Sprites_Importer.Import(m_new.m_Sprites, m_old.m_Sprites, m_new.m_Texture2D, m_old.m_Texture2D);
 
             AssetHelper.Save(m_old.m_Assets, m, compression);
+
+            AssetHelper.Close(m_old.m_Assets);
+            AssetHelper.Close(m_new.m_Assets);
 
             MessageBox.Show("Done!");
         }

@@ -84,6 +84,9 @@ namespace Watson {
             var asset = TMPFont_Importer.Import(m_tmpnew.m_FontNames, m_tmpold.m_FontNames, m_tmpnew.m_FontTextures, m_tmpold.m_FontTextures);
             AssetHelper.Save(m_tmpold.m_Assets, asset, compression);
 
+            AssetHelper.Close(m_tmpold.m_Assets);
+            AssetHelper.Close(m_tmpnew.m_Assets);
+
             MessageBox.Show("Done!");
         }
     }
