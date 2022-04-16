@@ -1,10 +1,9 @@
-﻿namespace Watson.Lib
+﻿namespace Watson.Lib;
+
+public class UnityManager
 {
-    public class UnityManager
+    public static void Init()
     {
-        public static void Init()
-        {
-            throw new NotImplementedException();
-        }
+        throw new NotImplementedException();
     }
 }
