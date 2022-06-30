@@ -74,6 +74,7 @@ public static class TMPFont_Importer
 
         foreach (var font in NewFontTextures2D)
         foreach (var fontold in OldFontTextures2D)
+            // TODO: Hacer que el usuario pueda tener un filtro
             if (font.Value.Item1.Replace(" Atlas", "-tex").Contains(fontold.Value.Item1))
             {
                 var encImageBytes =
@@ -101,7 +102,7 @@ public static class TMPFont_Importer
 
                 var Texture2Data = font.Value.Item2.WriteToByteArray();
 
-                File.WriteAllBytes("sprite.bin", encImageBytes);
+                //File.WriteAllBytes("sprite.bin", encImageBytes);
 
                 m.Add(new AssetsReplacerFromMemory(
                     0, fontold.Value.Item3.index, (int) fontold.Value.Item3.curFileType,

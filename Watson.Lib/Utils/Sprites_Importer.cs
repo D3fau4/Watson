@@ -73,7 +73,7 @@ public static class Sprites_Importer
 
                 var Texture2Data = sprite.Value.Item2.WriteToByteArray();
 
-                File.WriteAllBytes("sprite.bin", encImageBytes);
+                //File.WriteAllBytes("sprite.bin", encImageBytes);
 
                 m.Add(new AssetsReplacerFromMemory(
                     0, spriteold.Value.Item3.index, (int) spriteold.Value.Item3.curFileType,

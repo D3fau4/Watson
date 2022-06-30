@@ -1,4 +1,5 @@
 ﻿using AssetsTools.NET;
+using Watson.Lib.Assets;
 using Watson.Lib.IO;
 using Watson.Lib.Utils;
 using Watson.Lib.Utils.Helpers;
@@ -64,12 +65,12 @@ namespace Watson {
                 return;
             }
 
-            TMPFont m_tmpold = new TMPFont(OldAssettextBox.Text, new Assembly(OldDataFoldertextBox.Text));
-            TMPFont m_tmpnew = new TMPFont(NewAssettextBox.Text, new Assembly(NewDataFoldertextBox.Text));
+            TMPFont m_tmpold = new TMPFont(new (OldAssettextBox.Text), new Assembly(OldDataFoldertextBox.Text));
+            TMPFont m_tmpnew = new TMPFont(new (NewAssettextBox.Text), new Assembly(NewDataFoldertextBox.Text));
 
             AssetBundleCompressionType compression = AssetBundleCompressionType.NONE;
 
-            if (m_tmpold.m_Assets.IsBundle)
+            if (m_tmpold.m_AssetFile.IsBundle)
             {
                 CustomMessageBox message = new CustomMessageBox("", "You want compress the final bundle?", "With LZ4", "With LZMA", "No");
                 var result = message.ShowDialog();
@@ -92,10 +93,10 @@ namespace Watson {
                     asset.RemoveAt(asset.IndexOf(a));
             }
 
-            AssetHelper.Save(m_tmpold.m_Assets, asset, compression);
+            AssetHelper.Save(m_tmpold.m_AssetFile, asset, compression);
 
-            AssetHelper.Close(m_tmpold.m_Assets);
-            AssetHelper.Close(m_tmpnew.m_Assets);
+            AssetHelper.Close(m_tmpold.m_AssetFile);
+            AssetHelper.Close(m_tmpnew.m_AssetFile);
 
             MessageBox.Show("Done!");
         }

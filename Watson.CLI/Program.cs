@@ -12,7 +12,7 @@ namespace Watson.Program
     {
         public static void Main(string[] args)
         {
-            UnityAssets file = new UnityAssets(args[0]);
+            UnityAssetFile file = new UnityAssetFile(args[0]);
 
             foreach (var da in file.GetAssetsOfType(AssetsTools.NET.Extra.AssetClassID.MonoBehaviour))
             {
@@ -22,7 +22,7 @@ namespace Watson.Program
                     Console.WriteLine(name.Get("m_Name").GetValue().AsString());
             }
             
-            /*foreach (AssetFileInfoEx info in file.Assets.table.assetFileInfo)
+            /*foreach (AssetFileInfoEx info in file.assetFile.table.assetFileInfo)
             {
                 Console.WriteLine((AssetClassID)info.curFileType);
             }*/

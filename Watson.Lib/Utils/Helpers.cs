@@ -6,12 +6,12 @@ namespace Watson.Lib.Utils.Helpers;
 
 public static class AssetHelper
 {
-    public static void Close(UnityAssets Assets)
+    public static void Close(UnityAssetFile assetFile)
     {
-        Assets.Close();
+        assetFile.Close();
     }
 
-    public static void Save(UnityAssets Assets, List<AssetsReplacer> m,
+    public static void Save(UnityAssetFile assetFile, List<AssetsReplacer> m,
         AssetBundleCompressionType Compression = AssetBundleCompressionType.NONE)
     {
         //write changes to memory
@@ -19,24 +19,24 @@ public static class AssetHelper
         using (var stream = new MemoryStream())
         using (var writer = new AssetsFileWriter(stream))
         {
-            Assets.Assets.file.Write(writer, 0, m);
+            assetFile.Assets.file.Write(writer, 0, m);
             newAssetData = stream.ToArray();
         }
 
-        if (Assets.IsBundle)
+        if (assetFile.IsBundle)
         {
             //rename this asset name from boring to cool when saving
-            var bunRepl = new BundleReplacerFromMemory(Assets.Assets.name, null, true, newAssetData, 0);
+            var bunRepl = new BundleReplacerFromMemory(assetFile.Assets.name, null, true, newAssetData, 0);
 
             var bunWriter = new AssetsFileWriter(File.OpenWrite("TMP.unity3d"));
-            Assets.Bundle.file.Write(bunWriter, new List<BundleReplacer> {bunRepl});
+            assetFile.Bundle.file.Write(bunWriter, new List<BundleReplacer> {bunRepl});
             bunWriter.Close();
 
             if (Compression != AssetBundleCompressionType.NONE)
             {
                 var am = new AssetsManager();
                 var bun = am.LoadBundleFile("TMP.unity3d");
-                using (var stream = File.OpenWrite(Assets.AssetName))
+                using (var stream = File.OpenWrite(assetFile.AssetName))
                 using (var writer = new AssetsFileWriter(stream))
                 {
                     // hacer esto seleccionable
@@ -48,7 +48,7 @@ public static class AssetHelper
         }
         else
         {
-            File.WriteAllBytes(Assets.AssetName, newAssetData);
+            File.WriteAllBytes(assetFile.AssetName, newAssetData);
         }
     }
 

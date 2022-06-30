@@ -1,4 +1,5 @@
 ﻿using AssetsTools.NET;
+using Watson.Lib.Assets;
 using Watson.Lib.IO;
 using Watson.Lib.Utils;
 using Watson.Lib.Utils.Helpers;
@@ -41,12 +42,12 @@ namespace Watson {
                 return;
             }
 
-            Sprites m_old = new Sprites(OldAssettextBox.Text);
-            Sprites m_new = new Sprites(NewAssettextBox.Text);
+            Sprites m_old = new Sprites(new UnityAssetFile(OldAssettextBox.Text));
+            Sprites m_new = new Sprites(new UnityAssetFile(NewAssettextBox.Text));
 
             AssetBundleCompressionType compression = AssetBundleCompressionType.NONE;
 
-            if (m_old.m_Assets.IsBundle)
+            if (m_old.m_AssetFile.IsBundle)
             {
                 CustomMessageBox message = new CustomMessageBox("", "You want compress the final bundle?", "With LZ4", "With LZMA", "No");
                 var result = message.ShowDialog();
@@ -69,10 +70,10 @@ namespace Watson {
                     m.RemoveAt(m.IndexOf(a));
             }
 
-            AssetHelper.Save(m_old.m_Assets, m, compression);
+            AssetHelper.Save(m_old.m_AssetFile, m, compression);
 
-            AssetHelper.Close(m_old.m_Assets);
-            AssetHelper.Close(m_new.m_Assets);
+            AssetHelper.Close(m_old.m_AssetFile);
+            AssetHelper.Close(m_new.m_AssetFile);
 
             MessageBox.Show("Done!");
         }

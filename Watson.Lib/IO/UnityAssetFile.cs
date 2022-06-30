@@ -3,7 +3,7 @@ using AssetsTools.NET.Extra;
 
 namespace Watson.Lib.IO;
 
-public class UnityAssets
+public class UnityAssetFile
 {
     public AssetsManager AM;
     public string AssetName;
@@ -11,12 +11,12 @@ public class UnityAssets
     public BundleFileInstance Bundle;
     public bool IsBundle;
 
-    public UnityAssets(Stream stream, bool IsBundle = false)
+    public UnityAssetFile(Stream stream, bool IsBundle = false)
     {
         throw new NotImplementedException();
     }
 
-    public UnityAssets(string file)
+    public UnityAssetFile(string file)
     {
         AssetName = Path.GetFileName(file);
         AM = new AssetsManager();
