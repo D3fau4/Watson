@@ -3,7 +3,9 @@ using AssetsTools.NET.Extra;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Watson.Lib.Assets;
 using Watson.Lib.IO;
+using Watson.Lib.Utils;
 
 
 namespace Watson.Program
@@ -12,22 +14,15 @@ namespace Watson.Program
     {
         public static void Main(string[] args)
         {
-            UnityAssetFile file = new UnityAssetFile(args[0]);
-
-            foreach (var da in file.GetAssetsOfType(AssetsTools.NET.Extra.AssetClassID.MonoBehaviour))
-            {
-                var name = MonoDeserializer.GetMonoBaseField(file.AM, file.Assets, da, $"E:\\Games\\AI The Somnium Files\\AI_TheSomniumFiles_Data\\Managed");
-                var font = name.Get("m_fontInfo");
-                if (font != null)
-                    Console.WriteLine(name.Get("m_Name").GetValue().AsString());
-            }
+            TMPFont m_tmpold = new TMPFont(new (args[0]), new Assembly(args[1]));
+            TMPFont m_tmpnew = new TMPFont(new (args[2]), new Assembly(args[3]));
             
-            /*foreach (AssetFileInfoEx info in file.assetFile.table.assetFileInfo)
+            var m = TMPFont_Importer.GetToImportList(m_tmpnew.m_FontNames, m_tmpold.m_FontNames);
+            
+            foreach (var fontsnames in m)
             {
-                Console.WriteLine((AssetClassID)info.curFileType);
-            }*/
-
-            file.Close();
+                Console.WriteLine(fontsnames);
+            }
         }
     }
 }

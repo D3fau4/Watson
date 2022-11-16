@@ -19,6 +19,7 @@ public class TMPFont : IAsset
 
         m_AssetFile = FontBundle;
         m_DLL = assembly;
+        Load();
     }
 
     public void Load()

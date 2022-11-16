@@ -9,14 +9,15 @@ public static class TMPFont_Importer
 {
     public static List<string> GetToImportList(
         Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewFontNames,
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldFontNames)
+        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldFontNames,
+        string oldsuffix = "", string newsuffix = "")
     {
         var ToImport = new List<string>();
         // Buscar fuentes compatibles para importar
         foreach (var font in NewFontNames)
         foreach (var fontold in OldFontNames)
             // Puede que cambie en otras versiones
-            if (font.Value.Item1.Replace(" Atlas", "-tex").Contains(fontold.Value.Item1))
+            if (font.Value.Item1.Replace(oldsuffix, newsuffix).Contains(fontold.Value.Item1))
             {
                 ToImport.Add(font.Value.Item1);
                 break;
@@ -30,7 +31,8 @@ public static class TMPFont_Importer
         Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewFontNames,
         Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldFontNames,
         Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewFontTextures2D,
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldFontTextures2D)
+        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldFontTextures2D,
+        string oldsuffix = "", string newsuffix = "")
     {
         var m = new List<AssetsReplacer>();
 
@@ -75,7 +77,7 @@ public static class TMPFont_Importer
         foreach (var font in NewFontTextures2D)
         foreach (var fontold in OldFontTextures2D)
             // TODO: Hacer que el usuario pueda tener un filtro
-            if (font.Value.Item1.Replace(" Atlas", "-tex").Contains(fontold.Value.Item1))
+            if (font.Value.Item1.Replace(oldsuffix, newsuffix).Contains(fontold.Value.Item1))
             {
                 var encImageBytes =
                     TextureHelper.GetRawTextureBytes(TextureFile.ReadTextureFile(font.Value.Item2), font.Value.Item4);

@@ -82,6 +82,15 @@ namespace Watson {
                     compression = AssetBundleCompressionType.NONE;
             }
 
+            var m = TMPFont_Importer.GetToImportList(m_tmpnew.m_FontNames, m_tmpold.m_FontNames);
+
+            string msg = "Fuentes a importar: ";
+            foreach (var fontsnames in m)
+            {
+                msg += $"\n{fontsnames}";
+            }
+            MessageBox.Show(msg);
+            
             var asset = TMPFont_Importer.Import(m_tmpnew.m_FontNames, m_tmpold.m_FontNames, m_tmpnew.m_FontTextures, m_tmpold.m_FontTextures);
 
             List<long> tmp = new List<long>();

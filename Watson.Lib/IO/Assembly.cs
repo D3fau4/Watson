@@ -14,7 +14,7 @@ public class Assembly
 
     public AssemblyType assemblyType;
 
-    public Assembly(string DataFolder, Stream assetstream = null, string exepath = null, string metadatapath = null)
+    public Assembly(string DataFolder, Stream? assetstream = null, string? exepath = null, string? metadatapath = null)
     {
         if (Directory.Exists(Path.Combine(DataFolder, "Managed")))
             assemblyType = AssemblyType.Mono;
