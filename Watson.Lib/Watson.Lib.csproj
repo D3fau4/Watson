@@ -1,14 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-        <PackageReference Include="Samboy063.Cpp2IL.Core" Version="2022.0.2" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta3" />
+        <PackageReference Include="Samboy063.Cpp2IL.Core" Version="2022.0.7.2" />
         <PackageReference Include="Yarhl" Version="4.0.0-preview.153" />
     </ItemGroup>
 

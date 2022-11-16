@@ -39,7 +39,7 @@ public static class Sprites_Importer
                 var SpriteData = sprite.Value.Item2.WriteToByteArray();
 
                 m.Add(new AssetsReplacerFromMemory(
-                    0, spriteold.Value.Item3.index, (int) spriteold.Value.Item3.curFileType,
+                    0, spriteold.Value.Item3.index, (int)spriteold.Value.Item3.curFileType,
                     AssetHelper.GetScriptIndex(spriteold.Value.Item4.file, spriteold.Value.Item3), SpriteData
                 ));
             }
@@ -65,7 +65,7 @@ public static class Sprites_Importer
                 image_data.templateField.valueType = EnumValueTypes.ByteArray;
                 var byteArray = new AssetTypeByteArray
                 {
-                    size = (uint) encImageBytes.Length,
+                    size = (uint)encImageBytes.Length,
                     data = encImageBytes
                 };
                 image_data.GetValue().Set(byteArray);
@@ -76,7 +76,7 @@ public static class Sprites_Importer
                 //File.WriteAllBytes("sprite.bin", encImageBytes);
 
                 m.Add(new AssetsReplacerFromMemory(
-                    0, spriteold.Value.Item3.index, (int) spriteold.Value.Item3.curFileType,
+                    0, spriteold.Value.Item3.index, (int)spriteold.Value.Item3.curFileType,
                     AssetHelper.GetScriptIndex(spriteold.Value.Item4.file, spriteold.Value.Item3), Texture2Data
                 ));
             }

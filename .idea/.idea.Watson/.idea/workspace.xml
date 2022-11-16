@@ -15,12 +15,31 @@
       <change beforePath="$PROJECT_DIR$/Watson.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.CLI/Watson.CLI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Watson.CLI.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Assets/TMPFont.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Assets/TMPFont.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/IO/Assembly.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/IO/Assembly.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Assets/Texture2D.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Assets/Texture2D.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/IO/UnityAssetFile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/IO/UnityAssetFile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Resources/Resources.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Resources/Resources.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Resources/Resources.resx" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Resources/Resources.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/Helpers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/Helpers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/Sprites_Importer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/Sprites_Importer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/TMPFont_Importer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/TMPFont_Importer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Test/UnitTest1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Test/UnitTest1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Test/Watson.Test.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Test/Watson.Test.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/Resource.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/Resource.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/Resource.resx" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/Resource.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/Watson.Program.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/Watson.Program.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/WinForms/CustomMessageBox.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/CustomMessageBox.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/WinForms/CustomMessageBox.resx" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/CustomMessageBox.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/WinForms/MainWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/MainWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/WinForms/MainWindow.resx" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/MainWindow.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/WinForms/ProgressBarWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/ProgressBarWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/WinForms/ProgressBarWindow.resx" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/ProgressBarWindow.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/WinForms/SpriteImportWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/SpriteImportWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/WinForms/SpriteImportWindow.resx" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/SpriteImportWindow.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/WinForms/TMPFontImportWindow.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/TMPFontImportWindow.Designer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson/WinForms/TMPFontImportWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/TMPFontImportWindow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nuget.config" beforeDir="false" afterPath="$PROJECT_DIR$/nuget.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/WinForms/TMPFontImportWindow.resx" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/TMPFontImportWindow.resx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +47,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7e231682be8652744726acc6de35323daa68061429db55e0c251114902f60/String.Manipulation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Watson/Resource.Designer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -43,6 +63,8 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -54,7 +76,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Publish Watson.Program to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
-      <riderPublish configuration="Release" delete_existing_files="true" platform="Any CPU" runtime="Portable" target_folder="$PROJECT_DIR$/Watson/bin/Release/net6.0-windows10.0.17763.0/publish" target_framework="net6.0-windows10.0.17763.0" uuid_high="8795337528189403600" uuid_low="-5283853676068201648" />
+      <riderPublish configuration="Release" delete_existing_files="true" include_native_libs_for_self_extract="true" platform="Any CPU" produce_single_file="true" ready_to_run="true" runtime="win-x64" self_contained="true" target_folder="$PROJECT_DIR$/Watson/bin/Release/net6.0-windows10.0.17763.0/publish" target_framework="net7.0-windows" uuid_high="8795337528189403600" uuid_low="-5283853676068201648" />
       <method v="2" />
     </configuration>
     <configuration name="Watson.Program" type="DotNetProject" factoryName=".NET Project">
@@ -108,6 +130,13 @@
         <option name="Build" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue=".NET Launch Settings Profile.Watson.CLI" />
+      <item itemvalue=".NET Project.Watson.Program" />
+      <item itemvalue=".NET Project.Watson.Test" />
+      <item itemvalue="Publish to folder.Publish Watson.CLI to folder" />
+      <item itemvalue="Publish to folder.Publish Watson.Program to folder" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -120,6 +149,9 @@
       <workItem from="1650104809286" duration="331000" />
       <workItem from="1668581793588" duration="1258000" />
       <workItem from="1668594345703" duration="1408000" />
+      <workItem from="1668615848622" duration="1049000" />
+      <workItem from="1668617076940" duration="1000" />
+      <workItem from="1668617613166" duration="387000" />
     </task>
     <servers />
   </component>

@@ -29,7 +29,7 @@ public static class AssetHelper
             var bunRepl = new BundleReplacerFromMemory(assetFile.Assets.name, null, true, newAssetData, 0);
 
             var bunWriter = new AssetsFileWriter(File.OpenWrite("TMP.unity3d"));
-            assetFile.Bundle.file.Write(bunWriter, new List<BundleReplacer> {bunRepl});
+            assetFile.Bundle.file.Write(bunWriter, new List<BundleReplacer> { bunRepl });
             bunWriter.Close();
 
             if (Compression != AssetBundleCompressionType.NONE)
@@ -88,9 +88,9 @@ public static class TextureHelper
             if (File.Exists(fixedStreamPath))
             {
                 Stream stream = File.OpenRead(fixedStreamPath);
-                stream.Position = (long) texFile.m_StreamData.offset;
+                stream.Position = (long)texFile.m_StreamData.offset;
                 texFile.pictureData = new byte[texFile.m_StreamData.size];
-                stream.Read(texFile.pictureData, 0, (int) texFile.m_StreamData.size);
+                stream.Read(texFile.pictureData, 0, (int)texFile.m_StreamData.size);
             }
             else
             {

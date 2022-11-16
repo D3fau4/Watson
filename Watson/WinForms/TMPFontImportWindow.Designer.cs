@@ -42,6 +42,10 @@
             this.NewDataFoldertextBox = new System.Windows.Forms.TextBox();
             this.OpenNewDatabutton = new System.Windows.Forms.Button();
             this.Submitbutton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.newsuffix = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.oldsuffix = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -59,8 +63,8 @@
             this.OldAssettextBox.Name = "OldAssettextBox";
             this.OldAssettextBox.Size = new System.Drawing.Size(207, 23);
             this.OldAssettextBox.TabIndex = 2;
-            this.OldAssettextBox.Text = "E:\\Games\\AI The Somnium Files\\AI_TheSomniumFiles_Data\\StreamingAssets\\AssetBundle" +
-    "s\\StandaloneWindows64\\fonts";
+            this.OldAssettextBox.Text = "D:\\SteamLibrary\\steamapps\\common\\AI The Somnium Files\\AI_TheSomniumFiles_Data\\res" +
+    "ources.assets";
             // 
             // openFileDialog1
             // 
@@ -91,7 +95,8 @@
             this.NewAssettextBox.Name = "NewAssettextBox";
             this.NewAssettextBox.Size = new System.Drawing.Size(207, 23);
             this.NewAssettextBox.TabIndex = 5;
-            this.NewAssettextBox.Text = "F:\\Unity\\AI\\Builds\\win64\\AI_Data\\sharedassets0.assets";
+            this.NewAssettextBox.Text = "D:\\SteamLibrary\\steamapps\\common\\AI The Somnium Files\\meme\\BUILD_Data\\sharedasset" +
+    "s0.assets";
             // 
             // OpenNewFilebutton
             // 
@@ -118,7 +123,7 @@
             this.OldDataFoldertextBox.Name = "OldDataFoldertextBox";
             this.OldDataFoldertextBox.Size = new System.Drawing.Size(207, 23);
             this.OldDataFoldertextBox.TabIndex = 8;
-            this.OldDataFoldertextBox.Text = "E:\\Games\\AI The Somnium Files\\AI_TheSomniumFiles_Data";
+            this.OldDataFoldertextBox.Text = "D:\\SteamLibrary\\steamapps\\common\\AI The Somnium Files\\AI_TheSomniumFiles_Data\\";
             // 
             // OpenOldDatabutton
             // 
@@ -145,7 +150,7 @@
             this.NewDataFoldertextBox.Name = "NewDataFoldertextBox";
             this.NewDataFoldertextBox.Size = new System.Drawing.Size(207, 23);
             this.NewDataFoldertextBox.TabIndex = 11;
-            this.NewDataFoldertextBox.Text = "F:\\Unity\\AI\\Builds\\win64\\AI_Data";
+            this.NewDataFoldertextBox.Text = "D:\\SteamLibrary\\steamapps\\common\\AI The Somnium Files\\meme\\BUILD_Data";
             // 
             // OpenNewDatabutton
             // 
@@ -159,7 +164,7 @@
             // 
             // Submitbutton
             // 
-            this.Submitbutton.Location = new System.Drawing.Point(124, 218);
+            this.Submitbutton.Location = new System.Drawing.Point(124, 249);
             this.Submitbutton.Name = "Submitbutton";
             this.Submitbutton.Size = new System.Drawing.Size(75, 23);
             this.Submitbutton.TabIndex = 13;
@@ -167,11 +172,48 @@
             this.Submitbutton.UseVisualStyleBackColor = true;
             this.Submitbutton.Click += new System.EventHandler(this.Submitbutton_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 202);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(105, 15);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Sufijo de la textura";
+            // 
+            // newsuffix
+            // 
+            this.newsuffix.Location = new System.Drawing.Point(17, 220);
+            this.newsuffix.Name = "newsuffix";
+            this.newsuffix.Size = new System.Drawing.Size(100, 23);
+            this.newsuffix.TabIndex = 15;
+            this.newsuffix.Text = " Atlas";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(124, 202);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(74, 15);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Nuevo sufijo";
+            // 
+            // oldsuffix
+            // 
+            this.oldsuffix.Location = new System.Drawing.Point(124, 220);
+            this.oldsuffix.Name = "oldsuffix";
+            this.oldsuffix.Size = new System.Drawing.Size(100, 23);
+            this.oldsuffix.TabIndex = 17;
+            // 
             // TMPFontImportWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 257);
+            this.ClientSize = new System.Drawing.Size(340, 279);
+            this.Controls.Add(this.oldsuffix);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.newsuffix);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.Submitbutton);
             this.Controls.Add(this.OpenNewDatabutton);
             this.Controls.Add(this.NewDataFoldertextBox);
@@ -208,5 +250,9 @@
         private TextBox NewDataFoldertextBox;
         private Button OpenNewDatabutton;
         private Button Submitbutton;
+        private Label label5;
+        private TextBox newsuffix;
+        private Label label6;
+        private TextBox oldsuffix;
     }
 }

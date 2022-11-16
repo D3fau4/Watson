@@ -16,12 +16,18 @@ public static class TMPFont_Importer
         // Buscar fuentes compatibles para importar
         foreach (var font in NewFontNames)
         foreach (var fontold in OldFontNames)
+        {
+            var tmpname = font.Value.Item1;
+            if (oldsuffix != string.Empty && newsuffix != string.Empty)
+                tmpname = tmpname.Replace(oldsuffix, newsuffix);
             // Puede que cambie en otras versiones
-            if (font.Value.Item1.Replace(oldsuffix, newsuffix).Contains(fontold.Value.Item1))
+            if (tmpname.Equals(fontold.Value.Item1))
             {
                 ToImport.Add(font.Value.Item1);
                 break;
             }
+        }
+
 
         return ToImport;
     }
@@ -38,7 +44,11 @@ public static class TMPFont_Importer
 
         foreach (var font in NewFontNames)
         foreach (var fontold in OldFontNames)
-            if (font.Value.Item1.Contains(fontold.Value.Item1))
+        {
+            var tmpname = font.Value.Item1;
+            if (oldsuffix != string.Empty && newsuffix != string.Empty)
+                tmpname = tmpname.Replace(oldsuffix, newsuffix);
+            if (tmpname.Equals(fontold.Value.Item1))
             {
                 /* Remplazar m_Script */
                 // Establece el FileID
@@ -67,17 +77,22 @@ public static class TMPFont_Importer
                 var newMonoBytes = font.Value.Item2.WriteToByteArray();
 
                 m.Add(new AssetsReplacerFromMemory(
-                    0, fontold.Value.Item3.index, (int) fontold.Value.Item3.curFileType,
+                    0, fontold.Value.Item3.index, (int)fontold.Value.Item3.curFileType,
                     AssetHelper.GetScriptIndex(fontold.Value.Item4.file, fontold.Value.Item3), newMonoBytes
                 ));
 
                 break;
             }
+        }
+
 
         foreach (var font in NewFontTextures2D)
         foreach (var fontold in OldFontTextures2D)
-            // TODO: Hacer que el usuario pueda tener un filtro
-            if (font.Value.Item1.Replace(oldsuffix, newsuffix).Contains(fontold.Value.Item1))
+        {
+            var tmpname = font.Value.Item1;
+            if (oldsuffix != string.Empty && newsuffix != string.Empty)
+                tmpname = tmpname.Replace(oldsuffix, newsuffix);
+            if (tmpname.Equals(fontold.Value.Item1))
             {
                 var encImageBytes =
                     TextureHelper.GetRawTextureBytes(TextureFile.ReadTextureFile(font.Value.Item2), font.Value.Item4);
@@ -96,7 +111,7 @@ public static class TMPFont_Importer
                 image_data.templateField.valueType = EnumValueTypes.ByteArray;
                 var byteArray = new AssetTypeByteArray
                 {
-                    size = (uint) encImageBytes.Length,
+                    size = (uint)encImageBytes.Length,
                     data = encImageBytes
                 };
                 image_data.GetValue().Set(byteArray);
@@ -107,10 +122,11 @@ public static class TMPFont_Importer
                 //File.WriteAllBytes("sprite.bin", encImageBytes);
 
                 m.Add(new AssetsReplacerFromMemory(
-                    0, fontold.Value.Item3.index, (int) fontold.Value.Item3.curFileType,
+                    0, fontold.Value.Item3.index, (int)fontold.Value.Item3.curFileType,
                     AssetHelper.GetScriptIndex(fontold.Value.Item4.file, fontold.Value.Item3), Texture2Data
                 ));
             }
+        }
 
         return m;
     }

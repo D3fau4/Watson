@@ -6,8 +6,8 @@ namespace Watson.Lib.Assets;
 
 public class TMPFont : IAsset
 {
-    public UnityAssetFile m_AssetFile;
     private readonly Assembly m_DLL;
+    public UnityAssetFile m_AssetFile;
     public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> m_FontNames;
     public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> m_FontTextures;
 

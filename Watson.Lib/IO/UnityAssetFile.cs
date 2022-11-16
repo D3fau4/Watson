@@ -55,7 +55,7 @@ public class UnityAssetFile
     public List<AssetFileInfoEx> GetAssetsOfType(AssetClassID ID)
     {
         var list = new List<AssetFileInfoEx>();
-        foreach (var inf in Assets.table.GetAssetsOfType((int) ID)) list.Add(inf);
+        foreach (var inf in Assets.table.GetAssetsOfType((int)ID)) list.Add(inf);
         return list;
     }
 }
