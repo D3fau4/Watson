@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/nesrak1/AssetsTools.NET.git
+	branch = upd21-with-inst
+	commit = f49070c07fd2f439c82e7154ddd0247663859bcc
+	parent = b533d25e6eb803f8e600cbccb7167b8619844f69
+	method = merge
+	cmdver = 0.4.5
