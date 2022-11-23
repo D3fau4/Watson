@@ -25,7 +25,7 @@ public class UnityAssetFile
             Assets = AM.LoadAssetsFile(file, true);
 
             AM.LoadClassPackage(new MemoryStream(Resources.Resources.classdata));
-            AM.LoadClassDatabaseFromPackage(Assets.file.typeTree.unityVersion);
+            AM.LoadClassDatabaseFromPackage(Assets.file.Metadata.UnityVersion);
         }
         catch (Exception ex)
         {
@@ -41,7 +41,7 @@ public class UnityAssetFile
                 Assets = AM.LoadAssetsFileFromBundle(Bundle, 0, true);
 
                 AM.LoadClassPackage(new MemoryStream(Resources.Resources.classdata));
-                AM.LoadClassDatabaseFromPackage(Assets.file.typeTree.unityVersion);
+                AM.LoadClassDatabaseFromPackage(Assets.file.Metadata.UnityVersion);
                 IsBundle = true;
             }
         }
@@ -52,10 +52,10 @@ public class UnityAssetFile
         AM.UnloadAll();
     }
 
-    public List<AssetFileInfoEx> GetAssetsOfType(AssetClassID ID)
+    public List<AssetFileInfo> GetAssetsOfType(AssetClassID ID)
     {
-        var list = new List<AssetFileInfoEx>();
-        foreach (var inf in Assets.table.GetAssetsOfType((int)ID)) list.Add(inf);
+        var list = new List<AssetFileInfo>();
+        foreach (var inf in Assets.file.GetAssetsOfType((int)ID)) list.Add(inf);
         return list;
     }
 }

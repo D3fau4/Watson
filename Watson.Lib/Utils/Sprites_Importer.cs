@@ -8,14 +8,14 @@ namespace Watson.Lib.Utils;
 public static class Sprites_Importer
 {
     public static List<AssetsReplacer> Import(
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewSprites,
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldSprites,
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewTextures2D,
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldTextures2D)
+        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> NewSprites,
+        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> OldSprites,
+        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> NewTextures2D,
+        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> OldTextures2D)
     {
         var m = new List<AssetsReplacer>();
 
-        foreach (var sprite in NewSprites)
+        /*foreach (var sprite in NewSprites)
         foreach (var spriteold in OldSprites)
             if (sprite.Value.Item1.Equals(spriteold.Value.Item1))
             {
@@ -59,7 +59,7 @@ public static class Sprites_Importer
 
                 sprite.Value.Item2["m_StreamData"] = m_StreamData;
 
-                /* Escribe la texture en assets */
+                /* Escribe la texture en assets 
                 var image_data = sprite.Value.Item2.Get("image data");
                 image_data.GetValue().type = EnumValueTypes.ByteArray;
                 image_data.templateField.valueType = EnumValueTypes.ByteArray;
@@ -79,7 +79,7 @@ public static class Sprites_Importer
                     0, spriteold.Value.Item3.index, (int)spriteold.Value.Item3.curFileType,
                     AssetHelper.GetScriptIndex(spriteold.Value.Item4.file, spriteold.Value.Item3), Texture2Data
                 ));
-            }
+            }*/
 
         return m;
     }

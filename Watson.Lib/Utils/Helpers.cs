@@ -12,7 +12,7 @@ public static class AssetHelper
     }
 
     public static void Save(UnityAssetFile assetFile, List<AssetsReplacer> m,
-        AssetBundleCompressionType Compression = AssetBundleCompressionType.NONE)
+        AssetBundleCompressionType Compression = AssetBundleCompressionType.None)
     {
         //write changes to memory
         byte[] newAssetData;
@@ -32,7 +32,7 @@ public static class AssetHelper
             assetFile.Bundle.file.Write(bunWriter, new List<BundleReplacer> { bunRepl });
             bunWriter.Close();
 
-            if (Compression != AssetBundleCompressionType.NONE)
+            if (Compression != AssetBundleCompressionType.None)
             {
                 var am = new AssetsManager();
                 var bun = am.LoadBundleFile("TMP.unity3d");
@@ -40,7 +40,7 @@ public static class AssetHelper
                 using (var writer = new AssetsFileWriter(stream))
                 {
                     // hacer esto seleccionable
-                    bun.file.Pack(bun.file.reader, writer, Compression);
+                    bun.file.Pack(bun.file.Reader, writer, Compression);
                     am.UnloadAll(true);
                     File.Delete("TMP.unity3d");
                 }
@@ -53,8 +53,8 @@ public static class AssetHelper
     }
 
     public static List<string> GetToImportList(
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewAssets,
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldAssets)
+        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> NewAssets,
+        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> OldAssets)
     {
         var ToImport = new List<string>();
         // Buscar fuentes compatibles para importar

@@ -8,12 +8,12 @@ public class StringTable : IAsset
 {
     private readonly Assembly m_DLL;
     public UnityAssetFile m_AssetFile;
-    public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> m_StringTables;
+    public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_StringTables;
 
     public StringTable(UnityAssetFile StringTableBundle, Assembly assembly)
     {
         m_StringTables =
-            new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>>();
+            new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>>();
         m_AssetFile = StringTableBundle;
         m_DLL = assembly;
         Load();
@@ -23,12 +23,12 @@ public class StringTable : IAsset
     {
         foreach (var m_Asset in m_AssetFile.GetAssetsOfType(AssetClassID.MonoBehaviour))
         {
-            var deserialized =
-                MonoDeserializer.GetMonoBaseField(m_AssetFile.AM, m_AssetFile.Assets, m_Asset, m_DLL.AssemblyFolder);
+            var deserialized = m_AssetFile.AM.GetBaseField(m_AssetFile.Assets, m_Asset);
+                //MonoDeserializer.GetMonoBaseField(m_AssetFile.AM, m_AssetFile.Assets, m_Asset, m_DLL.AssemblyFolder);
             var asset = deserialized.Get("m_TableData");
             if (asset != null)
-                m_StringTables.Add(m_Asset.index,
-                    Tuple.Create(deserialized.Get("m_Name").GetValue().AsString(), deserialized, m_Asset,
+                m_StringTables.Add(m_Asset.PathId,
+                    Tuple.Create(deserialized.Get("m_Name").Value.AsString, deserialized, m_Asset,
                         m_AssetFile.Assets));
         }
     }
