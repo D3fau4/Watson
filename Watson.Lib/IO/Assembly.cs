@@ -14,7 +14,7 @@ public class Assembly
 
     public AssemblyType assemblyType;
 
-    public Assembly(string DataFolder, Stream? assetstream = null, string? exepath = null, string? metadatapath = null)
+    public Assembly(string DataFolder)
     {
         if (Directory.Exists(Path.Combine(DataFolder, "Managed")))
             assemblyType = AssemblyType.Mono;
@@ -24,20 +24,25 @@ public class Assembly
 
         if (assemblyType == AssemblyType.IL2CPP)
         {
-            Cpp2IlApi.InitializeLibCpp2Il(exepath, metadatapath, Cpp2IlApi.GetVersionFromDataUnity3D(assetstream),
+            var exepath = Path.Combine(Directory.GetParent(DataFolder).FullName, "GameAssembly.dll");
+            if (!File.Exists(exepath))
+                exepath = Path.Combine(Directory.GetParent(DataFolder).FullName, "GameAssembly.so");
+            var metadatapath = Path.Combine(DataFolder, "il2cpp_data", "Metadata", "global-metadata.dat");
+            if (!File.Exists(metadatapath))
+                throw new Exception("Version not supported");
+            Cpp2IlApi.InitializeLibCpp2Il(exepath, metadatapath, Cpp2IlApi.DetermineUnityVersion(null, DataFolder),
                 false);
             var Dlls = Cpp2IlApi.MakeDummyDLLs();
 
+            var tmp = Path.Combine(Path.GetTempPath(), "Assembly");
+            if (Directory.Exists(tmp))
+                Directory.Delete(tmp, true);
+            Directory.CreateDirectory(tmp);
+
             foreach (var Dll in Dlls)
             {
-                var tmp = $"{Path.GetTempPath()}{Path.PathSeparator}Assembly{Path.PathSeparator}";
-
-                if (Directory.Exists(tmp))
-                    Directory.Delete(tmp, true);
-
-                Directory.CreateDirectory(tmp);
-
-                Dll.Write(Path.Combine(tmp, Dll.FullName));
+                var m = Path.Combine(tmp, Dll.MainModule.Name);
+                Dll.Write(m);
 
                 AssemblyFolder = tmp;
             }
