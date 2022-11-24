@@ -11,11 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83357797-ebc7-41ad-9549-13a9187dfee1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/Assets/StringTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Assets/StringTable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/IO/StringTable2Po.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/IO/StringTable2Po.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/StringTable_Importer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/StringTable_Importer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/Sprites_Importer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/Sprites_Importer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +42,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected=".NET Project.Watson HoloError">
+  <component name="RunManager" selected=".NET Project.Watson.Program">
     <configuration name="Publish Watson.CLI to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" platform="Any CPU" produce_single_file="true" ready_to_run="true" runtime="win-x64" self_contained="true" target_folder="$PROJECT_DIR$/Watson.CLI/bin/Release/net7.0/win-x64/publish" target_framework="net7.0" uuid_high="230379160390094602" uuid_low="-9075046313692763487" />
       <method v="2" />
@@ -151,7 +147,7 @@
       <workItem from="1669239488331" duration="1342000" />
       <workItem from="1669273317288" duration="868000" />
       <workItem from="1669296956173" duration="1843000" />
-      <workItem from="1669306678070" duration="1849000" />
+      <workItem from="1669306678070" duration="2483000" />
     </task>
     <servers />
   </component>
@@ -190,19 +186,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Watson.Lib/Utils/StringTable_Importer.cs</url>
-          <line>27</line>
-          <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Utils\StringTable_Importer.cs" initialLine="24" containingFunctionPresentation="method 'Export'">
-            <startOffsets>
-              <option value="777" />
-            </startOffsets>
-            <endOffsets>
-              <option value="860" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
