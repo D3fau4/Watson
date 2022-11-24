@@ -1,29 +1,31 @@
 ﻿using AssetsTools.NET;
 using AssetsTools.NET.Extra;
 using Watson.Lib.Assets;
+using Watson.Lib.IO;
+using Yarhl.FileSystem;
+using Yarhl.Media.Text;
 
 namespace Watson.Lib.Utils;
 
 public static class StringTable_Importer
 {
-    public static StringTable.TableData[] Export(
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> StringTables)
-    {
-        var list = new List<StringTable.TableData>();
-        foreach (var stringTable in StringTables)
-        {
-            var count = stringTable.Value.Item2["m_TableData"]["Array"].Value.AsArray.size;
-            for (var i = 0; i < count; i++)
-            {
-                var data = new StringTable.TableData();
-                var localized = stringTable.Value.Item2["m_TableData"]["Array"][i]["m_Localized"].AsString;
-                var id = stringTable.Value.Item2["m_TableData"]["Array"][i]["m_id"].AsLong;
-                data.m_Localized = localized;
-                data.m_id = id;
-                list.Add(data);
-            }
-        }
+}
 
-        return list.ToArray();
+public static class StringTable_Exporter
+{
+    public static void Export(StringTable source, string outpath = "out")
+    {
+        if (!Directory.Exists(outpath))
+            Directory.CreateDirectory(outpath);
+        
+        foreach (var entrys in source.m_tableData)
+        {
+            var po = new StringTable2Po();
+            var poobj = po.Convert(entrys.Value);
+            var po2Binary = new Po2Binary();
+            var binary = po2Binary.Convert(poobj);
+            var node1 = new Node(entrys.Key["m_Name"].AsString, binary);
+            node1.Stream?.WriteTo(Path.Combine(outpath,$"{entrys.Key["m_Name"].AsString}.po"));
+        }
     }
 }

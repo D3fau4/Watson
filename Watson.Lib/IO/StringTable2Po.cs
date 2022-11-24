@@ -4,9 +4,9 @@ using Yarhl.Media.Text;
 
 namespace Watson.Lib.IO;
 
-public class StringTable2Po : IConverter<StringTable, Po>
+public class StringTable2Po : IConverter<StringTable.TableData[], Po>
 {
-    public Po Convert(StringTable source)
+    public Po Convert(StringTable.TableData[] source)
     {
         var currentCulture = Thread.CurrentThread.CurrentCulture;
         var po = new Po
@@ -17,11 +17,11 @@ public class StringTable2Po : IConverter<StringTable, Po>
             }
         };
 
-        foreach (var entry in source.m_tableData)
+        foreach (var entry in source)
         {
-            po.Add(new PoEntry()
+           po.Add(new PoEntry()
             {
-                Translated = entry.m_Localized,
+                Original = entry.m_Localized,
                 Context = $"{entry.m_id}"
             });
         }

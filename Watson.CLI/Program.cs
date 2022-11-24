@@ -10,6 +10,6 @@ public class Program
     {
         var m_stringTables = new StringTable(new UnityAssetFile(args[0]), new Assembly(args[1]));
 
-        var m = StringTable_Importer.Export(m_stringTables.m_StringTables);
+        StringTable_Exporter.Export(m_stringTables);
     }
 }

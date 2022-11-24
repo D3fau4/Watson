@@ -9,7 +9,7 @@ public class StringTable : IAsset
     private readonly Assembly m_DLL;
     public UnityAssetFile m_AssetFile;
     public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_StringTables;
-    public List<TableData> m_tableData = new List<TableData>(); 
+    public Dictionary<AssetTypeValueField,TableData[]> m_tableData = new Dictionary<AssetTypeValueField, TableData[]>(); 
 
     public StringTable(UnityAssetFile StringTableBundle, Assembly assembly)
     {
@@ -36,18 +36,20 @@ public class StringTable : IAsset
         foreach (var stringTable in m_StringTables)
         {
             var count = stringTable.Value.Item2["m_TableData"]["Array"].Value.AsArray.size;
+            List<TableData> list = new List<TableData>();
             for (var i = 0; i < count; i++)
             {
                 var data = new StringTable.TableData();
                 var localized = stringTable.Value.Item2["m_TableData"]["Array"][i]["m_Localized"].AsString;
-                var id = stringTable.Value.Item2["m_TableData"]["Array"][i]["m_id"].AsLong;
+                var id = stringTable.Value.Item2["m_TableData"]["Array"][i]["m_Id"].Value.AsLong;
                 data.m_Localized = localized;
                 data.m_id = id;
                 
                 // TODO: recoger Metadata
                 
-                m_tableData.Add(data);
+                list.Add(data);
             }
+            m_tableData.Add(stringTable.Value.Item2, list.ToArray());
         }
     }
 

@@ -5,6 +5,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
+        <PublishAot>true</PublishAot>
+        <StripSymbols>true</StripSymbols>
     </PropertyGroup>
 
     <ItemGroup>
