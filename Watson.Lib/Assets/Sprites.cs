@@ -24,7 +24,7 @@ public class Sprites : IAsset
         foreach (var m_Sprite in m_AssetFile.GetAssetsOfType(AssetClassID.Sprite))
         {
             var baseField = m_AssetFile.AM.GetBaseField(m_AssetFile.Assets, m_Sprite);
-            m_Sprites.Add(m_Sprite.TypeIdOrIndex,
+            m_Sprites.Add(m_Sprite.PathId,
                 Tuple.Create(baseField["m_Name"].Value.AsString, baseField, m_Sprite, m_AssetFile.Assets));
         }
 
@@ -32,7 +32,7 @@ public class Sprites : IAsset
         foreach (var m_Texture in m_AssetFile.GetAssetsOfType(AssetClassID.Texture2D))
         {
             var baseField = m_AssetFile.AM.GetBaseField(m_AssetFile.Assets, m_Texture);
-            m_Texture2D.Add(m_Texture.TypeIdOrIndex,
+            m_Texture2D.Add(m_Texture.PathId,
                 Tuple.Create(baseField["m_Name"].Value.AsString, baseField, m_Texture, m_AssetFile.Assets));
         }
     }

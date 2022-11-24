@@ -77,7 +77,7 @@ public static class AssetHelper
 /// </summary>
 public static class TextureHelper
 {
-    public static byte[] GetRawTextureBytes(TextureFile texFile, AssetsFileInstance inst)
+    public static byte[]? GetRawTextureBytes(TextureFile texFile, AssetsFileInstance inst)
     {
         var rootPath = Path.GetDirectoryName(inst.path);
         if (texFile.m_StreamData.size != 0 && texFile.m_StreamData.path != string.Empty)

@@ -9,17 +9,21 @@ public static class StringTable_Importer
     public static StringTable.TableData[] Export(
         Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> StringTables)
     {
-        List<string> list = new List<string>();
+        var list = new List<StringTable.TableData>();
         foreach (var stringTable in StringTables)
         {
             var count = stringTable.Value.Item2["m_TableData"]["Array"].Value.AsArray.size;
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
-                var meme = stringTable.Value.Item2["m_TableData"]["Array"][i]["m_Localized"].AsString;
-                list.Add(meme);
+                var data = new StringTable.TableData();
+                var localized = stringTable.Value.Item2["m_TableData"]["Array"][i]["m_Localized"].AsString;
+                var id = stringTable.Value.Item2["m_TableData"]["Array"][i]["m_id"].AsLong;
+                data.m_Localized = localized;
+                data.m_id = id;
+                list.Add(data);
             }
         }
-        File.WriteAllLines("Holoerror.txt", list.ToArray());
-        return null;
+
+        return list.ToArray();
     }
 }

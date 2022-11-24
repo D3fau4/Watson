@@ -16,11 +16,14 @@
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Assets/StringTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Assets/StringTable.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Assets/TMPFont.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Assets/TMPFont.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Assets/Texture2D.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Assets/Texture2D.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/IO/StringTable2Po.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/IO/StringTable2Po.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/IO/UnityAssetFile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/IO/UnityAssetFile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/Helpers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/Helpers.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/Sprites_Importer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/Sprites_Importer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/StringTable_Importer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/StringTable_Importer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/TMPFont_Importer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/TMPFont_Importer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/WinForms/SpriteImportWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/SpriteImportWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/WinForms/TMPFontImportWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/TMPFontImportWindow.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +32,6 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9ba6d56fd70744abbf5567e91ce224805d800/55/7893d5a8/Cpp2IlApi.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/36e740b59df23626d207e72ea77e34298e53dd99db463eee529f8c416b5664/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7641a1a0695522e81971758464776ba68659afdcd53575f6917f7593181d9345/Dictionary.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e466d67f482b0e1a84e8b7a513a33ded7b5f9c89109694b34051a07150a3c/ModuleDefinition.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7e231682be8652744726acc6de35323daa68061429db55e0c251114902f60/String.Manipulation.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e9a270fd5aa47ba627013a4744380641a33dda093ef15387b4c397865fa31a/AssemblyDefinition.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ee456ec7f2e479b4eaa66183eaa0d1365ef16c4615282c4e7dccacdcc14dda/ArgumentNullException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Watson/Resource.Designer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -57,7 +54,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected=".NET Project.Watson HoloError">
+  <component name="RunManager" selected=".NET Project.Watson.Program">
     <configuration name="Publish Watson.CLI to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" platform="Any CPU" produce_single_file="true" ready_to_run="true" runtime="win-x64" self_contained="true" target_folder="$PROJECT_DIR$/Watson.CLI/bin/Release/net7.0/win-x64/publish" target_framework="net7.0" uuid_high="230379160390094602" uuid_low="-9075046313692763487" />
       <method v="2" />
@@ -160,6 +157,8 @@
       <workItem from="1668617613166" duration="615000" />
       <workItem from="1669230015033" duration="4773000" />
       <workItem from="1669239488331" duration="1342000" />
+      <workItem from="1669273317288" duration="868000" />
+      <workItem from="1669296956173" duration="1843000" />
     </task>
     <servers />
   </component>
@@ -184,23 +183,6 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Watson.Lib/Utils/StringTable_Importer.cs</url>
-          <line>13</line>
-          <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Utils\StringTable_Importer.cs" initialLine="13" containingFunctionPresentation="method 'Export'">
-            <startOffsets>
-              <option value="388" />
-            </startOffsets>
-            <endOffsets>
-              <option value="388" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="DotNetProject">
         <watch expression="stringTable.Value" />

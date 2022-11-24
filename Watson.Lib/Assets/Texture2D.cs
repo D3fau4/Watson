@@ -24,7 +24,7 @@ public class Texture2D : IAsset
         foreach (var m_Texture in m_AssetFile.GetAssetsOfType(AssetClassID.Texture2D))
         {
             var baseField = m_AssetFile.AM.GetBaseField(m_AssetFile.Assets, m_Texture);
-            m_Textures2D.Add(m_Texture.ScriptTypeIndex,
+            m_Textures2D.Add(m_Texture.PathId,
                 Tuple.Create(baseField["m_Name"].Value.AsString, baseField, m_Texture, m_AssetFile.Assets));
         }
     }

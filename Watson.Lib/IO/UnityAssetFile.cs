@@ -7,8 +7,8 @@ public class UnityAssetFile
 {
     public AssetsManager AM;
     public string AssetName;
-    public AssetsFileInstance Assets;
-    public BundleFileInstance Bundle;
+    public AssetsFileInstance? Assets;
+    public BundleFileInstance? Bundle;
     public bool IsBundle;
 
     public UnityAssetFile(Stream stream, bool IsBundle = false)

@@ -32,7 +32,7 @@ public class TMPFont : IAsset
             var asset = deserialized.Get("m_fontInfo");
             if (asset != null)
                 // Almacenar el nombre de asset que contiene la fuente.
-                m_FontNames.Add(m_Asset.TypeIdOrIndex,
+                m_FontNames.Add(m_Asset.PathId,
                     Tuple.Create(deserialized.Get("m_Name").Value.AsString, deserialized, m_Asset,
                         m_AssetFile.Assets));
         }
@@ -41,7 +41,7 @@ public class TMPFont : IAsset
         foreach (var m_Texture in m_AssetFile.GetAssetsOfType(AssetClassID.Texture2D))
         {
             var baseField = m_AssetFile.AM.GetBaseField(m_AssetFile.Assets, m_Texture);
-            m_FontTextures.Add(m_Texture.TypeIdOrIndex,
+            m_FontTextures.Add(m_Texture.PathId,
                 Tuple.Create(baseField["m_Name"].Value.AsString, baseField, m_Texture, m_AssetFile.Assets));
         }
     }
