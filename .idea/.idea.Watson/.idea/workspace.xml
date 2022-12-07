@@ -11,7 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83357797-ebc7-41ad-9549-13a9187dfee1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/Sprites_Importer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/Sprites_Importer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/global.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Assets/StringTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Assets/StringTable.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +21,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9ba6d56fd70744abbf5567e91ce224805d800/55/7893d5a8/Cpp2IlApi.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Watson/Resource.Designer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -42,7 +43,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected=".NET Project.Watson.Program">
+  <component name="RunManager" selected=".NET Project.Needy Overdose">
     <configuration name="Publish Watson.CLI to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" platform="Any CPU" produce_single_file="true" ready_to_run="true" runtime="win-x64" self_contained="true" target_folder="$PROJECT_DIR$/Watson.CLI/bin/Release/net7.0/win-x64/publish" target_framework="net7.0" uuid_high="230379160390094602" uuid_low="-9075046313692763487" />
       <method v="2" />
@@ -50,6 +51,24 @@
     <configuration name="Publish Watson.Program to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" delete_existing_files="true" include_native_libs_for_self_extract="true" platform="Any CPU" produce_single_file="true" ready_to_run="true" runtime="win-x64" self_contained="true" target_folder="$PROJECT_DIR$/Watson/bin/Release/net6.0-windows10.0.17763.0/publish" target_framework="net7.0-windows" uuid_high="8795337528189403600" uuid_low="-5283853676068201648" />
       <method v="2" />
+    </configuration>
+    <configuration name="Needy Overdose" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0/Watson.CLI.exe" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;C:\Program Files (x86)\Steam\steamapps\common\NEEDY GIRL OVERDOSE\Windose_Data\StreamingAssets\aa\StandaloneWindows64\defaultlocalgroup_assets_all_9d5fd45a7d69c3d6b57190d79a82cd87.bundle&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\NEEDY GIRL OVERDOSE\Windose_Data&quot;" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Watson.CLI/Watson.CLI.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value="net7.0" />
+      <method v="2">
+        <option name="Build" />
+      </method>
     </configuration>
     <configuration name="Watson HoloError" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0/Watson.CLI.exe" />
@@ -122,6 +141,7 @@
     </configuration>
     <list>
       <item itemvalue=".NET Launch Settings Profile.Watson.CLI" />
+      <item itemvalue=".NET Project.Needy Overdose" />
       <item itemvalue=".NET Project.Watson HoloError" />
       <item itemvalue=".NET Project.Watson.Program" />
       <item itemvalue=".NET Project.Watson.Test" />
@@ -148,6 +168,7 @@
       <workItem from="1669273317288" duration="868000" />
       <workItem from="1669296956173" duration="1843000" />
       <workItem from="1669306678070" duration="2483000" />
+      <workItem from="1670406818980" duration="1177000" />
     </task>
     <servers />
   </component>
@@ -177,15 +198,47 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Watson.CLI/Program.cs</url>
           <line>12</line>
-          <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.CLI\Program.cs" initialLine="12" containingFunctionPresentation="method 'Main'">
+          <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.CLI\Program.cs" initialLine="12" containingFunctionPresentation="method 'Main'" />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Watson.Lib/Assets/StringTable.cs</url>
+          <line>37</line>
+          <properties documentPath="C:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Assets\StringTable.cs" initialLine="37" containingFunctionPresentation="method 'Load'">
             <startOffsets>
-              <option value="277" />
+              <option value="1468" />
             </startOffsets>
             <endOffsets>
-              <option value="277" />
+              <option value="1503" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="4" />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Watson.Lib/Assets/StringTable.cs</url>
+          <line>38</line>
+          <properties documentPath="C:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Assets\StringTable.cs" initialLine="38" containingFunctionPresentation="method 'Load'">
+            <startOffsets>
+              <option value="1551" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1596" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Watson.Lib/Assets/StringTable.cs</url>
+          <line>29</line>
+          <properties documentPath="C:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Assets\StringTable.cs" initialLine="29" containingFunctionPresentation="method 'Load'">
+            <startOffsets>
+              <option value="1160" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1178" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

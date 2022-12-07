@@ -25,9 +25,9 @@ public class StringTable : IAsset
         foreach (var m_Asset in m_AssetFile.GetAssetsOfType(AssetClassID.MonoBehaviour))
         {
             var deserialized = m_AssetFile.AM.GetBaseField(m_AssetFile.Assets, m_Asset);
-            //MonoDeserializer.GetMonoBaseField(m_AssetFile.AM, m_AssetFile.Assets, m_Asset, m_DLL.AssemblyFolder);
+
             var asset = deserialized.Get("m_TableData");
-            if (asset != null)
+            if (asset.Value != null)
                 m_StringTables.Add(m_Asset.PathId,
                     Tuple.Create(deserialized.Get("m_Name").Value.AsString, deserialized, m_Asset,
                         m_AssetFile.Assets));
