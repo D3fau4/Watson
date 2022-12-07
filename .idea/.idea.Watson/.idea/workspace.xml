@@ -11,30 +11,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83357797-ebc7-41ad-9549-13a9187dfee1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/IGame.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Game.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/ActMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/CmdMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/EgosaMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/EndingMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/EndingTextMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/EventTextMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/KRepMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/KituneMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/KituneSuretaiMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/KusoCommentMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/LineMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/MobCommentMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/ResourceMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/StatusLabelMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/StatusTextMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/SystemTextMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/TenCommentMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/TooltipMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/TweetMaster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/yakujoMaster.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +44,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected=".NET Project.Needy Overdose">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Watson.CLI">
     <configuration name="Publish Watson.CLI to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" platform="Any CPU" produce_single_file="true" ready_to_run="true" runtime="win-x64" self_contained="true" target_folder="$PROJECT_DIR$/Watson.CLI/bin/Release/net7.0/win-x64/publish" target_framework="net7.0" uuid_high="230379160390094602" uuid_low="-9075046313692763487" />
       <method v="2" />
@@ -218,7 +198,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Watson.CLI/Program.cs</url>
-          <line>12</line>
+          <line>14</line>
           <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.CLI\Program.cs" initialLine="12" containingFunctionPresentation="method 'Main'" />
           <option name="timeStamp" value="4" />
         </line-breakpoint>

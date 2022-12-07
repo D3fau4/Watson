@@ -1,5 +1,6 @@
 ﻿using AssetsTools.NET;
 using AssetsTools.NET.Extra;
+using AssetsTools.NET.Texture;
 using Watson.Lib.Utils.Helpers;
 
 namespace Watson.Lib.Utils;
