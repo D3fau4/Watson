@@ -13,6 +13,10 @@
     <list default="true" id="83357797-ebc7-41ad-9549-13a9187dfee1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Game.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/CmdMaster.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/CmdMaster.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/IO/Assembly.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/IO/Assembly.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/IO/UnityAssetFile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/IO/UnityAssetFile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.sln" afterDir="false" />
     </list>
@@ -35,16 +39,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\raul2\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\raul2\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\raul2\\AppData\\Local\\Symbols\\src"
+    ]
   }
-}</component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Watson.CLI">
+}]]></component>
+  <component name="RunManager" selected=".NET Project.Needy Overdose">
     <configuration name="Publish Watson.CLI to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" platform="Any CPU" produce_single_file="true" ready_to_run="true" runtime="win-x64" self_contained="true" target_folder="$PROJECT_DIR$/Watson.CLI/bin/Release/net7.0/win-x64/publish" target_framework="net7.0" uuid_high="230379160390094602" uuid_low="-9075046313692763487" />
       <method v="2" />
@@ -55,7 +66,7 @@
     </configuration>
     <configuration name="Needy Overdose" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0/Watson.CLI.exe" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;C:\Program Files (x86)\Steam\steamapps\common\NEEDY GIRL OVERDOSE\Windose_Data\StreamingAssets\aa\StandaloneWindows64\defaultlocalgroup_assets_all_9d5fd45a7d69c3d6b57190d79a82cd87.bundle&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\NEEDY GIRL OVERDOSE\Windose_Data&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;C:\Program Files (x86)\Steam\steamapps\common\NEEDY GIRL OVERDOSE&quot;" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
@@ -170,6 +181,8 @@
       <workItem from="1669296956173" duration="1843000" />
       <workItem from="1669306678070" duration="2483000" />
       <workItem from="1670406818980" duration="1177000" />
+      <workItem from="1670527989808" duration="1080000" />
+      <workItem from="1670530556336" duration="4212000" />
     </task>
     <servers />
   </component>
@@ -196,12 +209,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Watson.CLI/Program.cs</url>
-          <line>14</line>
-          <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.CLI\Program.cs" initialLine="12" containingFunctionPresentation="method 'Main'" />
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Watson.Lib/Assets/StringTable.cs</url>
           <line>37</line>
@@ -240,6 +247,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Watson.Lib/Game/Windose/Game.cs</url>
+          <line>86</line>
+          <properties documentPath="C:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Game\Windose\Game.cs" initialLine="67" containingFunctionPresentation="method 'Proccess'">
+            <startOffsets>
+              <option value="4564" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4591" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

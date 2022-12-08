@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetsTools.NET.Texture", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AssetsTools.NET", "AssetsTools.NET", "{145303D3-733A-4C5A-8813-9BD17C1DEF98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetsTools.NET.Cpp2IL", "AssetsTools.NET\AssetsTools.NET.Cpp2IL\AssetsTools.NET.Cpp2IL.csproj", "{14A58100-A6A2-4BD4-8F15-37E55E48DE8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{9E242F6A-FAFE-44FB-85FC-C1447F0F581D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E242F6A-FAFE-44FB-85FC-C1447F0F581D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E242F6A-FAFE-44FB-85FC-C1447F0F581D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A58100-A6A2-4BD4-8F15-37E55E48DE8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A58100-A6A2-4BD4-8F15-37E55E48DE8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A58100-A6A2-4BD4-8F15-37E55E48DE8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A58100-A6A2-4BD4-8F15-37E55E48DE8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,5 +63,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{86A1CEE2-4694-4217-8FA1-FA0E57D488DE} = {145303D3-733A-4C5A-8813-9BD17C1DEF98}
 		{9E242F6A-FAFE-44FB-85FC-C1447F0F581D} = {145303D3-733A-4C5A-8813-9BD17C1DEF98}
+		{14A58100-A6A2-4BD4-8F15-37E55E48DE8E} = {145303D3-733A-4C5A-8813-9BD17C1DEF98}
 	EndGlobalSection
 EndGlobal

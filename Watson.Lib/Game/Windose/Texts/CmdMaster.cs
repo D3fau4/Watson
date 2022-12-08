@@ -1,5 +1,8 @@
 ﻿namespace Watson.Lib.Game.Windose.Texts;
 
+/// <summary>
+///     Stream themes
+/// </summary>
 public class CmdMaster
 {
     public List<Param> param = new();
