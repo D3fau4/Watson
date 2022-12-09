@@ -2,6 +2,7 @@
 using Watson.Lib.Game.Windose.Texts;
 using Watson.Lib.IO;
 using Yarhl.FileFormat;
+using Yarhl.FileSystem;
 using Yarhl.Media.Text;
 
 namespace Watson.Lib.Game.Windose;
@@ -465,9 +466,81 @@ public class Game : IGame
         throw new NotImplementedException();
     }
 
-    public void Export()
+    public void Export(string outpath = "out")
     {
-        throw new NotImplementedException();
+        if (!Directory.Exists(outpath))
+            Directory.CreateDirectory(outpath);
+
+        new Node("ActMaster.EN", new Po2Binary().Convert(new ActMaster2Po().Convert(actMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "ActMaster.EN.po"));
+
+        var cmd = new CmdMaster2Po().Convert(cmdMaster.param.ToArray());
+        new Node("CmdMaster.desc.EN", new Po2Binary().Convert(cmd.Item1)).Stream?.WriteTo(Path.Combine(outpath,
+            "CmdMaster.desc.EN.po"));
+        new Node("CmdMaster.label.EN", new Po2Binary().Convert(cmd.Item2)).Stream?.WriteTo(Path.Combine(outpath,
+            "CmdMaster.label.EN.po"));
+        
+        new Node("EgosaMaster.EN", new Po2Binary().Convert(new EgosaMaster2Po().Convert(egosaMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "EgosaMaster.EN.po"));
+
+        var endingm = new EndingMaster2Po().Convert(endingMaster.param.ToArray());
+        new Node("EndingMaster.name.EN", new Po2Binary().Convert(endingm.Item1)).Stream?.WriteTo(Path.Combine(outpath,
+            "EndingMaster.name.EN.po"));
+        new Node("EndingMaster.isseki.EN", new Po2Binary().Convert(endingm.Item2)).Stream?.WriteTo(Path.Combine(outpath,
+            "EndingMaster.isseki.EN.po"));
+        new Node("EndingMaster.reason.EN", new Po2Binary().Convert(endingm.Item3)).Stream?.WriteTo(Path.Combine(outpath,
+            "EndingMaster.reason.EN.po"));
+        
+        new Node("EndingTextMaster.EN", new Po2Binary().Convert(new EndingTextMaster2Po().Convert(endingTextMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "EndingTextMaster.EN.po"));
+        
+        new Node("EventTextMaster.EN", new Po2Binary().Convert(new EventTextMaster2Po().Convert(eventTextMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "EventTextMaster.EN.po"));
+        
+        new Node("KituneMaster.EN", new Po2Binary().Convert(new KituneMaster2po().Convert(kituneMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "KituneMaster.EN.po"));
+        
+        new Node("KituneSuretaiMaster.EN", new Po2Binary().Convert(new KituneSuretaiMaster2Po().Convert(kituneSuretaiMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "KituneSuretaiMaster.EN.po"));
+        
+        new Node("KRepMaster.EN", new Po2Binary().Convert(new KRepMaster2Po().Convert(repMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "KRepMaster.EN.po"));
+        
+        new Node("KusoCommentMaster.EN", new Po2Binary().Convert(new KusoCommentMaster2Po().Convert(kusoCommentMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "KusoCommentMaster.EN.po"));
+        
+        new Node("LineMaster.EN", new Po2Binary().Convert(new LineMaster2Po().Convert(lineMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "LineMaster.EN.po"));
+        
+        new Node("MobCommentMaster.EN", new Po2Binary().Convert(new MobCommentMaster2Po().Convert(mobCommentMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "MobCommentMaster.EN.po"));
+        
+        new Node("MusicTitleMaster.EN", new Po2Binary().Convert(new MusicTitleMaster2Po().Convert(musicTitleMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "MusicTitleMaster.EN.po"));
+        
+        new Node("StatusLabelMaster.EN", new Po2Binary().Convert(new StatusLabelMaster2Po().Convert(statusLabelMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "StatusLabelMaster.EN.po"));
+        
+        new Node("StatusTextMaster.EN", new Po2Binary().Convert(new StatusTextMaster2Po().Convert(statusTextMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "StatusTextMaster.EN.po"));
+        
+        new Node("SystemTextMaster.EN", new Po2Binary().Convert(new SystemTextMaster2Po().Convert(systemTextMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "SystemTextMaster.EN.po"));
+        
+        new Node("TenCommentMaster.EN", new Po2Binary().Convert(new TenCommentMaster2Po().Convert(tenCommentMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "TenCommentMaster.EN.po"));
+        
+        new Node("TooltipMaster.EN", new Po2Binary().Convert(new TooltipMaster2Po().Convert(tooltipMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "TooltipMaster.EN.po"));
+        
+        var tweet = new TweetMaster2Po().Convert(tweetMaster.param.ToArray());
+        new Node("TweetMaster.omote.EN", new Po2Binary().Convert(tweet.Item1)).Stream?.WriteTo(Path.Combine(outpath,
+            "TweetMaster.omote.EN.po"));
+        new Node("TweetMaster.ura.EN", new Po2Binary().Convert(tweet.Item2)).Stream?.WriteTo(Path.Combine(outpath,
+            "TweetMaster.ura.EN.po"));
+        
+        new Node("yakujoMaster.EN", new Po2Binary().Convert(new yakujoMaster2Po().Convert(yakujoMaster.param.ToArray()))).Stream
+            ?.WriteTo(Path.Combine(outpath, "yakujoMaster.EN.po"));
     }
 
     #region Converters
@@ -521,14 +594,14 @@ public class Game : IGame
             {
                 podesc.Add(new PoEntry
                 {
-                    Original = entry.DescEn,
+                    Original = entry.DescEn != string.Empty ? entry.DescEn : "{empty}",
                     Context = entry.ParentAct,
                     ExtractedComments = entry.ParentAct
                 });
 
                 polabel.Add(new PoEntry
                 {
-                    Original = entry.LabelEn,
+                    Original = entry.LabelEn != string.Empty ? entry.LabelEn : "{empty}",
                     Context = entry.TweetID,
                     ExtractedComments = entry.ParentAct
                 });
@@ -596,17 +669,17 @@ public class Game : IGame
             {
                 poname.Add(new PoEntry
                 {
-                    Original = entry.EndingNameEn,
+                    Original = entry.EndingNameEn != string.Empty ? entry.EndingNameEn : "{empty}",
                     Context = entry.Id
                 });
                 pojisseki.Add(new PoEntry
                 {
-                    Original = entry.JissekiEn,
+                    Original = entry.JissekiEn != string.Empty ? entry.JissekiEn : "{empty}",
                     Context = entry.Id
                 });
                 pojreason.Add(new PoEntry
                 {
-                    Original = entry.ReasonEn,
+                    Original = entry.ReasonEn != string.Empty ? entry.ReasonEn : "{empty}",
                     Context = entry.Id
                 });
             }
@@ -682,7 +755,7 @@ public class Game : IGame
             foreach (var entry in source)
                 po.Add(new PoEntry
                 {
-                    Original = entry.BodyEn,
+                    Original = entry.BodyEn != string.Empty ? entry.BodyEn : "{empty}",
                     Context = entry.Id,
                     Reference = entry.FollowerRank,
                     ExtractedComments = $"{entry.ResNumber}"
@@ -709,7 +782,7 @@ public class Game : IGame
                 po.Add(new PoEntry
                 {
                     Original = entry.BodyEn,
-                    Context = entry.Id,
+                    Context = entry.Id
                 });
 
             return po;
@@ -907,7 +980,7 @@ public class Game : IGame
             foreach (var entry in source)
                 po.Add(new PoEntry
                 {
-                    Original = entry.BodyEn,
+                    Original = entry.BodyEn != string.Empty ? entry.BodyEn : "{empty}",
                     Context = entry.Id,
                     ExtractedComments = entry.ArgumentType
                 });
@@ -932,8 +1005,8 @@ public class Game : IGame
             foreach (var entry in source)
                 po.Add(new PoEntry
                 {
-                    Original = entry.BodyEn,
-                    Context = entry.Id,
+                    Original = entry.BodyEn != string.Empty ? entry.BodyEn : "{empty}",
+                    Context = entry.Id
                 });
 
             return po;
@@ -958,16 +1031,16 @@ public class Game : IGame
                 {
                     Original = entry.BodyEn,
                     Context = entry.Id,
-                    TranslatorComment = $"Speaker: {entry.Speaker}\nSummary: {entry.Summary}",
+                    TranslatorComment = $"Speaker: {entry.Speaker}\nSummary: {entry.Summary}"
                 });
 
             return po;
         }
     }
 
-    public class TweetMaster2Po : IConverter<TweetMaster.Param[], (Po,Po)>
+    public class TweetMaster2Po : IConverter<TweetMaster.Param[], (Po, Po)>
     {
-        public (Po,Po) Convert(TweetMaster.Param[] source)
+        public (Po, Po) Convert(TweetMaster.Param[] source)
         {
             var currentCulture = Thread.CurrentThread.CurrentCulture;
             var poomote = new Po
@@ -977,7 +1050,7 @@ public class Game : IGame
                     LanguageTeam = "Any"
                 }
             };
-            
+
             var poUra = new Po
             {
                 Header = new PoHeader("Windose - TweetMaster.Ura", "d3fau4@not-d3fau4.com", currentCulture.Name)
@@ -990,21 +1063,21 @@ public class Game : IGame
             {
                 poomote.Add(new PoEntry
                 {
-                    Original = entry.OmoteBodyEn,
+                    Original = entry.OmoteBodyEn != string.Empty ? entry.OmoteBodyEn : "{empty}",
                     Context = entry.Id,
                     Reference = entry.CommandID,
                     TranslatorComment = entry.Result
                 });
-                
+
                 poUra.Add(new PoEntry
                 {
-                    Original = entry.UraBodyEn,
+                    Original = entry.UraBodyEn != string.Empty ? entry.UraBodyEn : "{empty}",
                     Context = entry.Id,
                     Reference = entry.CommandID,
                     TranslatorComment = entry.Result
                 });
             }
-                
+
 
             return (poomote, poUra);
         }

@@ -13,8 +13,8 @@
     <list default="true" id="83357797-ebc7-41ad-9549-13a9187dfee1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/IGame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/IGame.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Game.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/MusicTitleMaster.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Texts/MusicTitleMaster.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +187,7 @@
       <workItem from="1670604298851" duration="45000" />
       <workItem from="1670604543731" duration="166000" />
       <workItem from="1670604755556" duration="893000" />
-      <workItem from="1670605922345" duration="5222000" />
+      <workItem from="1670605922345" duration="7087000" />
     </task>
     <servers />
   </component>
@@ -231,6 +231,19 @@
           <line>29</line>
           <properties documentPath="C:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Assets\StringTable.cs" initialLine="29" containingFunctionPresentation="method 'Load'" />
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Watson.Lib/Game/Windose/Game.cs</url>
+          <line>470</line>
+          <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Game\Windose\Game.cs" initialLine="470" containingFunctionPresentation="method 'Export'">
+            <startOffsets>
+              <option value="27968" />
+            </startOffsets>
+            <endOffsets>
+              <option value="27999" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

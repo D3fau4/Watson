@@ -8,5 +8,5 @@ public interface IGame
 
     public void Import();
 
-    public void Export();
+    public void Export(string outpath = "out");
 }
