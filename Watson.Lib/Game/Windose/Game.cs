@@ -76,15 +76,17 @@ public class Game : IGame
                             param.PassingTime = m_param.Get("PassingTime").Value.AsInt;
                             param.FollowerDelta = m_param.Get("FollowerDelta").Value.AsInt;
                             param.AttentionDelta = m_param.Get("AttentionDelta").Value.AsInt;
+                            param.StressDelta = m_param.Get("StressDelta").Value.AsInt;
                             param.YamiDelta = m_param.Get("YamiDelta").Value.AsInt;
                             param.FavorDelta = m_param.Get("FavorDelta").Value.AsInt;
                             param.OkusuriCount = m_param.Get("OkusuriCount").Value.AsInt;
                             param.OirokeCount = m_param.Get("OirokeCount").Value.AsInt;
-                            param.SNS = m_param.Get("GameCount").Value.AsInt;
-                            param.SNS = m_param.Get("CinePhillCount").Value.AsInt;
-                            param.SNS = m_param.Get("ShabekuriCount").Value.AsInt;
-                            param.SNS = m_param.Get("DatespotCount").Value.AsInt;
-                            param.SNS = m_param.Get("Harumagedo").Value.AsInt;
+                            param.SNS = m_param.Get("SNS").Value.AsInt;
+                            param.GameCount = m_param.Get("GameCount").Value.AsInt;
+                            param.CinePhillCount = m_param.Get("CinePhillCount").Value.AsInt;
+                            param.ShabekuriCount = m_param.Get("ShabekuriCount").Value.AsInt;
+                            param.DatespotCount = m_param.Get("DatespotCount").Value.AsInt;
+                            param.Harumagedo = m_param.Get("Harumagedo").Value.AsInt;
                             cmdMaster.param.Add(param);
                         }
 
@@ -264,30 +266,176 @@ public class Game : IGame
                         Console.WriteLine($"LineMaster: {lineMaster.param.Count}");
                         break;
                     case "MobCommentMaster":
-                        MobCommentMaster mobCommentMaster = new MobCommentMaster();
+                        var mobCommentMaster = new MobCommentMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new MobCommentMaster.Param();
                             param.Id = m_param.Get("Id").Value.AsString;
-                            param.ParentId = m_param.Get("ParentId").Value.AsString;
-                            param.Speaker = m_param.Get("Speaker").Value.AsString;
+                            param.Rank = m_param.Get("Rank").Value.AsInt;
+                            param.BodyJP = m_param.Get("BodyJP").Value.AsString;
+                            param.BodyEn = m_param.Get("BodyEn").Value.AsString;
+                            param.BodyCh = m_param.Get("BodyCh").Value.AsString;
+                            param.BodyKo = m_param.Get("BodyKo").Value.AsString;
+                            param.BodyTw = m_param.Get("BodyTw").Value.AsString;
+                            param.timing = m_param.Get("timing").Value.AsString;
+                            param.goodbad = m_param.Get("goodbad").Value.AsString;
+                            mobCommentMaster.param.Add(param);
+                        }
+
+                        Console.WriteLine($"MobCommentMaster: {mobCommentMaster.param.Count}");
+                        break;
+                    case "MusicTitleMaster":
+                        var musicTitleMaster = new MusicTitleMaster();
+                        foreach (var m_param in deserialized["_MusicTitleList"])
+                        {
+                            var param = new MusicTitleMaster.Param();
+                            param.Id = m_param.Get("Id").Value.AsString;
+                            param.Index = m_param.Get("Index").Value.AsInt;
+                            param.IsPlayable = m_param.Get("IsPlayable").Value.AsBool;
+                            param.BodyJp = m_param.Get("BodyJp").Value.AsString;
+                            param.BodyEn = m_param.Get("BodyEn").Value.AsString;
+                            param.BodyCn = m_param.Get("BodyCn").Value.AsString;
+                            musicTitleMaster.param.Add(param);
+                        }
+
+                        Console.WriteLine($"MusicTitleMaster: {musicTitleMaster.param.Count}");
+                        break;
+                    case "StatusLabelMaster":
+                        var statusLabelMaster = new StatusLabelMaster();
+                        foreach (var m_param in deserialized["param"])
+                        {
+                            var param = new StatusLabelMaster.Param();
+                            param.Id = m_param.Get("Id").Value.AsString;
+                            param.Body = m_param.Get("Body").Value.AsString;
+                            param.BodyEn = m_param.Get("BodyEn").Value.AsString;
+                            param.BodyCn = m_param.Get("BodyCn").Value.AsString;
+                            param.BodyKo = m_param.Get("BodyKo").Value.AsString;
+                            param.BodyTw = m_param.Get("BodyTw").Value.AsString;
+                            statusLabelMaster.param.Add(param);
+                        }
+
+                        Console.WriteLine($"StatusLabelMaster: {statusLabelMaster.param.Count}");
+                        break;
+                    case "StatusTextMaster":
+                        var statusTextMaster = new StatusTextMaster();
+                        foreach (var m_param in deserialized["param"])
+                        {
+                            var param = new StatusTextMaster.Param();
+                            param.Id = m_param.Get("Id").Value.AsString;
+                            param.Body = m_param.Get("Body").Value.AsString;
+                            param.BodyEn = m_param.Get("BodyEn").Value.AsString;
+                            param.BodyCn = m_param.Get("BodyCn").Value.AsString;
+                            param.BodyKo = m_param.Get("BodyKo").Value.AsString;
+                            param.BodyTw = m_param.Get("BodyTw").Value.AsString;
+                            statusTextMaster.param.Add(param);
+                        }
+
+                        Console.WriteLine($"StatusTextMaster: {statusTextMaster.param.Count}");
+                        break;
+                    case "SystemTextMaster":
+                        var systemTextMaster = new SystemTextMaster();
+                        foreach (var m_param in deserialized["param"])
+                        {
+                            var param = new SystemTextMaster.Param();
+                            param.Id = m_param.Get("Id").Value.AsString;
                             param.BodyJp = m_param.Get("BodyJp").Value.AsString;
                             param.BodyEn = m_param.Get("BodyEn").Value.AsString;
                             param.BodyCn = m_param.Get("BodyCn").Value.AsString;
                             param.BodyKo = m_param.Get("BodyKo").Value.AsString;
                             param.BodyTw = m_param.Get("BodyTw").Value.AsString;
-                            param.ImageId = m_param.Get("ImageId").Value.AsString;
                             param.ArgumentType = m_param.Get("ArgumentType").Value.AsString;
-                            lineMaster.param.Add(param);
+                            param.ArgumentType2 = m_param.Get("ArgumentType2").Value.AsString;
+                            systemTextMaster.param.Add(param);
                         }
+
+                        Console.WriteLine($"SystemTextMaster: {systemTextMaster.param.Count}");
+                        break;
+                    case "TenCommentMaster":
+                        var tenCommentMaster = new TenCommentMaster();
+                        foreach (var m_param in deserialized["param"])
+                        {
+                            var param = new TenCommentMaster.Param();
+                            param.Id = m_param.Get("Id").Value.AsString;
+                            param.BodyJP = m_param.Get("BodyJP").Value.AsString;
+                            param.BodyEn = m_param.Get("BodyEn").Value.AsString;
+                            param.BodyCn = m_param.Get("BodyCn").Value.AsString;
+                            param.BodyKo = m_param.Get("BodyKo").Value.AsString;
+                            param.BodyTw = m_param.Get("BodyTw").Value.AsString;
+                            tenCommentMaster.param.Add(param);
+                        }
+
+                        Console.WriteLine($"TenCommentMaster: {tenCommentMaster.param.Count}");
+                        break;
+                    case "TooltipMaster":
+                        var tooltipMaster = new TooltipMaster();
+                        foreach (var m_param in deserialized["param"])
+                        {
+                            var param = new TooltipMaster.Param();
+                            param.Id = m_param.Get("Id").Value.AsString;
+                            param.Speaker = m_param.Get("Speaker").Value.AsString;
+                            param.Summary = m_param.Get("Summary").Value.AsString;
+                            param.BodyJp = m_param.Get("BodyJp").Value.AsString;
+                            param.BodyEn = m_param.Get("BodyEn").Value.AsString;
+                            param.BodyCn = m_param.Get("BodyCn").Value.AsString;
+                            param.BodyKo = m_param.Get("BodyKo").Value.AsString;
+                            param.BodyTw = m_param.Get("BodyTw").Value.AsString;
+                            tooltipMaster.param.Add(param);
+                        }
+
+                        Console.WriteLine($"TooltipMaster: {tooltipMaster.param.Count}");
+                        break;
+                    case "TweetMaster":
+                        var tweetMaster = new TweetMaster();
+                        foreach (var m_param in deserialized["param"])
+                        {
+                            var param = new TweetMaster.Param();
+                            param.Id = m_param.Get("Id").Value.AsString;
+                            param.CommandID = m_param.Get("CommandID").Value.AsString;
+                            param.Result = m_param.Get("Result").Value.AsString;
+                            param.OmoteBodyJp = m_param.Get("OmoteBodyJp").Value.AsString;
+                            param.OmoteBodyEn = m_param.Get("OmoteBodyEn").Value.AsString;
+                            param.OmoteBodyCn = m_param.Get("OmoteBodyCn").Value.AsString;
+                            param.OtomeBodyKo = m_param.Get("OtomeBodyKo").Value.AsString;
+                            param.OmoteBodyTw = m_param.Get("OmoteBodyTw").Value.AsString;
+                            param.OmoteImageId = m_param.Get("OmoteImageId").Value.AsString;
+                            param.BuzzPowerFav = m_param.Get("BuzzPowerFav").Value.AsInt;
+                            param.BuzzPowerRT = m_param.Get("BuzzPowerRT").Value.AsInt;
+                            param.UraBodyJp = m_param.Get("UraBodyJp").Value.AsString;
+                            param.UraBodyEn = m_param.Get("UraBodyEn").Value.AsString;
+                            param.UraBodyCn = m_param.Get("UraBodyCn").Value.AsString;
+                            param.UraBodyKo = m_param.Get("UraBodyKo").Value.AsString;
+                            param.UraBodyTw = m_param.Get("UraBodyTw").Value.AsString;
+                            param.UraImageId = m_param.Get("UraImageId").Value.AsString;
+                            param.isNight = m_param.Get("isNight").Value.AsBool;
+                            param.isDay = m_param.Get("isDay").Value.AsBool;
+                            tweetMaster.param.Add(param);
+                        }
+
+                        Console.WriteLine($"TweetMaster: {tweetMaster.param.Count}");
+                        break;
+                    case "yakujoMaster":
+                        var yakujoMaster = new yakujoMaster();
+                        foreach (var m_param in deserialized["param"])
+                        {
+                            var param = new yakujoMaster.Param();
+                            param.Id = m_param.Get("Id").Value.AsString;
+                            param.Type = m_param.Get("Type").Value.AsString;
+                            param.Content = m_param.Get("Content").Value.AsString;
+                            param.BodyJp = m_param.Get("BodyJp").Value.AsString;
+                            param.BodyEn = m_param.Get("BodyEn").Value.AsString;
+                            param.BodyCn = m_param.Get("BodyCn").Value.AsString;
+                            param.BodyKo = m_param.Get("BodyKo").Value.AsString;
+                            param.BodyTw = m_param.Get("BodyTw").Value.AsString;
+                            yakujoMaster.param.Add(param);
+                        }
+
+                        Console.WriteLine($"yakujoMaster: {yakujoMaster.param.Count}");
                         break;
                     default:
                         continue;
                 }
             }
         }
-
-        throw new NotImplementedException();
     }
 
     public void Import()
