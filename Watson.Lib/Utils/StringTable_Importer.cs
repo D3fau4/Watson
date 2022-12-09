@@ -1,6 +1,4 @@
-﻿using AssetsTools.NET;
-using AssetsTools.NET.Extra;
-using Watson.Lib.Assets;
+﻿using Watson.Lib.Assets;
 using Watson.Lib.IO;
 using Yarhl.FileSystem;
 using Yarhl.Media.Text;
@@ -17,7 +15,7 @@ public static class StringTable_Exporter
     {
         if (!Directory.Exists(outpath))
             Directory.CreateDirectory(outpath);
-        
+
         foreach (var entrys in source.m_tableData)
         {
             var po = new StringTable2Po();
@@ -25,7 +23,7 @@ public static class StringTable_Exporter
             var po2Binary = new Po2Binary();
             var binary = po2Binary.Convert(poobj);
             var node1 = new Node(entrys.Key["m_Name"].AsString, binary);
-            node1.Stream?.WriteTo(Path.Combine(outpath,$"{entrys.Key["m_Name"].AsString}.po"));
+            node1.Stream?.WriteTo(Path.Combine(outpath, $"{entrys.Key["m_Name"].AsString}.po"));
         }
     }
 }

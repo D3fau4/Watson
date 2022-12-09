@@ -47,7 +47,7 @@ public class UnityAssetFile
             }
         }
     }
-    
+
     public UnityAssetFile(string file, string DataFolder)
     {
         AssetName = Path.GetFileName(file);
@@ -88,11 +88,9 @@ public class UnityAssetFile
             }
             else
             {
-                FindCpp2IlFilesResult il2cppFiles = FindCpp2IlFiles.Find(DataFolder);
+                var il2cppFiles = FindCpp2IlFiles.Find(DataFolder);
                 if (il2cppFiles.success)
-                {
                     AM.SetMonoTempGenerator(new Cpp2IlTempGenerator(il2cppFiles.metaPath, il2cppFiles.asmPath));
-                }
             }
         }
     }

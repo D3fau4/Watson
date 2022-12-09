@@ -2,7 +2,6 @@
 
 namespace Watson.Lib.IO;
 
-
 public class Assembly
 {
     public enum AssemblyType
@@ -14,7 +13,7 @@ public class Assembly
     public string AssemblyFolder;
 
     public AssemblyType assemblyType;
-    
+
     [Obsolete("Ahora se cargan desde UnityAssetFile")]
     public Assembly(string DataFolder)
     {

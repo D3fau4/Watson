@@ -18,14 +18,12 @@ public class StringTable2Po : IConverter<StringTable.TableData[], Po>
         };
 
         foreach (var entry in source)
-        {
-           po.Add(new PoEntry()
+            po.Add(new PoEntry
             {
                 Original = entry.m_Localized,
                 Context = $"{entry.m_id}"
             });
-        }
-        
+
         return po;
     }
 }

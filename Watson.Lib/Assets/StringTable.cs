@@ -9,7 +9,7 @@ public class StringTable : IAsset
     private readonly Assembly m_DLL;
     public UnityAssetFile m_AssetFile;
     public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_StringTables;
-    public Dictionary<AssetTypeValueField,TableData[]> m_tableData = new Dictionary<AssetTypeValueField, TableData[]>(); 
+    public Dictionary<AssetTypeValueField, TableData[]> m_tableData = new();
 
     public StringTable(UnityAssetFile StringTableBundle, Assembly assembly)
     {
@@ -32,23 +32,24 @@ public class StringTable : IAsset
                     Tuple.Create(deserialized.Get("m_Name").Value.AsString, deserialized, m_Asset,
                         m_AssetFile.Assets));
         }
-        
+
         foreach (var stringTable in m_StringTables)
         {
             var count = stringTable.Value.Item2["m_TableData"]["Array"].Value.AsArray.size;
-            List<TableData> list = new List<TableData>();
+            var list = new List<TableData>();
             for (var i = 0; i < count; i++)
             {
-                var data = new StringTable.TableData();
+                var data = new TableData();
                 var localized = stringTable.Value.Item2["m_TableData"]["Array"][i]["m_Localized"].AsString;
                 var id = stringTable.Value.Item2["m_TableData"]["Array"][i]["m_Id"].Value.AsLong;
                 data.m_Localized = localized;
                 data.m_id = id;
-                
+
                 // TODO: recoger Metadata
-                
+
                 list.Add(data);
             }
+
             m_tableData.Add(stringTable.Value.Item2, list.ToArray());
         }
     }

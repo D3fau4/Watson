@@ -479,8 +479,9 @@ public class Game : IGame
             "CmdMaster.desc.EN.po"));
         new Node("CmdMaster.label.EN", new Po2Binary().Convert(cmd.Item2)).Stream?.WriteTo(Path.Combine(outpath,
             "CmdMaster.label.EN.po"));
-        
-        new Node("EgosaMaster.EN", new Po2Binary().Convert(new EgosaMaster2Po().Convert(egosaMaster.param.ToArray()))).Stream
+
+        new Node("EgosaMaster.EN", new Po2Binary().Convert(new EgosaMaster2Po().Convert(egosaMaster.param.ToArray())))
+            .Stream
             ?.WriteTo(Path.Combine(outpath, "EgosaMaster.EN.po"));
 
         var endingm = new EndingMaster2Po().Convert(endingMaster.param.ToArray());
@@ -490,56 +491,72 @@ public class Game : IGame
             "EndingMaster.isseki.EN.po"));
         new Node("EndingMaster.reason.EN", new Po2Binary().Convert(endingm.Item3)).Stream?.WriteTo(Path.Combine(outpath,
             "EndingMaster.reason.EN.po"));
-        
-        new Node("EndingTextMaster.EN", new Po2Binary().Convert(new EndingTextMaster2Po().Convert(endingTextMaster.param.ToArray()))).Stream
+
+        new Node("EndingTextMaster.EN",
+                new Po2Binary().Convert(new EndingTextMaster2Po().Convert(endingTextMaster.param.ToArray()))).Stream
             ?.WriteTo(Path.Combine(outpath, "EndingTextMaster.EN.po"));
-        
-        new Node("EventTextMaster.EN", new Po2Binary().Convert(new EventTextMaster2Po().Convert(eventTextMaster.param.ToArray()))).Stream
+
+        new Node("EventTextMaster.EN",
+                new Po2Binary().Convert(new EventTextMaster2Po().Convert(eventTextMaster.param.ToArray()))).Stream
             ?.WriteTo(Path.Combine(outpath, "EventTextMaster.EN.po"));
-        
-        new Node("KituneMaster.EN", new Po2Binary().Convert(new KituneMaster2po().Convert(kituneMaster.param.ToArray()))).Stream
+
+        new Node("KituneMaster.EN",
+                new Po2Binary().Convert(new KituneMaster2po().Convert(kituneMaster.param.ToArray()))).Stream
             ?.WriteTo(Path.Combine(outpath, "KituneMaster.EN.po"));
-        
-        new Node("KituneSuretaiMaster.EN", new Po2Binary().Convert(new KituneSuretaiMaster2Po().Convert(kituneSuretaiMaster.param.ToArray()))).Stream
+
+        new Node("KituneSuretaiMaster.EN",
+                new Po2Binary().Convert(new KituneSuretaiMaster2Po().Convert(kituneSuretaiMaster.param.ToArray())))
+            .Stream
             ?.WriteTo(Path.Combine(outpath, "KituneSuretaiMaster.EN.po"));
-        
-        new Node("KRepMaster.EN", new Po2Binary().Convert(new KRepMaster2Po().Convert(repMaster.param.ToArray()))).Stream
+
+        new Node("KRepMaster.EN", new Po2Binary().Convert(new KRepMaster2Po().Convert(repMaster.param.ToArray())))
+            .Stream
             ?.WriteTo(Path.Combine(outpath, "KRepMaster.EN.po"));
-        
-        new Node("KusoCommentMaster.EN", new Po2Binary().Convert(new KusoCommentMaster2Po().Convert(kusoCommentMaster.param.ToArray()))).Stream
+
+        new Node("KusoCommentMaster.EN",
+                new Po2Binary().Convert(new KusoCommentMaster2Po().Convert(kusoCommentMaster.param.ToArray()))).Stream
             ?.WriteTo(Path.Combine(outpath, "KusoCommentMaster.EN.po"));
-        
-        new Node("LineMaster.EN", new Po2Binary().Convert(new LineMaster2Po().Convert(lineMaster.param.ToArray()))).Stream
+
+        new Node("LineMaster.EN", new Po2Binary().Convert(new LineMaster2Po().Convert(lineMaster.param.ToArray())))
+            .Stream
             ?.WriteTo(Path.Combine(outpath, "LineMaster.EN.po"));
-        
-        new Node("MobCommentMaster.EN", new Po2Binary().Convert(new MobCommentMaster2Po().Convert(mobCommentMaster.param.ToArray()))).Stream
+
+        new Node("MobCommentMaster.EN",
+                new Po2Binary().Convert(new MobCommentMaster2Po().Convert(mobCommentMaster.param.ToArray()))).Stream
             ?.WriteTo(Path.Combine(outpath, "MobCommentMaster.EN.po"));
-        
-        new Node("MusicTitleMaster.EN", new Po2Binary().Convert(new MusicTitleMaster2Po().Convert(musicTitleMaster.param.ToArray()))).Stream
+
+        new Node("MusicTitleMaster.EN",
+                new Po2Binary().Convert(new MusicTitleMaster2Po().Convert(musicTitleMaster.param.ToArray()))).Stream
             ?.WriteTo(Path.Combine(outpath, "MusicTitleMaster.EN.po"));
-        
-        new Node("StatusLabelMaster.EN", new Po2Binary().Convert(new StatusLabelMaster2Po().Convert(statusLabelMaster.param.ToArray()))).Stream
+
+        new Node("StatusLabelMaster.EN",
+                new Po2Binary().Convert(new StatusLabelMaster2Po().Convert(statusLabelMaster.param.ToArray()))).Stream
             ?.WriteTo(Path.Combine(outpath, "StatusLabelMaster.EN.po"));
-        
-        new Node("StatusTextMaster.EN", new Po2Binary().Convert(new StatusTextMaster2Po().Convert(statusTextMaster.param.ToArray()))).Stream
+
+        new Node("StatusTextMaster.EN",
+                new Po2Binary().Convert(new StatusTextMaster2Po().Convert(statusTextMaster.param.ToArray()))).Stream
             ?.WriteTo(Path.Combine(outpath, "StatusTextMaster.EN.po"));
-        
-        new Node("SystemTextMaster.EN", new Po2Binary().Convert(new SystemTextMaster2Po().Convert(systemTextMaster.param.ToArray()))).Stream
+
+        new Node("SystemTextMaster.EN",
+                new Po2Binary().Convert(new SystemTextMaster2Po().Convert(systemTextMaster.param.ToArray()))).Stream
             ?.WriteTo(Path.Combine(outpath, "SystemTextMaster.EN.po"));
-        
-        new Node("TenCommentMaster.EN", new Po2Binary().Convert(new TenCommentMaster2Po().Convert(tenCommentMaster.param.ToArray()))).Stream
+
+        new Node("TenCommentMaster.EN",
+                new Po2Binary().Convert(new TenCommentMaster2Po().Convert(tenCommentMaster.param.ToArray()))).Stream
             ?.WriteTo(Path.Combine(outpath, "TenCommentMaster.EN.po"));
-        
-        new Node("TooltipMaster.EN", new Po2Binary().Convert(new TooltipMaster2Po().Convert(tooltipMaster.param.ToArray()))).Stream
+
+        new Node("TooltipMaster.EN",
+                new Po2Binary().Convert(new TooltipMaster2Po().Convert(tooltipMaster.param.ToArray()))).Stream
             ?.WriteTo(Path.Combine(outpath, "TooltipMaster.EN.po"));
-        
+
         var tweet = new TweetMaster2Po().Convert(tweetMaster.param.ToArray());
         new Node("TweetMaster.omote.EN", new Po2Binary().Convert(tweet.Item1)).Stream?.WriteTo(Path.Combine(outpath,
             "TweetMaster.omote.EN.po"));
         new Node("TweetMaster.ura.EN", new Po2Binary().Convert(tweet.Item2)).Stream?.WriteTo(Path.Combine(outpath,
             "TweetMaster.ura.EN.po"));
-        
-        new Node("yakujoMaster.EN", new Po2Binary().Convert(new yakujoMaster2Po().Convert(yakujoMaster.param.ToArray()))).Stream
+
+        new Node("yakujoMaster.EN",
+                new Po2Binary().Convert(new yakujoMaster2Po().Convert(yakujoMaster.param.ToArray()))).Stream
             ?.WriteTo(Path.Combine(outpath, "yakujoMaster.EN.po"));
     }
 

@@ -38,7 +38,7 @@ public static class Sprites_Importer
                     .AsLong = spriteold.Value.Item2["m_RD"]["texture"]["m_PathID"].Value.AsLong;
 
                 var SpriteData = sprite.Value.Item2.WriteToByteArray();
-                
+
                 m.Add(new AssetsReplacerFromMemory(spriteold.Value.Item4.file, spriteold.Value.Item3, SpriteData));
             }
 
@@ -64,7 +64,7 @@ public static class Sprites_Importer
                 sprite.Value.Item2["image data"].Value.AsByteArray = encImageBytes;
 
                 var Texture2Data = sprite.Value.Item2.WriteToByteArray();
-                
+
                 m.Add(new AssetsReplacerFromMemory(sprite.Value.Item4.file, spriteold.Value.Item3, Texture2Data));
             }
 
