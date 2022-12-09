@@ -1,12 +1,34 @@
 ﻿using AssetsTools.NET.Extra;
 using Watson.Lib.Game.Windose.Texts;
 using Watson.Lib.IO;
+using Yarhl.FileFormat;
+using Yarhl.Media.Text;
 
 namespace Watson.Lib.Game.Windose;
 
 public class Game : IGame
 {
+    private ActMaster actMaster;
+    private CmdMaster cmdMaster;
+    private EgosaMaster egosaMaster;
+    private EndingMaster endingMaster;
+    private EndingTextMaster endingTextMaster;
+    private EventTextMaster eventTextMaster;
+    private KituneMaster kituneMaster;
+    private KituneSuretaiMaster kituneSuretaiMaster;
+    private KusoCommentMaster kusoCommentMaster;
+    private LineMaster lineMaster;
     private UnityAssetFile m_assetfile;
+    private MobCommentMaster mobCommentMaster;
+    private MusicTitleMaster musicTitleMaster;
+    private KRepMaster repMaster;
+    private StatusLabelMaster statusLabelMaster;
+    private StatusTextMaster statusTextMaster;
+    private SystemTextMaster systemTextMaster;
+    private TenCommentMaster tenCommentMaster;
+    private TooltipMaster tooltipMaster;
+    private TweetMaster tweetMaster;
+    private yakujoMaster yakujoMaster;
 
     public Game(string path)
     {
@@ -40,7 +62,7 @@ public class Game : IGame
                 switch (classname)
                 {
                     case "ActMaster":
-                        var actMaster = new ActMaster();
+                        actMaster = new ActMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new ActMaster.Param();
@@ -56,7 +78,7 @@ public class Game : IGame
                         Console.WriteLine($"ActMaster: {actMaster.param.Count}");
                         break;
                     case "CmdMaster":
-                        var cmdMaster = new CmdMaster();
+                        cmdMaster = new CmdMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new CmdMaster.Param();
@@ -93,7 +115,7 @@ public class Game : IGame
                         Console.WriteLine($"CmdMaster: {cmdMaster.param.Count}");
                         break;
                     case "EgosaMaster":
-                        var egosaMaster = new EgosaMaster();
+                        egosaMaster = new EgosaMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new EgosaMaster.Param();
@@ -111,7 +133,7 @@ public class Game : IGame
                         Console.WriteLine($"EgosaMaster: {egosaMaster.param.Count}");
                         break;
                     case "EndingMaster":
-                        var endingMaster = new EndingMaster();
+                        endingMaster = new EndingMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new EndingMaster.Param();
@@ -137,7 +159,7 @@ public class Game : IGame
                         Console.WriteLine($"EndingMaster: {endingMaster.param.Count}");
                         break;
                     case "EndingTextMaster":
-                        var endingTextMaster = new EndingTextMaster();
+                        endingTextMaster = new EndingTextMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new EndingTextMaster.Param();
@@ -154,7 +176,7 @@ public class Game : IGame
                         Console.WriteLine($"EndingTextMaster: {endingTextMaster.param.Count}");
                         break;
                     case "EventTextMaster":
-                        var eventTextMaster = new EventTextMaster();
+                        eventTextMaster = new EventTextMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new EventTextMaster.Param();
@@ -175,7 +197,7 @@ public class Game : IGame
                         Console.WriteLine($"EventTextMaster: {eventTextMaster.param.Count}");
                         break;
                     case "KituneMaster":
-                        var kituneMaster = new KituneMaster();
+                        kituneMaster = new KituneMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new KituneMaster.Param();
@@ -193,7 +215,7 @@ public class Game : IGame
                         Console.WriteLine($"KituneMaster: {kituneMaster.param.Count}");
                         break;
                     case "KituneSuretaiMaster":
-                        var kituneSuretaiMaster = new KituneSuretaiMaster();
+                        kituneSuretaiMaster = new KituneSuretaiMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new KituneSuretaiMaster.Param();
@@ -208,8 +230,8 @@ public class Game : IGame
 
                         Console.WriteLine($"KituneSuretaiMaster: {kituneSuretaiMaster.param.Count}");
                         break;
-                    case "KRep":
-                        var repMaster = new KRepMaster();
+                    case "KRepMaster":
+                        repMaster = new KRepMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new KRepMaster.Param();
@@ -229,7 +251,7 @@ public class Game : IGame
                         Console.WriteLine($"KRepMaster: {repMaster.param.Count}");
                         break;
                     case "KusoCommentMaster":
-                        var kusoCommentMaster = new KusoCommentMaster();
+                        kusoCommentMaster = new KusoCommentMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new KusoCommentMaster.Param();
@@ -246,7 +268,7 @@ public class Game : IGame
                         Console.WriteLine($"KusoCommentMaster: {kusoCommentMaster.param.Count}");
                         break;
                     case "LineMaster":
-                        var lineMaster = new LineMaster();
+                        lineMaster = new LineMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new LineMaster.Param();
@@ -266,7 +288,7 @@ public class Game : IGame
                         Console.WriteLine($"LineMaster: {lineMaster.param.Count}");
                         break;
                     case "MobCommentMaster":
-                        var mobCommentMaster = new MobCommentMaster();
+                        mobCommentMaster = new MobCommentMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new MobCommentMaster.Param();
@@ -285,7 +307,7 @@ public class Game : IGame
                         Console.WriteLine($"MobCommentMaster: {mobCommentMaster.param.Count}");
                         break;
                     case "MusicTitleMaster":
-                        var musicTitleMaster = new MusicTitleMaster();
+                        musicTitleMaster = new MusicTitleMaster();
                         foreach (var m_param in deserialized["_MusicTitleList"])
                         {
                             var param = new MusicTitleMaster.Param();
@@ -301,7 +323,7 @@ public class Game : IGame
                         Console.WriteLine($"MusicTitleMaster: {musicTitleMaster.param.Count}");
                         break;
                     case "StatusLabelMaster":
-                        var statusLabelMaster = new StatusLabelMaster();
+                        statusLabelMaster = new StatusLabelMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new StatusLabelMaster.Param();
@@ -317,7 +339,7 @@ public class Game : IGame
                         Console.WriteLine($"StatusLabelMaster: {statusLabelMaster.param.Count}");
                         break;
                     case "StatusTextMaster":
-                        var statusTextMaster = new StatusTextMaster();
+                        statusTextMaster = new StatusTextMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new StatusTextMaster.Param();
@@ -333,7 +355,7 @@ public class Game : IGame
                         Console.WriteLine($"StatusTextMaster: {statusTextMaster.param.Count}");
                         break;
                     case "SystemTextMaster":
-                        var systemTextMaster = new SystemTextMaster();
+                        systemTextMaster = new SystemTextMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new SystemTextMaster.Param();
@@ -351,7 +373,7 @@ public class Game : IGame
                         Console.WriteLine($"SystemTextMaster: {systemTextMaster.param.Count}");
                         break;
                     case "TenCommentMaster":
-                        var tenCommentMaster = new TenCommentMaster();
+                        tenCommentMaster = new TenCommentMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new TenCommentMaster.Param();
@@ -367,7 +389,7 @@ public class Game : IGame
                         Console.WriteLine($"TenCommentMaster: {tenCommentMaster.param.Count}");
                         break;
                     case "TooltipMaster":
-                        var tooltipMaster = new TooltipMaster();
+                        tooltipMaster = new TooltipMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new TooltipMaster.Param();
@@ -385,7 +407,7 @@ public class Game : IGame
                         Console.WriteLine($"TooltipMaster: {tooltipMaster.param.Count}");
                         break;
                     case "TweetMaster":
-                        var tweetMaster = new TweetMaster();
+                        tweetMaster = new TweetMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new TweetMaster.Param();
@@ -414,7 +436,7 @@ public class Game : IGame
                         Console.WriteLine($"TweetMaster: {tweetMaster.param.Count}");
                         break;
                     case "yakujoMaster":
-                        var yakujoMaster = new yakujoMaster();
+                        yakujoMaster = new yakujoMaster();
                         foreach (var m_param in deserialized["param"])
                         {
                             var param = new yakujoMaster.Param();
@@ -447,4 +469,571 @@ public class Game : IGame
     {
         throw new NotImplementedException();
     }
+
+    #region Converters
+
+    public class ActMaster2Po : IConverter<ActMaster.Param[], Po>
+    {
+        public Po Convert(ActMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - ActMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.TitleEn,
+                    Context = entry.Id
+                });
+
+            return po;
+        }
+    }
+
+    public class CmdMaster2Po : IConverter<CmdMaster.Param[], (Po, Po)>
+    {
+        public (Po, Po) Convert(CmdMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var podesc = new Po
+            {
+                Header = new PoHeader("Windose - CmdMaster.Desc", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            var polabel = new Po
+            {
+                Header = new PoHeader("Windose - CmdMaster.Label", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+            {
+                podesc.Add(new PoEntry
+                {
+                    Original = entry.DescEn,
+                    Context = entry.ParentAct,
+                    ExtractedComments = entry.ParentAct
+                });
+
+                polabel.Add(new PoEntry
+                {
+                    Original = entry.LabelEn,
+                    Context = entry.TweetID,
+                    ExtractedComments = entry.ParentAct
+                });
+            }
+
+            return (podesc, polabel);
+        }
+    }
+
+    public class EgosaMaster2Po : IConverter<EgosaMaster.Param[], Po>
+    {
+        public Po Convert(EgosaMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - EgosaMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id,
+                    Reference = entry.Type
+                });
+
+            return po;
+        }
+    }
+
+    public class EndingMaster2Po : IConverter<EndingMaster.Param[], (Po, Po, Po)>
+    {
+        public (Po, Po, Po) Convert(EndingMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var poname = new Po
+            {
+                Header = new PoHeader("Windose - EndingMaster.Name", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            var pojisseki = new Po
+            {
+                Header = new PoHeader("Windose - EndingMaster.Jisseki", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            var pojreason = new Po
+            {
+                Header = new PoHeader("Windose - EndingMaster.Reason", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+            {
+                poname.Add(new PoEntry
+                {
+                    Original = entry.EndingNameEn,
+                    Context = entry.Id
+                });
+                pojisseki.Add(new PoEntry
+                {
+                    Original = entry.JissekiEn,
+                    Context = entry.Id
+                });
+                pojreason.Add(new PoEntry
+                {
+                    Original = entry.ReasonEn,
+                    Context = entry.Id
+                });
+            }
+
+            return (poname, pojisseki, pojreason);
+        }
+    }
+
+    public class EndingTextMaster2Po : IConverter<EndingTextMaster.Param[], Po>
+    {
+        public Po Convert(EndingTextMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - EndingTextMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id,
+                    Reference = entry.ParentID
+                });
+
+            return po;
+        }
+    }
+
+    public class EventTextMaster2Po : IConverter<EventTextMaster.Param[], Po>
+    {
+        public Po Convert(EventTextMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - EventTextMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id,
+                    Reference = entry.EventId,
+                    ExtractedComments = entry.ArgumentType1
+                });
+
+            return po;
+        }
+    }
+
+    public class KituneMaster2po : IConverter<KituneMaster.Param[], Po>
+    {
+        public Po Convert(KituneMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - KituneMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id,
+                    Reference = entry.FollowerRank,
+                    ExtractedComments = $"{entry.ResNumber}"
+                });
+
+            return po;
+        }
+    }
+
+    public class KituneSuretaiMaster2Po : IConverter<KituneSuretaiMaster.Param[], Po>
+    {
+        public Po Convert(KituneSuretaiMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - KituneSuretaiMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id,
+                });
+
+            return po;
+        }
+    }
+
+    public class KRepMaster2Po : IConverter<KRepMaster.Param[], Po>
+    {
+        public Po Convert(KRepMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - KRepMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id,
+                    Reference = entry.ParentID
+                });
+
+            return po;
+        }
+    }
+
+    public class KusoCommentMaster2Po : IConverter<KusoCommentMaster.Param[], Po>
+    {
+        public Po Convert(KusoCommentMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - KusoCommentMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id,
+                    Reference = entry.goodbad
+                });
+
+            return po;
+        }
+    }
+
+    public class LineMaster2Po : IConverter<LineMaster.Param[], Po>
+    {
+        public Po Convert(LineMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - LineMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id,
+                    Reference = entry.ParentId,
+                    TranslatorComment = $"Speaker: {entry.Speaker}"
+                });
+
+            return po;
+        }
+    }
+
+    public class MobCommentMaster2Po : IConverter<MobCommentMaster.Param[], Po>
+    {
+        public Po Convert(MobCommentMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - MobCommentMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id,
+                    Reference = entry.goodbad,
+                    TranslatorComment = $"Rank: {entry.Rank}"
+                });
+
+            return po;
+        }
+    }
+
+    public class MusicTitleMaster2Po : IConverter<MusicTitleMaster.Param[], Po>
+    {
+        public Po Convert(MusicTitleMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - MusicTitleMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id,
+                    Reference = entry.FileName
+                });
+
+            return po;
+        }
+    }
+
+    public class StatusLabelMaster2Po : IConverter<StatusLabelMaster.Param[], Po>
+    {
+        public Po Convert(StatusLabelMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - StatusLabelMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id
+                });
+
+            return po;
+        }
+    }
+
+    public class StatusTextMaster2Po : IConverter<StatusTextMaster.Param[], Po>
+    {
+        public Po Convert(StatusTextMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - StatusTextMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id
+                });
+
+            return po;
+        }
+    }
+
+    public class SystemTextMaster2Po : IConverter<SystemTextMaster.Param[], Po>
+    {
+        public Po Convert(SystemTextMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - SystemTextMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id,
+                    ExtractedComments = entry.ArgumentType
+                });
+
+            return po;
+        }
+    }
+
+    public class TenCommentMaster2Po : IConverter<TenCommentMaster.Param[], Po>
+    {
+        public Po Convert(TenCommentMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - SystemTextMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id,
+                });
+
+            return po;
+        }
+    }
+
+    public class TooltipMaster2Po : IConverter<TooltipMaster.Param[], Po>
+    {
+        public Po Convert(TooltipMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - SystemTextMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id,
+                    TranslatorComment = $"Speaker: {entry.Speaker}\nSummary: {entry.Summary}",
+                });
+
+            return po;
+        }
+    }
+
+    public class TweetMaster2Po : IConverter<TweetMaster.Param[], (Po,Po)>
+    {
+        public (Po,Po) Convert(TweetMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var poomote = new Po
+            {
+                Header = new PoHeader("Windose - TweetMaster.Omote", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+            
+            var poUra = new Po
+            {
+                Header = new PoHeader("Windose - TweetMaster.Ura", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+            {
+                poomote.Add(new PoEntry
+                {
+                    Original = entry.OmoteBodyEn,
+                    Context = entry.Id,
+                    Reference = entry.CommandID,
+                    TranslatorComment = entry.Result
+                });
+                
+                poUra.Add(new PoEntry
+                {
+                    Original = entry.UraBodyEn,
+                    Context = entry.Id,
+                    Reference = entry.CommandID,
+                    TranslatorComment = entry.Result
+                });
+            }
+                
+
+            return (poomote, poUra);
+        }
+    }
+
+    public class yakujoMaster2Po : IConverter<yakujoMaster.Param[], Po>
+    {
+        public Po Convert(yakujoMaster.Param[] source)
+        {
+            var currentCulture = Thread.CurrentThread.CurrentCulture;
+            var po = new Po
+            {
+                Header = new PoHeader("Windose - yakujoMaster", "d3fau4@not-d3fau4.com", currentCulture.Name)
+                {
+                    LanguageTeam = "Any"
+                }
+            };
+
+            foreach (var entry in source)
+                po.Add(new PoEntry
+                {
+                    Original = entry.BodyEn,
+                    Context = entry.Id,
+                    TranslatorComment = $"Type: {entry.Type}\nContent: {entry.Content}"
+                });
+
+            return po;
+        }
+    }
+
+    #endregion
 }

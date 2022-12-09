@@ -11,7 +11,6 @@ public class MusicTitleMaster
         public string BodyEn;
         public string BodyJp;
         public string FileName;
-        public string goodbad;
         public string Id;
         public int Index;
         public bool IsPlayable;
