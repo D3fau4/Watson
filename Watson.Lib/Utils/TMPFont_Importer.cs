@@ -1,5 +1,7 @@
 ﻿using AssetsTools.NET;
 using AssetsTools.NET.Extra;
+using AssetsTools.NET.Texture;
+using Watson.Lib.Utils.Helpers;
 
 namespace Watson.Lib.Utils;
 
@@ -39,7 +41,69 @@ public static class TMPFont_Importer
         string oldsuffix = "", string newsuffix = "")
     {
         var m = new List<AssetsReplacer>();
-        throw new NotImplementedException();
+        foreach (var font in NewFontNames)
+        foreach (var fontold in OldFontNames)
+        {
+            var tmpname = font.Value.Item1;
+            if (oldsuffix != string.Empty && newsuffix != string.Empty)
+                tmpname = tmpname.Replace(oldsuffix, newsuffix);
+            if (tmpname.Equals(fontold.Value.Item1))
+            {
+                /* Remplazar m_Script */
+                // Establece el FileID
+                font.Value.Item2["m_Script"]["m_FileID"].Value = fontold.Value.Item2["m_Script"]["m_FileID"].Value;
+                // Establece el PathID
+                font.Value.Item2["m_Script"]["m_PathID"].Value = fontold.Value.Item2["m_Script"]["m_PathID"].Value;
+
+                /* Remplazar Material */
+                // Establece el FileID
+                font.Value.Item2["material"]["m_FileID"].Value = fontold.Value.Item2["material"]["m_FileID"].Value;
+                // Establece el PathID
+                font.Value.Item2["material"]["m_PathID"].Value = fontold.Value.Item2["material"]["m_PathID"].Value;
+
+                /* Remplazar Atlas */
+                // Establece el FileID
+                font.Value.Item2["atlas"]["m_FileID"].Value = fontold.Value.Item2["atlas"]["m_FileID"].Value;
+                // Establece el PathID
+                font.Value.Item2["atlas"]["m_PathID"].Value = fontold.Value.Item2["atlas"]["m_PathID"].Value;
+
+                var newMonoBytes = font.Value.Item2.WriteToByteArray();
+
+                m.Add(new AssetsReplacerFromMemory(fontold.Value.Item4.file, fontold.Value.Item3, newMonoBytes));
+            }
+        }
+
+        foreach (var font in NewFontTextures2D)
+        foreach (var fontold in OldFontTextures2D)
+        {
+            var tmpname = font.Value.Item1;
+            if (oldsuffix != string.Empty && newsuffix != string.Empty)
+                tmpname = tmpname.Replace(oldsuffix, newsuffix);
+            if (tmpname.Equals(fontold.Value.Item1))
+            {
+                var encImageBytes =
+                    TextureHelper.GetRawTextureBytes(TextureFile.ReadTextureFile(font.Value.Item2), font.Value.Item4);
+
+                var m_StreamData = font.Value.Item2.Get("m_StreamData");
+                m_StreamData["offset"].Value.AsInt = 0;
+                m_StreamData["size"].Value.AsInt = 0;
+                m_StreamData["path"].Value.AsString = string.Empty;
+
+                font.Value.Item2["m_StreamData"].Value = m_StreamData.Value;
+
+                var image_data = font.Value.Item2.Get("image data");
+                image_data.Value.ValueType = AssetValueType.ByteArray;
+                image_data.TemplateField.ValueType = AssetValueType.ByteArray;
+                image_data.Value.AsByteArray = encImageBytes;
+                // TODO: Mirar que realmente esto funcione
+                font.Value.Item2["image data"].Value = image_data.Value;
+
+                var Texture2Data = font.Value.Item2.WriteToByteArray();
+
+                m.Add(new AssetsReplacerFromMemory(fontold.Value.Item4.file, fontold.Value.Item3, Texture2Data));
+            }
+        }
+
         return m;
     }
 }

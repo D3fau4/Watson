@@ -19,7 +19,6 @@ public static class Sprites_Importer
         foreach (var spriteold in OldSprites)
             if (sprite.Value.Item1.Equals(spriteold.Value.Item1))
             {
-                // 
                 sprite.Value.Item2["m_RenderDataKey"]["first"][0].Value.AsUInt =
                     spriteold.Value.Item2["m_RenderDataKey"]["first"][0].AsUInt;
                 sprite.Value.Item2["m_RenderDataKey"]["first"][1].Value.AsUInt =

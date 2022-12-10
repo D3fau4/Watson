@@ -14,6 +14,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/Windose/Game.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/Sprites_Importer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/Sprites_Importer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/TMPFont_Importer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/TMPFont_Importer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +58,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected=".NET Project.Needy Overdose">
+  <component name="RunManager" selected=".NET Project.Watson.Program">
     <configuration name="Publish Watson.CLI to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" platform="Any CPU" produce_single_file="true" ready_to_run="true" runtime="win-x64" self_contained="true" target_folder="$PROJECT_DIR$/Watson.CLI/bin/Release/net7.0/win-x64/publish" target_framework="net7.0" uuid_high="230379160390094602" uuid_low="-9075046313692763487" />
       <method v="2" />
@@ -189,6 +191,10 @@
       <workItem from="1670604755556" duration="893000" />
       <workItem from="1670605922345" duration="8132000" />
       <workItem from="1670617622855" duration="479000" />
+      <workItem from="1670618290021" duration="381000" />
+      <workItem from="1670625449235" duration="647000" />
+      <workItem from="1670669273517" duration="98000" />
+      <workItem from="1670669582517" duration="923000" />
     </task>
     <servers />
   </component>
