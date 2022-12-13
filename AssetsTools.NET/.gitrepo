@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/nesrak1/AssetsTools.NET.git
 	branch = upd21-with-inst
-	commit = 6d1c93ba43dd69e8c1da87f3983b562065f68912
-	parent = 3dee055fd82639605a7caae662d74369bc2385df
+	commit = 22a9eb847bd3d9db9976584e6a8ecd3b794b73fa
+	parent = d8cbae1f6407ec3b78130dad94ddc19ddfbc5bc6
 	method = merge
-	cmdver = 0.4.3
+	cmdver = 0.4.5
