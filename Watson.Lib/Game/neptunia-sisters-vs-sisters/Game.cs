@@ -6,6 +6,8 @@ using CsvHelper.Configuration;
 using Watson.Lib.Assets;
 using Watson.Lib.Game.neptunia_sisters_vs_sisters.Texts;
 using Watson.Lib.IO;
+using Yarhl.FileFormat;
+using Yarhl.Media.Text;
 
 namespace Watson.Lib.Game.neptunia_sisters_vs_sisters;
 
@@ -24,7 +26,7 @@ public class Game : IGame
     private string gamedatapath { get; set; }
     private string assemblyFolder { get; set; }
     private List<string> csvassets { get; } = new();
-    public Dictionary<string, CSV> csvfiles { get; } = new();
+    public Dictionary<string, CSV[]> csvfiles { get; } = new();
 
     public void Load()
     {
@@ -54,7 +56,7 @@ public class Game : IGame
                     // Todo: Comprobar que es este bad data...
                     BadDataFound = null
                 };
-
+                List<CSV> csvs = new();
                 using (var reader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(csvtxt))))
                 using (var csvr = new CsvReader(reader, configuration))
                 {
@@ -63,10 +65,11 @@ public class Game : IGame
                     foreach (var entry in records)
                         if (entry.Header.Equals("eTALK_SET_ALL"))
                         {
-                            csvfiles.Add(csv.Value.Item2["m_Name"].AsString, entry);
+                            csvs.Add(entry);
                             break;
                         }
                 }
+                csvfiles.Add(csv.Value.Item2["m_Name"].AsString, csvs.ToArray());
             }
         }
     }
@@ -79,5 +82,32 @@ public class Game : IGame
     public void Export(string outpath = "out")
     {
         throw new NotImplementedException();
+    }
+}
+
+public class CSV2Po : IConverter<(string, CSV[]), Po>
+{
+    public Po Convert((string, CSV[]) source)
+    {
+        var currentCulture = Thread.CurrentThread.CurrentCulture;
+        var po = new Po
+        {
+            Header = new PoHeader($"Neptunia: Sisters VS Sisters - {source.Item1}", "d3fau4@not-d3fau4.com", currentCulture.Name)
+            {
+                LanguageTeam = "Any"
+            }
+        };
+
+        foreach (var csv in source.Item2)
+        {
+            po.Add(new PoEntry
+            {
+                Original = csv.message_en,
+                Context = csv.unk_3,
+                TranslatorComment = $"Speaker: {csv.talkername_en}\n"
+            });
+        }
+        
+        return po;
     }
 }
