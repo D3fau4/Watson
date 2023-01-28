@@ -7,6 +7,7 @@ using Watson.Lib.Assets;
 using Watson.Lib.Game.neptunia_sisters_vs_sisters.Texts;
 using Watson.Lib.IO;
 using Yarhl.FileFormat;
+using Yarhl.FileSystem;
 using Yarhl.Media.Text;
 
 namespace Watson.Lib.Game.neptunia_sisters_vs_sisters;
@@ -47,29 +48,74 @@ public class Game : IGame
             {
                 var csvtxt = csv.Value.Item2["m_Script"].AsString;
 
+                //File.WriteAllText($"csv/{csv.Value.Item2["m_Name"].AsString}.csv", csvtxt);
+
+                List<CSV> csvs = new();
+                List<string> baddata = new();
+                var isRecordBad = false;
+
                 var configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
                 {
                     HasHeaderRecord = false,
                     Encoding = Encoding.UTF8,
                     Delimiter = ";",
                     MissingFieldFound = null,
-                    // Todo: Comprobar que es este bad data...
-                    BadDataFound = null
+                    BadDataFound = context =>
+                    {
+                        isRecordBad = true;
+                        baddata.Add(context.RawRecord);
+                    }
                 };
-                List<CSV> csvs = new();
+
                 using (var reader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(csvtxt))))
                 using (var csvr = new CsvReader(reader, configuration))
                 {
-                    var records = csvr.GetRecords<CSV>();
+                    while (csvr.Read())
+                    {
+                        var records = csvr.GetRecords<CSV>();
 
-                    foreach (var entry in records)
-                        if (entry.Header.Equals("eTALK_SET_ALL"))
-                        {
-                            csvs.Add(entry);
-                            break;
-                        }
+                        foreach (var entry in records)
+                            if (entry.Header.Equals("eTALK_SET_ALL"))
+                            {
+                                csvs.Add(entry);
+                            }
+                            else if (entry.Header.Equals("WIPE_TALK"))
+                            {
+                                // TODO: hacer mejor esto que es un truño
+                                entry.talkername_en = entry.talkername_ko;
+                                entry.message_en = entry.message_ko;
+                                csvs.Add(entry);
+                            }
+                    }
                 }
-                csvfiles.Add(csv.Value.Item2["m_Name"].AsString, csvs.ToArray());
+
+                if (baddata.Count > 0)
+                    foreach (var bad in baddata)
+                    {
+                        var entrys = bad.Split(";");
+                        var csventry = new CSV();
+                        csventry.Header = entrys[0];
+                        csventry.unk_1 = entrys[1];
+                        csventry.unk_2 = entrys[2];
+                        csventry.unk_3 = entrys[3];
+                        csventry.talkername_jp = entrys[4];
+                        csventry.talkername_en = entrys[5];
+                        csventry.talkername_cn = entrys[6];
+                        csventry.talkername_cn2 = entrys[7];
+                        csventry.talkername_ko = entrys[8];
+                        csventry.message_jp = entrys[9];
+                        csventry.message_en = entrys[10];
+                        csventry.message_cn = entrys[11];
+                        csventry.message_cn2 = entrys[12];
+                        csventry.message_ko = entrys[13];
+                        csventry.unk_4 = entrys[14];
+                        csvs.Add(csventry);
+                    }
+
+                var arr = csvs.ToArray();
+                if (arr.Length <= 0)
+                    continue;
+                csvfiles.Add(csv.Value.Item2["m_Name"].AsString, arr);
             }
         }
     }
@@ -81,7 +127,14 @@ public class Game : IGame
 
     public void Export(string outpath = "out")
     {
-        throw new NotImplementedException();
+        if (!Directory.Exists(outpath))
+            Directory.CreateDirectory(outpath);
+
+        var currentCulture = Thread.CurrentThread.CurrentCulture;
+        foreach (var entrys in csvfiles)
+            new Node($"{entrys.Key}.{currentCulture}",
+                    new Po2Binary().Convert(new CSV2Po().Convert((entrys.Key, entrys.Value)))).Stream
+                ?.WriteTo(Path.Combine(outpath, $"{entrys.Key}_{currentCulture.Name}.po"));
     }
 }
 
@@ -92,7 +145,8 @@ public class CSV2Po : IConverter<(string, CSV[]), Po>
         var currentCulture = Thread.CurrentThread.CurrentCulture;
         var po = new Po
         {
-            Header = new PoHeader($"Neptunia: Sisters VS Sisters - {source.Item1}", "d3fau4@not-d3fau4.com", currentCulture.Name)
+            Header = new PoHeader($"Neptunia: Sisters VS Sisters - {source.Item1}", "d3fau4@not-d3fau4.com",
+                currentCulture.Name)
             {
                 LanguageTeam = "Any"
             }
@@ -100,14 +154,17 @@ public class CSV2Po : IConverter<(string, CSV[]), Po>
 
         foreach (var csv in source.Item2)
         {
+            if (csv.message_en.Equals(string.Empty))
+                continue;
+
             po.Add(new PoEntry
             {
                 Original = csv.message_en,
-                Context = csv.unk_3,
+                Context = $"{csv.talkername_en}.{csv.unk_3}",
                 TranslatorComment = $"Speaker: {csv.talkername_en}\n"
             });
         }
-        
+
         return po;
     }
 }

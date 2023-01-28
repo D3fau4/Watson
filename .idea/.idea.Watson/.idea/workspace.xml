@@ -11,8 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74c63f27-3af9-4ea9-804e-503c4fd5b288" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Watson.CLI/Utils/HandlerArgs.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.CLI/Watson.CLI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Watson.CLI.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/neptunia-sisters-vs-sisters/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/neptunia-sisters-vs-sisters/Game.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +27,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/18b8ac8836494af4932f441874c7351f11400/cc/7d18a394/0200002Epdb8.il" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/6c087e1770ee47baa02bae116e7601e87e600/c7/914c84d1/02000008pdb7.il" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b084ce74169e34cadce64cee46fd7d36df7ded3c9c5d0ac1c6793ad1b9e6ec/IFormat.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b698c27f1e807b372591cb73c64b1e7bbc8d7e0744fc2ebdd10c03b4f649fb/BadDataFound.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b8367264a05acd301ea13989be34e562f187b81979f7a9c95b691302772dc/CsvReader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ee8e52d469c2e9ebabd98c3424c7c3c72e3dc8f19db08af586cb8dbdfef4/PoEntry.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Watson/Resource.Designer.cs" root0="FORCE_HIGHLIGHTING" />
@@ -104,7 +109,7 @@
     </configuration>
     <configuration name="Watson SVS" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0/win-x64/Watson.CLI.exe" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;D:\SteamLibrary\steamapps\common\Neptunia Sisters VS Sisters&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="-svs --gamepath &quot;D:\SteamLibrary\steamapps\common\Neptunia Sisters VS Sisters&quot; -x -o &quot;outpo&quot;" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0/win-x64" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
@@ -269,6 +274,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Watson.Lib/Game/neptunia-sisters-vs-sisters/Game.cs</url>
+          <line>83</line>
+          <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Game\neptunia-sisters-vs-sisters\Game.cs" initialLine="83" containingFunctionPresentation="method 'Proccess'">
+            <startOffsets>
+              <option value="3004" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3004" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
