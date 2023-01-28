@@ -16,6 +16,7 @@ public class Sprites : IAsset
         m_Texture2D = new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>>();
 
         m_AssetFile = SpriteBundle;
+        Load();
     }
 
     public void Load()

@@ -11,7 +11,8 @@ public static class Sprites_Importer
         Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewSprites,
         Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldSprites,
         Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewTextures2D,
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldTextures2D)
+        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldTextures2D,
+        string oldsuffix = " Atlas", string newsuffix = "-tex")
     {
         var m = new List<AssetsReplacer>();
 

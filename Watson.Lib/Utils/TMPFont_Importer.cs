@@ -10,7 +10,7 @@ public static class TMPFont_Importer
     public static List<string> GetToImportList(
         Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewFontNames,
         Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldFontNames,
-        string oldsuffix = "", string newsuffix = "")
+        string oldsuffix = " Atlas", string newsuffix = "-tex")
     {
         var ToImport = new List<string>();
         // Buscar fuentes compatibles para importar
@@ -32,7 +32,7 @@ public static class TMPFont_Importer
         Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldFontNames,
         Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> NewFontTextures2D,
         Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> OldFontTextures2D,
-        string oldsuffix = "", string newsuffix = "")
+        string oldsuffix = " Atlas", string newsuffix = "-tex")
     {
         var m = new List<AssetsReplacer>();
 
