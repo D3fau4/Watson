@@ -11,8 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74c63f27-3af9-4ea9-804e-503c4fd5b288" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/neptunia-sisters-vs-sisters/Assets/DbStringObject.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/neptunia-sisters-vs-sisters/Texts/DbStringMake.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/neptunia-sisters-vs-sisters/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/neptunia-sisters-vs-sisters/Game.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +24,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/18b8ac8836494af4932f441874c7351f11400/cc/7d18a394/0200002Epdb8.il" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/6c087e1770ee47baa02bae116e7601e87e600/c7/914c84d1/02000008pdb7.il" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4be0f7abd3a2af874bb5ad40eca31015297fcf931984f02b929b7a39967af/RegexParser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b084ce74169e34cadce64cee46fd7d36df7ded3c9c5d0ac1c6793ad1b9e6ec/IFormat.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b698c27f1e807b372591cb73c64b1e7bbc8d7e0744fc2ebdd10c03b4f649fb/BadDataFound.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b8367264a05acd301ea13989be34e562f187b81979f7a9c95b691302772dc/CsvReader.cs" root0="SKIP_HIGHLIGHTING" />
@@ -61,7 +63,7 @@
 }</component>
   <component name="RunManager" selected=".NET Project.Watson SVS">
     <configuration name="Publish Watson.CLI to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
-      <riderPublish configuration="Release" platform="Any CPU" produce_single_file="true" ready_to_run="true" runtime="win-x64" self_contained="true" target_folder="$PROJECT_DIR$/Watson.CLI/bin/Release/net7.0/win-x64/publish" target_framework="net7.0" uuid_high="230379160390094602" uuid_low="-9075046313692763487" />
+      <riderPublish configuration="Release" delete_existing_files="true" platform="Any CPU" ready_to_run="true" runtime="win-x64" self_contained="true" target_folder="$PROJECT_DIR$/Watson.CLI/bin/Release/net7.0/win-x64/publish" target_framework="net7.0" uuid_high="230379160390094602" uuid_low="-9075046313692763487" />
       <method v="2" />
     </configuration>
     <configuration name="Publish Watson.Program to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
@@ -215,7 +217,9 @@
       <workItem from="1670625449235" duration="647000" />
       <workItem from="1670669273517" duration="98000" />
       <workItem from="1670669582517" duration="923000" />
-      <workItem from="1674948596388" duration="1662000" />
+      <workItem from="1674948596388" duration="1887000" />
+      <workItem from="1674986738024" duration="738000" />
+      <workItem from="1675013119895" duration="4234000" />
     </task>
     <servers />
   </component>
@@ -273,25 +277,18 @@
           </properties>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Watson.Lib/Game/neptunia-sisters-vs-sisters/Game.cs</url>
-          <line>143</line>
-          <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Game\neptunia-sisters-vs-sisters\Game.cs" initialLine="142" containingFunctionPresentation="method 'Export'">
-            <startOffsets>
-              <option value="5318" />
-            </startOffsets>
-            <endOffsets>
-              <option value="5349" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Frame#Watson.Lib.Game.neptunia_sisters_vs_sisters.Game.Proccess" memberName="a" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="DotNetProject">
         <watch expression="stringTable.Value" />
         <watch expression="((System.Tuple&lt;string, AssetsTools.NET.AssetTypeValueField, AssetsTools.NET.AssetFileInfoEx, AssetsTools.NET.Extra.AssetsFileInstance&gt;) stringTable.Value).m_Item2.children[3]" />
+        <watch expression="this.dbstrings" />
       </configuration>
     </watches-manager>
   </component>

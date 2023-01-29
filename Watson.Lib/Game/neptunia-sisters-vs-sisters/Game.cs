@@ -5,6 +5,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using Spectre.Console;
 using Watson.Lib.Assets;
+using Watson.Lib.Game.neptunia_sisters_vs_sisters.Assets;
 using Watson.Lib.Game.neptunia_sisters_vs_sisters.Texts;
 using Watson.Lib.IO;
 using Yarhl.FileFormat;
@@ -16,7 +17,7 @@ namespace Watson.Lib.Game.neptunia_sisters_vs_sisters;
 public class Game : IGame
 {
     public static readonly string gamename = "neptunia-sisters-vs-sisters";
-    public static readonly string CSV_REGEX = "event_.*en_assets_all.*$";
+    public static readonly string CSV_REGEX = "en_assets_all.*$";
 
     public Game(string gamepath, ProgressContext ctx = null)
     {
@@ -30,6 +31,7 @@ public class Game : IGame
     private string assemblyFolder { get; set; }
     private List<string> csvassets { get; } = new();
     public Dictionary<string, CSV[]> csvfiles { get; } = new();
+    public Dictionary<string, DbStringMake[]> dbstrings { get; } = new();
     private ProgressContext ctx { get; set; }
 
     public void Load()
@@ -38,9 +40,9 @@ public class Game : IGame
         var task = ctx?.AddTask("[green]Searching assets[/]");
         gamedatapath = Path.Combine(gamepath, $"{gamename}_Data");
         
-        foreach (var file in Directory.GetFiles(gamedatapath, "*.*", SearchOption.AllDirectories)
+        foreach (var files in Directory.GetFiles(gamedatapath, "*.*", SearchOption.AllDirectories)
                      .Where(file => Regex.IsMatch(file, CSV_REGEX)))
-            csvassets.Add(file);
+            csvassets.Add(files);
         task?.Increment(100);
     }
 
@@ -48,10 +50,13 @@ public class Game : IGame
     {
         
         var task = ctx?.AddTask("[green]Processing assets[/]");
-        float proInc = 100.0f / csvassets.Count;
+        float proInc = 100.0f / (csvassets.Count -1);
         foreach (var file in csvassets)
         {
-            var text = new TextAsset(new UnityAssetFile(file, gamedatapath));
+            var am = new UnityAssetFile(file, gamedatapath);
+            
+            // CSV
+            var text = new TextAsset(am);
             text.Load();
             foreach (var csv in text.m_TextsAssets)
             {
@@ -121,12 +126,49 @@ public class Game : IGame
                         csvs.Add(csventry);
                     }
                 
-                task?.Increment(proInc);
                 var arr = csvs.ToArray();
                 if (arr.Length <= 0)
                     continue;
-                csvfiles.Add(csv.Value.Item2["m_Name"].AsString, arr);
+                    csvfiles.Add(csv.Value.Item2["m_Name"].AsString, arr);
             }
+            
+            // String DB
+                
+            var dbobject = new DbStringObject(am);
+            dbobject.Load();
+
+            foreach (var dbobjets in dbobject.m_TextsAssets)
+            {
+                List<DbStringMake> list = new List<DbStringMake>();
+                for (int i = 0; i < dbobjets.Value.Item2.Children.Count; i++)
+                {
+                    if (dbobjets.Value.Item2.Children[i].TypeName.Equals("DbStringMake"))
+                    {
+                        foreach (var test in dbobjets.Value.Item2.Children[i].Children[0].Children)
+                        {
+                            var s = new DbStringMake();
+                            s.nameOld_ = test["nameOld_"].AsString;
+                            s.id_ = test["id_"].AsUInt;
+                            s.jpText_ = test["jpText_"].AsString;
+                            s.enText_ = test["enText_"].AsString;
+                            s.chText_ = test["chText_"].AsString;
+                            s.chs_Text_ = test["chs_text_"].AsString;
+                            s.krText_ = test["krText_"].AsString;
+                            s.tag_ = test["tag_"].AsString;
+                            s.extend_ = new DbExtendString(test["extend_"]["Comment_"].AsString);
+                            
+                            list.Add(s);
+                        }
+                    }
+                }
+                
+                var arr = list.ToArray();
+                if (arr.Length <= 0)
+                    continue;
+                dbstrings.Add(dbobjets.Value.Item2["m_Name"].AsString, arr);
+            }
+            
+            task?.Increment(proInc);
         }
     }
 
@@ -139,7 +181,7 @@ public class Game : IGame
     {
         var task = ctx?.AddTask("[green]Converting to po[/]");
         
-        float proInc = 100.0f / csvfiles.Count;
+        float proInc = 100.0f / (csvfiles.Count + dbstrings.Count);
         
         if (!Directory.Exists(outpath))
             Directory.CreateDirectory(outpath);
@@ -149,6 +191,14 @@ public class Game : IGame
         {
             new Node($"{entrys.Key}.{currentCulture}",
                     new Po2Binary().Convert(new CSV2Po().Convert((entrys.Key, entrys.Value)))).Stream
+                ?.WriteTo(Path.Combine(outpath, $"{entrys.Key}_{currentCulture.Name}.po"));
+            task?.Increment(proInc);
+        }
+
+        foreach (var entrys in dbstrings)
+        {
+            new Node($"{entrys.Key}.{currentCulture}",
+                    new Po2Binary().Convert(new DbStringMake2Po().Convert((entrys.Key, entrys.Value)))).Stream
                 ?.WriteTo(Path.Combine(outpath, $"{entrys.Key}_{currentCulture.Name}.po"));
             task?.Increment(proInc);
         }
@@ -179,6 +229,37 @@ public class CSV2Po : IConverter<(string, CSV[]), Po>
                 Original = csv.message_en,
                 Context = $"{csv.talkername_en}.{csv.unk_3}",
                 TranslatorComment = $"Speaker: {csv.talkername_en}\n"
+            });
+        }
+
+        return po;
+    }
+}
+
+public class DbStringMake2Po : IConverter<(string, DbStringMake[]), Po>
+{
+    public Po Convert((string, DbStringMake[]) source)
+    {
+        var currentCulture = Thread.CurrentThread.CurrentCulture;
+        var po = new Po
+        {
+            Header = new PoHeader($"Neptunia: Sisters VS Sisters - {source.Item1}", "d3fau4@not-d3fau4.com",
+                currentCulture.Name)
+            {
+                LanguageTeam = "Any"
+            }
+        };
+
+        foreach (var db in source.Item2)
+        {
+            if (db.enText_.Equals(string.Empty))
+                continue;
+
+            po.Add(new PoEntry
+            {
+                Original = db.enText_,
+                Context = $"{db.id_}",
+                TranslatorComment = $"{db.extend_.Comment_}\n"
             });
         }
 
