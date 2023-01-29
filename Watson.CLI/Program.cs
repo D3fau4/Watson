@@ -7,14 +7,19 @@ var arg = new HandlerArgs(args);
 switch (arg.OperationMode)
 {
     case HandlerArgs.Mode.SVS:
-        var svs = new Watson.Lib.Game.neptunia_sisters_vs_sisters.Game(arg.GamePath);
-        svs.Proccess();
+        AnsiConsole.Progress()
+            .Start(ctx => 
+            {
+                var svs = new Watson.Lib.Game.neptunia_sisters_vs_sisters.Game(arg.GamePath, ctx);
+                svs.Proccess();
         
-        // Extract to Po
-        if (arg.extract)
-        {
-            svs.Export(arg.OutPut);
-        }
+                // Extract to Po
+                if (arg.extract)
+                {
+                    svs.Export(arg.OutPut);
+                }
+            });
+        
         
         break;
     case HandlerArgs.Mode.Help:

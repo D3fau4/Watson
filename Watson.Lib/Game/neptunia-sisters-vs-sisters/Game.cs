@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using CsvHelper;
 using CsvHelper.Configuration;
+using Spectre.Console;
 using Watson.Lib.Assets;
 using Watson.Lib.Game.neptunia_sisters_vs_sisters.Texts;
 using Watson.Lib.IO;
@@ -17,9 +18,10 @@ public class Game : IGame
     public static readonly string gamename = "neptunia-sisters-vs-sisters";
     public static readonly string CSV_REGEX = "event_.*en_assets_all.*$";
 
-    public Game(string gamepath)
+    public Game(string gamepath, ProgressContext ctx = null)
     {
         this.gamepath = gamepath;
+        this.ctx = ctx;
         Load();
     }
 
@@ -28,18 +30,25 @@ public class Game : IGame
     private string assemblyFolder { get; set; }
     private List<string> csvassets { get; } = new();
     public Dictionary<string, CSV[]> csvfiles { get; } = new();
+    private ProgressContext ctx { get; set; }
 
     public void Load()
     {
+        AnsiConsole.Markup("[yellow]Neptunia: Sisters VS Sisters mode![/]\n");
+        var task = ctx?.AddTask("[green]Searching assets[/]");
         gamedatapath = Path.Combine(gamepath, $"{gamename}_Data");
-
+        
         foreach (var file in Directory.GetFiles(gamedatapath, "*.*", SearchOption.AllDirectories)
                      .Where(file => Regex.IsMatch(file, CSV_REGEX)))
             csvassets.Add(file);
+        task?.Increment(100);
     }
 
     public void Proccess()
     {
+        
+        var task = ctx?.AddTask("[green]Processing assets[/]");
+        float proInc = 100.0f / csvassets.Count;
         foreach (var file in csvassets)
         {
             var text = new TextAsset(new UnityAssetFile(file, gamedatapath));
@@ -111,7 +120,8 @@ public class Game : IGame
                         csventry.unk_4 = entrys[14];
                         csvs.Add(csventry);
                     }
-
+                
+                task?.Increment(proInc);
                 var arr = csvs.ToArray();
                 if (arr.Length <= 0)
                     continue;
@@ -127,14 +137,21 @@ public class Game : IGame
 
     public void Export(string outpath = "out")
     {
+        var task = ctx?.AddTask("[green]Converting to po[/]");
+        
+        float proInc = 100.0f / csvfiles.Count;
+        
         if (!Directory.Exists(outpath))
             Directory.CreateDirectory(outpath);
 
         var currentCulture = Thread.CurrentThread.CurrentCulture;
         foreach (var entrys in csvfiles)
+        {
             new Node($"{entrys.Key}.{currentCulture}",
                     new Po2Binary().Convert(new CSV2Po().Convert((entrys.Key, entrys.Value)))).Stream
                 ?.WriteTo(Path.Combine(outpath, $"{entrys.Key}_{currentCulture.Name}.po"));
+            task?.Increment(proInc);
+        }
     }
 }
 
