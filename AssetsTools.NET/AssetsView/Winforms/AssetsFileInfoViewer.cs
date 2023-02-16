@@ -44,7 +44,7 @@ namespace AssetsView.Winforms
             {
                 if (type.Nodes == null || type.Nodes.Count == 0)
                 {
-                    ClassDatabaseType cldt = cldb.Classes.First(c => c.ClassId == type.TypeId);
+                    ClassDatabaseType cldt = cldb.FindAssetClassByID(type.TypeId);
                     ttr_list.Items.Add($"[{cldb.GetString(cldt.Name)}] (0x{type.TypeId.ToString("x")})");
                 }
                 else
@@ -66,9 +66,9 @@ namespace AssetsView.Winforms
             foreach (AssetsFileExternal dep in metadata.Externals)
             {
                 string guid = string.Empty;
-                if (dep.Guid.mostSignificant != 0 || dep.Guid.leastSignificant != 0)
+                if (!dep.Guid.IsEmpty)
                 {
-                    guid = $"{dep.Guid.mostSignificant:x8}{dep.Guid.leastSignificant:x8}";
+                    guid = dep.Guid.ToString();
                 }
                 dep_list.Items.Add(new ListViewItem(new[] { dep.PathName, dep.Type.ToString(), guid }));
             }
@@ -81,7 +81,7 @@ namespace AssetsView.Winforms
             TypeTreeType type = metadata.TypeTreeTypes[ttr_list.SelectedIndex];
             if (type.Nodes == null || type.Nodes.Count == 0)
             {
-                ClassDatabaseType cldt = cldb.Classes.First(c => c.ClassId == type.TypeId);
+                ClassDatabaseType cldt = cldb.FindAssetClassByID(type.TypeId);
                 ttr_type.Text = cldb.GetString(cldt.Name);
             }
             else

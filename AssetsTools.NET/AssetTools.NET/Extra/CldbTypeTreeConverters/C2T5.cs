@@ -14,13 +14,13 @@ namespace AssetsTools.NET.Extra
 
         public static TypeTreeType Convert(ClassDatabaseFile classes, string name, bool preferEditor = false)
         {
-            ClassDatabaseType type = AssetHelper.FindAssetClassByName(classes, name);
+            ClassDatabaseType type = classes.FindAssetClassByName(name);
             return Convert(classes, type, preferEditor);
         }
 
         public static TypeTreeType Convert(ClassDatabaseFile classes, int id, bool preferEditor = false)
         {
-            ClassDatabaseType type = AssetHelper.FindAssetClassByID(classes, id);
+            ClassDatabaseType type = classes.FindAssetClassByID(id);
             return Convert(classes, type, preferEditor);
         }
 
@@ -68,13 +68,14 @@ namespace AssetsTools.NET.Extra
         private void InitializeDefaultStringTableIndices()
         {
             int commonStringTablePos = 0;
-            string[] commonStrings = TypeTreeType.COMMON_STRING_TABLE.Substring(TypeTreeType.COMMON_STRING_TABLE.Length - 1).Split('\0');
-            foreach (string entry in commonStrings)
+            List<ushort> commonStringIndices = cldbFile.CommonStringBufferIndices;
+            foreach (ushort entry in commonStringIndices)
             {
-                if (entry != string.Empty)
+                string strEntry = cldbFile.StringTable.GetString(entry);
+                if (strEntry != string.Empty)
                 {
-                    commonStringTableLookup.Add(entry, (uint)commonStringTablePos);
-                    commonStringTablePos += entry.Length + 1;
+                    commonStringTableLookup.Add(strEntry, (uint)commonStringTablePos);
+                    commonStringTablePos += strEntry.Length + 1;
                 }
             }
         }

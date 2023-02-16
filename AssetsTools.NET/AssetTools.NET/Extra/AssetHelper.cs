@@ -1,82 +1,38 @@
-﻿namespace AssetsTools.NET.Extra
+﻿using System.Collections.Generic;
+using System.Reflection;
+
+namespace AssetsTools.NET.Extra
 {
     public static class AssetHelper
     {
-        public static ClassDatabaseType FindAssetClassByID(ClassDatabaseFile cldb, int id)
+        public static List<AssetHelperMonoScriptInfo> GetAssetsFileScriptInfos(AssetsManager am, AssetsFileInstance inst)
         {
-            foreach (ClassDatabaseType type in cldb.Classes)
+            List<AssetHelperMonoScriptInfo> infos = new List<AssetHelperMonoScriptInfo>();
+            AssetsFileMetadata metadata = inst.file.Metadata;
+            foreach (AssetPPtr scriptPPtr in metadata.ScriptTypes)
             {
-                if (type.ClassId == id)
-                    return type;
+                AssetTypeValueField msBaseField = am.GetExtAsset(inst, scriptPPtr.FileId, scriptPPtr.PathId).baseField;
+                string assemblyName = msBaseField["m_AssemblyName"].AsString;
+                string nameSpace = msBaseField["m_Namespace"].AsString;
+                string className = msBaseField["m_ClassName"].AsString;
+                
+                AssetHelperMonoScriptInfo info = new AssetHelperMonoScriptInfo(assemblyName, nameSpace, className);
+                infos.Add(info);
             }
-            return null;
-        }
 
-        public static ClassDatabaseType FindAssetClassByName(ClassDatabaseFile cldb, string name)
-        {
-            foreach (ClassDatabaseType type in cldb.Classes)
-            {
-                if (cldb.GetString(type.Name) == name)
-                    return type;
-            }
-            return null;
-        }
-
-        public static TypeTreeType FindTypeTreeTypeByID(AssetsFileMetadata metadata, int id)
-        {
-            foreach (TypeTreeType type in metadata.TypeTreeTypes)
-            {
-                if (type.TypeId == id)
-                    return type;
-            }
-            return null;
-        }
-
-        public static TypeTreeType FindTypeTreeTypeByID(AssetsFileMetadata metadata, int id, ushort scriptIndex)
-        {
-            // todo: use metadata for better version checking
-            foreach (TypeTreeType type in metadata.TypeTreeTypes)
-            {
-                //5.5+
-                if (type.TypeId == id && type.ScriptTypeIndex == scriptIndex)
-                    return type;
-                //5.4-
-                if (type.TypeId < 0 && id == 0x72 && (type.ScriptTypeIndex - 0x10000 == type.TypeId))
-                    return type;
-            }
-            return null;
-        }
-
-        public static TypeTreeType FindTypeTreeTypeByScriptIndex(AssetsFileMetadata metadata, ushort scriptIndex)
-        {
-            foreach (TypeTreeType type in metadata.TypeTreeTypes)
-            {
-                if (type.ScriptTypeIndex == scriptIndex)
-                    return type;
-            }
-            return null;
-        }
-
-        public static TypeTreeType FindTypeTreeTypeByName(AssetsFileMetadata metadata, string name)
-        {
-            foreach (TypeTreeType type in metadata.TypeTreeTypes)
-            {
-                if (type.Nodes[0].GetTypeString(type.StringBuffer) == name)
-                    return type;
-            }
-            return null;
+            return infos;
         }
 
         public static string GetAssetNameFast(AssetsFile file, ClassDatabaseFile cldb, AssetFileInfo info)
         {
-            ClassDatabaseType type = FindAssetClassByID(cldb, info.TypeId);
+            ClassDatabaseType type = cldb.FindAssetClassByID(info.TypeId);
             AssetsFileReader reader = file.Reader;
 
             if (file.Metadata.TypeTreeEnabled)
             {
                 ushort scriptId = file.GetScriptIndex(info);
 
-                TypeTreeType ttType = FindTypeTreeTypeByID(file.Metadata, info.TypeId, scriptId);
+                TypeTreeType ttType = file.Metadata.FindTypeTreeTypeByID(info.TypeId, scriptId);
 
                 string ttTypeName = ttType.Nodes[0].GetTypeString(ttType.StringBuffer);
                 if (ttType.Nodes.Count == 0) return cldb.GetString(type.Name); // fallback to cldb
@@ -135,6 +91,20 @@
                 }
             }
             return typeName;
+        }
+    }
+
+    public struct AssetHelperMonoScriptInfo
+    {
+        public string assemblyName;
+        public string nameSpace;
+        public string className;
+
+        public AssetHelperMonoScriptInfo(string assemblyName, string nameSpace, string className)
+        {
+            this.assemblyName = assemblyName;
+            this.nameSpace = nameSpace;
+            this.className = className;
         }
     }
 }

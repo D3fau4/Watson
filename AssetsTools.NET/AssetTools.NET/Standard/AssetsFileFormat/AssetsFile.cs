@@ -11,20 +11,20 @@ namespace AssetsTools.NET
         /// <summary>
         /// Assets file header.
         /// </summary>
-        public AssetsFileHeader Header { get; }
+        public AssetsFileHeader Header { get; set; }
         /// <summary>
         /// Contains metadata about the file (TypeTree, engine version, dependencies, etc.)
         /// </summary>
-        public AssetsFileMetadata Metadata { get; }
+        public AssetsFileMetadata Metadata { get; set; }
 
-        public AssetsFileReader Reader { get; }
+        public AssetsFileReader Reader { get; set; }
 
         public void Close()
         {
             Reader.Close();
         }
 
-        public AssetsFile(AssetsFileReader reader)
+        public void Read(AssetsFileReader reader)
         {
             Reader = reader;
             
@@ -34,7 +34,11 @@ namespace AssetsTools.NET
             Metadata = new AssetsFileMetadata();
             Metadata.Read(reader, Header);
         }
-        public AssetsFile(Stream stream) : this(new AssetsFileReader(stream)) { }
+
+        public void Read(Stream stream)
+        {
+            Read(new AssetsFileReader(stream));
+        }
 
         public void Write(AssetsFileWriter writer, long filePos, List<AssetsReplacer> replacers, ClassDatabaseFile typeMeta = null)
         {
@@ -50,17 +54,24 @@ namespace AssetsTools.NET
 
             List<TypeTreeType> typeTreeTypes = Metadata.TypeTreeTypes;
 
-            foreach (AssetsReplacer replacer in replacers)
+            foreach (AssetsReplacer replacer in replacers.Where(r => r.GetReplacementType() == AssetsReplacementType.AddOrModify))
             {
                 int replacerClassId = replacer.GetClassID();
                 ushort replacerScriptIndex = replacer.GetMonoScriptID();
-                if (!typeTreeTypes.Any(t => t.TypeId == replacerClassId && t.ScriptTypeIndex == replacerScriptIndex))
+
+                bool typeInTree;
+                if (Header.Version >= 16)
+                    typeInTree = typeTreeTypes.Any(t => t.TypeId == replacerClassId && t.ScriptTypeIndex == replacerScriptIndex);
+                else
+                    typeInTree = typeTreeTypes.Any(t => t.TypeId == replacerClassId); // script index is always 0xffff in type tree
+
+                if (!typeInTree)
                 {
                     TypeTreeType type = null;
 
                     if (typeMeta != null)
                     {
-                        ClassDatabaseType cldbType = AssetHelper.FindAssetClassByID(typeMeta, replacerClassId);
+                        ClassDatabaseType cldbType = typeMeta.FindAssetClassByID(replacerClassId);
                         if (cldbType != null)
                         {
                             type = ClassDatabaseToTypeTree.Convert(typeMeta, cldbType);
@@ -130,6 +141,11 @@ namespace AssetsTools.NET
 
                 if (Header.Version < 16)
                 {
+                    // v < 16, class id for monobehaviour is 0x72 and
+                    // type id or index is the negative number
+                    if (replacer.GetClassID() < 0)
+                        newAssetInfo.ClassId = 0x72;
+
                     newAssetInfo.TypeIdOrIndex = replacer.GetClassID();
                 }
                 else
@@ -287,6 +303,8 @@ namespace AssetsTools.NET
         public void GenerateQuickLookupTree() => Metadata.GenerateQuickLookupTree();
         public List<AssetFileInfo> GetAssetsOfType(int typeId) => Metadata.GetAssetsOfType(typeId);
         public List<AssetFileInfo> GetAssetsOfType(AssetClassID typeId) => Metadata.GetAssetsOfType(typeId);
+        public List<AssetFileInfo> GetAssetsOfType(int typeId, ushort scriptIndex) => Metadata.GetAssetsOfType(typeId, scriptIndex);
+        public List<AssetFileInfo> GetAssetsOfType(AssetClassID typeId, ushort scriptIndex) => Metadata.GetAssetsOfType(typeId, scriptIndex);
 
         public List<AssetFileInfo> AssetInfos => Metadata.AssetInfos;
     }
