@@ -84,13 +84,13 @@ public class UnityAssetFile
 
             if (type == Assembly.AssemblyType.Mono)
             {
-                AM.SetMonoTempGenerator(new MonoCecilTempGenerator(Path.Combine(DataFolder, "Managed")));
+                AM.MonoTempGenerator  = new MonoCecilTempGenerator(Path.Combine(DataFolder, "Managed"));
             }
             else
             {
                 var il2cppFiles = FindCpp2IlFiles.Find(DataFolder);
                 if (il2cppFiles.success)
-                    AM.SetMonoTempGenerator(new Cpp2IlTempGenerator(il2cppFiles.metaPath, il2cppFiles.asmPath));
+                    AM.MonoTempGenerator = new Cpp2IlTempGenerator(il2cppFiles.metaPath, il2cppFiles.asmPath);
             }
         }
     }

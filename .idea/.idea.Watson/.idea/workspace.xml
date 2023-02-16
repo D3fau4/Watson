@@ -11,10 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74c63f27-3af9-4ea9-804e-503c4fd5b288" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/neptunia-sisters-vs-sisters/Assets/DbStringObject.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/neptunia-sisters-vs-sisters/Texts/DbStringMake.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/neptunia-sisters-vs-sisters/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/neptunia-sisters-vs-sisters/Game.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
