@@ -1,4 +1,5 @@
 ﻿using Spectre.Console;
+using Watson.Lib.Game.AI_TheSomniumFiles2.Enums;
 using Watson.Program.Utils;
 
 AnsiConsole.Markup("[purple]Welcome to Watson![/] - [yellow]v1.0.0[/]\n");
@@ -19,8 +20,14 @@ switch (arg.OperationMode)
                     svs.Export(arg.OutPut);
                 }
             });
-        
-        
+        break;
+    case HandlerArgs.Mode.Psync2:
+        AnsiConsole.Progress()
+            .Start(ctx => 
+            {
+                var psync2 = new Watson.Lib.Game.AI_TheSomniumFiles2.Game(arg.GamePath, LanguageType.en);
+                psync2.Load();
+            });
         break;
     case HandlerArgs.Mode.Help:
     default:

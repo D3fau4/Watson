@@ -11,6 +11,7 @@
 
     <ItemGroup>
         <PackageReference Include="CsvHelper" Version="30.0.1" />
+        <PackageReference Include="MessagePack" Version="2.6.100-alpha" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Samboy063.Cpp2IL.Core" Version="2022.0.7.2" />
         <PackageReference Include="Spectre.Console" Version="0.47.1-preview.0.8" />
@@ -20,6 +21,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\AssetsTools.NET\AssetsTools.NET.Cpp2IL\AssetsTools.NET.Cpp2IL.csproj" />
+        <ProjectReference Include="..\AssetsTools.NET\AssetsTools.NET.MonoCecil\AssetsTools.NET.MonoCecil.csproj" />
         <ProjectReference Include="..\AssetsTools.NET\AssetsTools.NET.Texture\AssetsTools.NET.Texture.csproj" />
         <ProjectReference Include="..\AssetsTools.NET\AssetTools.NET\AssetsTools.NET.csproj" />
     </ItemGroup>

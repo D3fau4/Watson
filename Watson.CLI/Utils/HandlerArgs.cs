@@ -10,7 +10,8 @@ public class HandlerArgs
         Help,
         HoloError,
         Windose,
-        SVS
+        SVS,
+        Psync2
     }
 
     public HandlerArgs(string[] raw_args)
@@ -21,7 +22,8 @@ public class HandlerArgs
             new( new[] { "--help", "-h" }, () => OperationMode = Mode.Help),
             new( new[] { "--holoerror" }, () => OperationMode = Mode.HoloError),
             new( new[] { "--windose" }, () => OperationMode = Mode.Windose),
-            new( new[] {  "--NeptuniaSVS", "-svs"}, () => OperationMode = Mode.SVS),
+            new( new[] {  "--NeptuniaSVS", "-svs" }, () => OperationMode = Mode.SVS),
+            new( new[] {  "--AI2", "-ai2" }, () => OperationMode = Mode.Psync2),
 
             // Args
             new(new[] { "--gamepath" }, x => GamePath = x),

@@ -11,7 +11,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74c63f27-3af9-4ea9-804e-503c4fd5b288" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Assets/FolderManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Assets/I18Text.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Assets/I18n.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Enums/LanguageType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.CLI/Utils/HandlerArgs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Utils/HandlerArgs.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.CLI/Watson.CLI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Watson.CLI.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,13 +29,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/18b8ac8836494af4932f441874c7351f11400/cc/7d18a394/0200002Epdb8.il" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/6c087e1770ee47baa02bae116e7601e87e600/c7/914c84d1/02000008pdb7.il" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4be0f7abd3a2af874bb5ad40eca31015297fcf931984f02b929b7a39967af/RegexParser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b084ce74169e34cadce64cee46fd7d36df7ded3c9c5d0ac1c6793ad1b9e6ec/IFormat.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b698c27f1e807b372591cb73c64b1e7bbc8d7e0744fc2ebdd10c03b4f649fb/BadDataFound.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b8367264a05acd301ea13989be34e562f187b81979f7a9c95b691302772dc/CsvReader.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ee8e52d469c2e9ebabd98c3424c7c3c72e3dc8f19db08af586cb8dbdfef4/PoEntry.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Watson/Resource.Designer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -61,7 +65,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Project.Watson SVS">
+  <component name="RunManager" selected=".NET Project.Watson PSYNC2">
     <configuration name="Publish Watson.CLI to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" delete_existing_files="true" platform="Any CPU" ready_to_run="true" runtime="win-x64" self_contained="true" target_folder="$PROJECT_DIR$/Watson.CLI/bin/Release/net7.0/win-x64/publish" target_framework="net7.0" uuid_high="230379160390094602" uuid_low="-9075046313692763487" />
       <method v="2" />
@@ -71,9 +75,9 @@
       <method v="2" />
     </configuration>
     <configuration name="Needy Overdose" type="DotNetProject" factoryName=".NET Project">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0/win-x64/Watson.CLI.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0/Watson.CLI.exe" />
       <option name="PROGRAM_PARAMETERS" value="&quot;D:\SteamLibrary\steamapps\common\NEEDY GIRL OVERDOSE&quot;" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0/win-x64" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
@@ -106,10 +110,28 @@
         <option name="Build" />
       </method>
     </configuration>
+    <configuration name="Watson PSYNC2" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0/Watson.CLI.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-ai2 --gamepath &quot;D:\Games\AI The Somnium Files 2&quot;" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Watson.CLI/Watson.CLI.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value="net7.0" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
     <configuration name="Watson SVS" type="DotNetProject" factoryName=".NET Project">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0/win-x64/Watson.CLI.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0/Watson.CLI.exe" />
       <option name="PROGRAM_PARAMETERS" value="-svs --gamepath &quot;D:\SteamLibrary\steamapps\common\Neptunia Sisters VS Sisters&quot; -x -o &quot;outpo&quot;" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0/win-x64" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
@@ -178,6 +200,7 @@
     <list>
       <item itemvalue=".NET Launch Settings Profile.Watson.CLI" />
       <item itemvalue=".NET Project.Watson SVS" />
+      <item itemvalue=".NET Project.Watson PSYNC2" />
       <item itemvalue=".NET Project.Needy Overdose" />
       <item itemvalue=".NET Project.Watson HoloError" />
       <item itemvalue=".NET Project.Watson.Program" />
