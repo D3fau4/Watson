@@ -1,19 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
         <PublishAot>true</PublishAot>
         <StripSymbols>true</StripSymbols>
+        <TargetFramework>net7.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="CsvHelper" Version="30.0.1" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Samboy063.Cpp2IL.Core" Version="2022.0.7.2" />
-        <PackageReference Include="Spectre.Console" Version="0.46.1-preview.0.4" />
+        <PackageReference Include="Spectre.Console" Version="0.47.1-preview.0.8" />
         <PackageReference Include="Yarhl" Version="4.0.0-preview.167" />
         <PackageReference Include="Yarhl.Media" Version="4.0.0-preview.157" />
     </ItemGroup>
