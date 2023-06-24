@@ -1,15 +1,29 @@
-﻿using Watson.Lib.Assets;
-using Watson.Lib.IO;
-using Watson.Lib.Utils;
+﻿using Spectre.Console;
+using Watson.Program.Utils;
 
-namespace Watson.Program;
+AnsiConsole.Markup("[purple]Welcome to Watson![/] - [yellow]v1.0.0[/]\n");
+var arg = new HandlerArgs(args);
 
-public class Program
+switch (arg.OperationMode)
 {
-    public static void Main(string[] args)
-    {
-        var m_stringTables = new StringTable(new UnityAssetFile(args[0]), new Assembly(args[1]));
-
-        var m = StringTable_Importer.Export(m_stringTables.m_StringTables);
-    }
+    case HandlerArgs.Mode.SVS:
+        AnsiConsole.Progress()
+            .Start(ctx => 
+            {
+                var svs = new Watson.Lib.Game.neptunia_sisters_vs_sisters.Game(arg.GamePath, ctx);
+                svs.Proccess();
+        
+                // Extract to Po
+                if (arg.extract)
+                {
+                    svs.Export(arg.OutPut);
+                }
+            });
+        
+        
+        break;
+    case HandlerArgs.Mode.Help:
+    default:
+        HandlerArgs.PrintInfo();
+        break;
 }

@@ -43,26 +43,26 @@ namespace AssetsView.Winforms
             {
                 foreach (AssetID id in xrefs)
                 {
-                    int instIndex = am.files.FindIndex(f => Path.GetFileName(f.path).ToLower() == Path.GetFileName(id.fileName).ToLower());
+                    int instIndex = am.Files.FindIndex(f => Path.GetFileName(f.path).ToLower() == Path.GetFileName(id.fileName).ToLower());
                     if (instIndex != -1)
                     {
-                        AssetsFileInstance xrefInst = am.files[instIndex];
+                        AssetsFileInstance xrefInst = am.Files[instIndex];
                         AssetsFile xrefFile = xrefInst.file;
-                        AssetFileInfoEx xrefInf = xrefInst.table.GetAssetInfo(id.pathID);
-                        uint fixedId = AssetHelper.FixAudioID(xrefInf.curFileType);
-                        bool hasTypeTree = xrefFile.typeTree.hasTypeTree;
+                        AssetFileInfo xrefInf = xrefInst.file.GetAssetInfo(id.pathID);
+                        int typeId = xrefInf.TypeId;
+                        bool hasTypeTree = xrefFile.Metadata.TypeTreeEnabled;
 
-                        string assetName = AssetHelper.GetAssetNameFast(xrefFile, am.classFile, xrefInf);
+                        string assetName = AssetHelper.GetAssetNameFast(xrefFile, am.ClassDatabase, xrefInf);
                         string typeName;
                         if (hasTypeTree)
                         {
-                            Type_0D xrefType = AssetHelper.FindTypeTreeTypeByID(xrefFile.typeTree, fixedId);
-                            typeName = xrefType.typeFieldsEx[0].GetTypeString(xrefType.stringTable);
+                            TypeTreeType xrefType = xrefFile.Metadata.FindTypeTreeTypeByID(typeId);
+                            typeName = xrefType.Nodes[0].GetTypeString(xrefType.StringBuffer);
                         }
                         else
                         {
-                            ClassDatabaseType xrefType = AssetHelper.FindAssetClassByID(am.classFile, fixedId);
-                            typeName = xrefType.name.GetString(am.classFile);
+                            ClassDatabaseType xrefType = am.ClassDatabase.FindAssetClassByID(typeId);
+                            typeName = am.ClassDatabase.GetString(xrefType.Name);
                         }
                         xrefList.Items.Add(new ListBoxInfo($"{id.fileName} {id.pathID} ({typeName} {assetName})", id));
                     }

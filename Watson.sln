@@ -13,6 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssetsTools.NET", "AssetsTo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Watson.Test", "Watson.Test\Watson.Test.csproj", "{5F8E03E7-D6B9-4159-B500-9602B551E83E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetsTools.NET.Texture", "AssetsTools.NET\AssetsTools.NET.Texture\AssetsTools.NET.Texture.csproj", "{9E242F6A-FAFE-44FB-85FC-C1447F0F581D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AssetsTools.NET", "AssetsTools.NET", "{145303D3-733A-4C5A-8813-9BD17C1DEF98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetsTools.NET.Cpp2IL", "AssetsTools.NET\AssetsTools.NET.Cpp2IL\AssetsTools.NET.Cpp2IL.csproj", "{14A58100-A6A2-4BD4-8F15-37E55E48DE8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,11 +45,24 @@ Global
 		{5F8E03E7-D6B9-4159-B500-9602B551E83E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F8E03E7-D6B9-4159-B500-9602B551E83E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F8E03E7-D6B9-4159-B500-9602B551E83E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E242F6A-FAFE-44FB-85FC-C1447F0F581D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E242F6A-FAFE-44FB-85FC-C1447F0F581D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E242F6A-FAFE-44FB-85FC-C1447F0F581D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E242F6A-FAFE-44FB-85FC-C1447F0F581D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A58100-A6A2-4BD4-8F15-37E55E48DE8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A58100-A6A2-4BD4-8F15-37E55E48DE8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A58100-A6A2-4BD4-8F15-37E55E48DE8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A58100-A6A2-4BD4-8F15-37E55E48DE8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94ECCAF6-711E-4352-9E81-E918BD61688E}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{86A1CEE2-4694-4217-8FA1-FA0E57D488DE} = {145303D3-733A-4C5A-8813-9BD17C1DEF98}
+		{9E242F6A-FAFE-44FB-85FC-C1447F0F581D} = {145303D3-733A-4C5A-8813-9BD17C1DEF98}
+		{14A58100-A6A2-4BD4-8F15-37E55E48DE8E} = {145303D3-733A-4C5A-8813-9BD17C1DEF98}
 	EndGlobalSection
 EndGlobal

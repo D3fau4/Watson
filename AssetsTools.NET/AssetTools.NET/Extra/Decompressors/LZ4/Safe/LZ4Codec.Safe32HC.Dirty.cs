@@ -235,7 +235,7 @@ namespace LZ4ps
 						}
 						if ((ipt < src_LASTLITERALS) && (src[reft] == src[ipt])) ipt++;
 
-						_endCount:
+					_endCount:
 						reft = src_ref;
 
 						while ((startt > startLimit) && (reft > src_base) && (src[startt - 1] == src[reft - 1]))

@@ -40,7 +40,7 @@ public partial class SpriteImportWindow : Form
         var m_old = new Sprites(new UnityAssetFile(OldAssettextBox.Text));
         var m_new = new Sprites(new UnityAssetFile(NewAssettextBox.Text));
 
-        var compression = AssetBundleCompressionType.NONE;
+        var compression = AssetBundleCompressionType.None;
 
         if (m_old.m_AssetFile.IsBundle)
         {
@@ -52,7 +52,7 @@ public partial class SpriteImportWindow : Form
             else if (result == DialogResult.No)
                 compression = AssetBundleCompressionType.LZMA;
             else if (result == DialogResult.Cancel)
-                compression = AssetBundleCompressionType.NONE;
+                compression = AssetBundleCompressionType.None;
         }
 
         var m = Sprites_Importer.Import(m_new.m_Sprites, m_old.m_Sprites, m_new.m_Texture2D, m_old.m_Texture2D);

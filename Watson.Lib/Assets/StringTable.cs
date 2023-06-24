@@ -8,12 +8,13 @@ public class StringTable : IAsset
 {
     private readonly Assembly m_DLL;
     public UnityAssetFile m_AssetFile;
-    public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> m_StringTables;
+    public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_StringTables;
+    public Dictionary<AssetTypeValueField, TableData[]> m_tableData = new();
 
     public StringTable(UnityAssetFile StringTableBundle, Assembly assembly)
     {
         m_StringTables =
-            new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>>();
+            new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>>();
         m_AssetFile = StringTableBundle;
         m_DLL = assembly;
         Load();
@@ -23,13 +24,33 @@ public class StringTable : IAsset
     {
         foreach (var m_Asset in m_AssetFile.GetAssetsOfType(AssetClassID.MonoBehaviour))
         {
-            var deserialized =
-                MonoDeserializer.GetMonoBaseField(m_AssetFile.AM, m_AssetFile.Assets, m_Asset, m_DLL.AssemblyFolder);
+            var deserialized = m_AssetFile.AM.GetBaseField(m_AssetFile.Assets, m_Asset);
+
             var asset = deserialized.Get("m_TableData");
-            if (asset != null)
-                m_StringTables.Add(m_Asset.index,
-                    Tuple.Create(deserialized.Get("m_Name").GetValue().AsString(), deserialized, m_Asset,
+            if (asset.Value != null)
+                m_StringTables.Add(m_Asset.PathId,
+                    Tuple.Create(deserialized.Get("m_Name").Value.AsString, deserialized, m_Asset,
                         m_AssetFile.Assets));
+        }
+
+        foreach (var stringTable in m_StringTables)
+        {
+            var count = stringTable.Value.Item2["m_TableData"]["Array"].Value.AsArray.size;
+            var list = new List<TableData>();
+            for (var i = 0; i < count; i++)
+            {
+                var data = new TableData();
+                var localized = stringTable.Value.Item2["m_TableData"]["Array"][i]["m_Localized"].AsString;
+                var id = stringTable.Value.Item2["m_TableData"]["Array"][i]["m_Id"].Value.AsLong;
+                data.m_Localized = localized;
+                data.m_id = id;
+
+                // TODO: recoger Metadata
+
+                list.Add(data);
+            }
+
+            m_tableData.Add(stringTable.Value.Item2, list.ToArray());
         }
     }
 

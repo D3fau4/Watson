@@ -52,7 +52,7 @@ namespace AssetsTools.NET.Extra
                             typeParamToArg[typeDef.GenericParameters[i].Name] = mappedType;
                         }
                     }
-                    
+
                 }
             }
         }

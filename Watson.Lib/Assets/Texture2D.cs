@@ -8,11 +8,11 @@ public class Texture2D : IAsset
 {
     private readonly Assembly m_DLL;
     public UnityAssetFile m_AssetFile;
-    public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> m_Textures2D;
+    public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_Textures2D;
 
     public Texture2D(UnityAssetFile FontBundle, Assembly assembly)
     {
-        m_Textures2D = new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>>();
+        m_Textures2D = new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>>();
 
         m_AssetFile = FontBundle;
         m_DLL = assembly;
@@ -23,9 +23,9 @@ public class Texture2D : IAsset
         // Buscar Texture2D
         foreach (var m_Texture in m_AssetFile.GetAssetsOfType(AssetClassID.Texture2D))
         {
-            var baseField = m_AssetFile.AM.GetTypeInstance(m_AssetFile.Assets, m_Texture).GetBaseField();
-            m_Textures2D.Add(m_Texture.index,
-                Tuple.Create(baseField["m_Name"].value.AsString(), baseField, m_Texture, m_AssetFile.Assets));
+            var baseField = m_AssetFile.AM.GetBaseField(m_AssetFile.Assets, m_Texture);
+            m_Textures2D.Add(m_Texture.PathId,
+                Tuple.Create(baseField["m_Name"].Value.AsString, baseField, m_Texture, m_AssetFile.Assets));
         }
     }
 

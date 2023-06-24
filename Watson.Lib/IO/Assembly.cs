@@ -14,14 +14,10 @@ public class Assembly
 
     public AssemblyType assemblyType;
 
+    [Obsolete("Ahora se cargan desde UnityAssetFile")]
     public Assembly(string DataFolder)
     {
-        if (Directory.Exists(Path.Combine(DataFolder, "Managed")))
-            assemblyType = AssemblyType.Mono;
-        else
-            assemblyType = AssemblyType.IL2CPP;
-
-
+        assemblyType = CheckGameBackEnd(DataFolder);
         if (assemblyType == AssemblyType.IL2CPP)
         {
             var exepath = Path.Combine(Directory.GetParent(DataFolder).FullName, "GameAssembly.dll");
@@ -51,5 +47,10 @@ public class Assembly
         {
             AssemblyFolder = Path.Combine(DataFolder, "Managed");
         }
+    }
+
+    public static AssemblyType CheckGameBackEnd(string DataFolder)
+    {
+        return Directory.Exists(Path.Combine(DataFolder, "Managed")) ? AssemblyType.Mono : AssemblyType.IL2CPP;
     }
 }

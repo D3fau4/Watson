@@ -6,10 +6,16 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
+        <PublishAot>true</PublishAot>
+        <StripSymbols>true</StripSymbols>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Watson.Lib\Watson.Lib.csproj"/>
+        <ProjectReference Include="..\Watson.Lib\Watson.Lib.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Spectre.Console" Version="0.46.1-preview.0.4" />
     </ItemGroup>
 
 </Project>

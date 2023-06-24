@@ -8,14 +8,14 @@ public class TMPFont : IAsset
 {
     private readonly Assembly m_DLL;
     public UnityAssetFile m_AssetFile;
-    public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> m_FontNames;
-    public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>> m_FontTextures;
+    public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_FontNames;
+    public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_FontTextures;
 
     public TMPFont(UnityAssetFile FontBundle, Assembly assembly)
     {
-        m_FontNames = new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>>();
+        m_FontNames = new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>>();
         m_FontTextures =
-            new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfoEx, AssetsFileInstance>>();
+            new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>>();
 
         m_AssetFile = FontBundle;
         m_DLL = assembly;
@@ -28,21 +28,21 @@ public class TMPFont : IAsset
         foreach (var m_Asset in m_AssetFile.GetAssetsOfType(AssetClassID.MonoBehaviour))
         {
             var deserialized =
-                MonoDeserializer.GetMonoBaseField(m_AssetFile.AM, m_AssetFile.Assets, m_Asset, m_DLL.AssemblyFolder);
+                m_AssetFile.AM.GetBaseField(m_AssetFile.Assets, m_Asset);
             var asset = deserialized.Get("m_fontInfo");
             if (asset != null)
                 // Almacenar el nombre de asset que contiene la fuente.
-                m_FontNames.Add(m_Asset.index,
-                    Tuple.Create(deserialized.Get("m_Name").GetValue().AsString(), deserialized, m_Asset,
+                m_FontNames.Add(m_Asset.PathId,
+                    Tuple.Create(deserialized.Get("m_Name").Value.AsString, deserialized, m_Asset,
                         m_AssetFile.Assets));
         }
 
         // Buscar Texture2D
         foreach (var m_Texture in m_AssetFile.GetAssetsOfType(AssetClassID.Texture2D))
         {
-            var baseField = m_AssetFile.AM.GetTypeInstance(m_AssetFile.Assets, m_Texture).GetBaseField();
-            m_FontTextures.Add(m_Texture.index,
-                Tuple.Create(baseField["m_Name"].value.AsString(), baseField, m_Texture, m_AssetFile.Assets));
+            var baseField = m_AssetFile.AM.GetBaseField(m_AssetFile.Assets, m_Texture);
+            m_FontTextures.Add(m_Texture.PathId,
+                Tuple.Create(baseField["m_Name"].Value.AsString, baseField, m_Texture, m_AssetFile.Assets));
         }
     }
 

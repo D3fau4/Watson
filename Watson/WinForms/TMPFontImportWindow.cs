@@ -57,7 +57,7 @@ public partial class TMPFontImportWindow : Form
         var m_tmpold = new TMPFont(new UnityAssetFile(OldAssettextBox.Text), new Assembly(OldDataFoldertextBox.Text));
         var m_tmpnew = new TMPFont(new UnityAssetFile(NewAssettextBox.Text), new Assembly(NewDataFoldertextBox.Text));
 
-        var compression = AssetBundleCompressionType.NONE;
+        var compression = AssetBundleCompressionType.None;
 
         if (m_tmpold.m_AssetFile.IsBundle)
         {
@@ -69,7 +69,7 @@ public partial class TMPFontImportWindow : Form
             else if (result == DialogResult.No)
                 compression = AssetBundleCompressionType.LZMA;
             else if (result == DialogResult.Cancel)
-                compression = AssetBundleCompressionType.NONE;
+                compression = AssetBundleCompressionType.None;
         }
 
         var m = TMPFont_Importer.GetToImportList(m_tmpnew.m_FontNames, m_tmpold.m_FontNames, newsuffix.Text,

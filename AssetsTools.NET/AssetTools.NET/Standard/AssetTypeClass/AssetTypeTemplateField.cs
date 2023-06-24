@@ -6,208 +6,284 @@ namespace AssetsTools.NET
 {
     public class AssetTypeTemplateField
     {
-        public string name;
-        public string type;
-        public EnumValueTypes valueType;
-        public bool isArray;
-        public bool align;
-        public bool hasValue;
-        public int childrenCount;
-        public AssetTypeTemplateField[] children;
+        /// <summary>
+        /// Name of the field.
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// Type name of the field.
+        /// </summary>
+        public string Type { get; set; }
+        /// <summary>
+        /// Type of the field (as an enum).
+        /// </summary>
+        public AssetValueType ValueType { get; set; }
+        /// <summary>
+        /// Is the field an array?
+        /// </summary>
+        public bool IsArray { get; set; }
+        /// <summary>
+        /// Is the field aligned? This aligns four bytes after all children have been read/written.
+        /// </summary>
+        public bool IsAligned { get; set; }
+        /// <summary>
+        /// Does the field have value? (i.e. is the field a numeric / string / array type?)
+        /// </summary>
+        public bool HasValue { get; set; }
+        /// <summary>
+        /// Children of the field.
+        /// </summary>
+        public List<AssetTypeTemplateField> Children { get; set; }
 
-        public bool From0D(Type_0D u5Type, int fieldIndex)
+        public void FromTypeTree(TypeTreeType typeTreeType)
         {
-            TypeField_0D field = u5Type.typeFieldsEx[fieldIndex];
-            name = field.GetNameString(u5Type.stringTable);
-            type = field.GetTypeString(u5Type.stringTable);
-            valueType = AssetTypeValueField.GetValueTypeByTypeName(type);
-            isArray = field.isArray == 1 ? true : false;
-            align = (field.flags & 0x4000) != 0x00 ? true : false;
-            hasValue = (valueType == EnumValueTypes.None) ? false : true;
-
-            List<int> childrenIndexes = new List<int>();
-            int thisDepth = u5Type.typeFieldsEx[fieldIndex].depth;
-            for (int i = fieldIndex + 1; i < u5Type.typeFieldsExCount; i++)
-            {
-                if (u5Type.typeFieldsEx[i].depth == thisDepth + 1)
-                {
-                    childrenCount++;
-                    childrenIndexes.Add(i);
-                }
-                if (u5Type.typeFieldsEx[i].depth <= thisDepth) break;
-            }
-            children = new AssetTypeTemplateField[childrenCount];
-            int child = 0;
-            for (int i = fieldIndex + 1; i < u5Type.typeFieldsExCount; i++)
-            {
-                if (u5Type.typeFieldsEx[i].depth == thisDepth + 1)
-                {
-                    children[child] = new AssetTypeTemplateField();
-                    children[child].From0D(u5Type, childrenIndexes[child]);
-                    child++;
-                }
-                if (u5Type.typeFieldsEx[i].depth <= thisDepth) break;
-            }
-            return true;
+            int fieldIndex = 0;
+            FromTypeTree(typeTreeType, ref fieldIndex);
         }
-        public bool FromClassDatabase(ClassDatabaseFile file, ClassDatabaseType type, uint fieldIndex)
+
+        private void FromTypeTree(TypeTreeType typeTreeType, ref int fieldIndex)
         {
-            ClassDatabaseTypeField field = type.fields[(int)fieldIndex];
-            name = field.fieldName.GetString(file);
-            this.type = field.typeName.GetString(file);
-            valueType = AssetTypeValueField.GetValueTypeByTypeName(this.type);
-            isArray = field.isArray == 1 ? true : false;
-            align = (field.flags2 & 0x4000) != 0x00 ? true : false;
-            hasValue = (valueType == EnumValueTypes.None) ? false : true;
+            TypeTreeNode field = typeTreeType.Nodes[fieldIndex];
+            Name = field.GetNameString(typeTreeType.StringBuffer);
+            Type = field.GetTypeString(typeTreeType.StringBuffer);
+            ValueType = AssetTypeValueField.GetValueTypeByTypeName(Type);
+            IsArray = field.TypeFlags == 1;
+            IsAligned = (field.MetaFlags & 0x4000) != 0;
+            HasValue = ValueType != AssetValueType.None;
 
-            List<int> childrenIndexes = new List<int>();
-            int thisDepth = type.fields[(int)fieldIndex].depth;
-            for (int i = (int)fieldIndex + 1; i < type.fields.Count; i++)
+            Children = new List<AssetTypeTemplateField>();
+
+            for (fieldIndex++; fieldIndex < typeTreeType.Nodes.Count; fieldIndex++)
             {
-                if (type.fields[i].depth == thisDepth + 1)
+                TypeTreeNode typeTreeField = typeTreeType.Nodes[fieldIndex];
+                if (typeTreeField.Level <= field.Level)
                 {
-                    childrenCount++;
-                    childrenIndexes.Add(i);
+                    fieldIndex--;
+                    break;
                 }
-                if (type.fields[i].depth <= thisDepth) break;
+
+                AssetTypeTemplateField assetField = new AssetTypeTemplateField();
+                assetField.FromTypeTree(typeTreeType, ref fieldIndex);
+                Children.Add(assetField);
             }
-            children = new AssetTypeTemplateField[childrenCount];
-            int child = 0;
-            for (int i = (int)fieldIndex + 1; i < type.fields.Count; i++)
+
+            //There can be a case where string child is not an array but an int
+            //(ExposedReferenceTable field in PlayableDirector class before 2018.4.25)
+            if (ValueType == AssetValueType.String && !Children[0].IsArray && Children[0].ValueType != AssetValueType.None)
             {
-                if (type.fields[i].depth == thisDepth + 1)
-                {
-                    children[child] = new AssetTypeTemplateField();
-                    children[child].FromClassDatabase(file, type, (uint)childrenIndexes[child]);
-                    child++;
-                }
-                if (type.fields[i].depth <= thisDepth) break;
+                Type = Children[0].Type;
+                ValueType = Children[0].ValueType;
+
+                Children.Clear();
             }
-            return true;
+
+            if (IsArray)
+            {
+                ValueType = Children[1].ValueType == AssetValueType.UInt8 ? AssetValueType.ByteArray : AssetValueType.Array;
+            }
+
+
+            Children.TrimExcess();
         }
+
+        public void FromClassDatabase(ClassDatabaseFile cldbFile, ClassDatabaseType cldbType, bool preferEditor = false)
+        {
+            if (cldbType.EditorRootNode == null && cldbType.ReleaseRootNode == null)
+                throw new Exception("No root nodes were found!");
+
+            ClassDatabaseTypeNode node = cldbType.GetPreferredNode(preferEditor);
+
+            FromClassDatabase(cldbFile.StringTable, node);
+        }
+
+        private void FromClassDatabase(ClassDatabaseStringTable strTable, ClassDatabaseTypeNode node)
+        {
+            Name = strTable.GetString(node.FieldName);
+            Type = strTable.GetString(node.TypeName);
+
+            // temporary hack for tpk
+            if (Type == "SInt32")
+                Type = "int";
+            else if (Type == "UInt32")
+                Type = "unsigned int";
+
+            ValueType = AssetTypeValueField.GetValueTypeByTypeName(Type);
+            IsArray = node.TypeFlags == 1;
+            IsAligned = (node.MetaFlag & 0x4000) != 0;
+            HasValue = ValueType != AssetValueType.None;
+
+            Children = new List<AssetTypeTemplateField>(node.Children.Count);
+            foreach (ClassDatabaseTypeNode childNode in node.Children)
+            {
+                AssetTypeTemplateField childField = new AssetTypeTemplateField();
+                childField.FromClassDatabase(strTable, childNode);
+                Children.Add(childField);
+            }
+
+            //There can be a case where string child is not an array but an int
+            //(ExposedReferenceTable field in PlayableDirector class before 2018.4.25)
+            if (ValueType == AssetValueType.String && !Children[0].IsArray && Children[0].ValueType != AssetValueType.None)
+            {
+                Type = Children[0].Type;
+                ValueType = Children[0].ValueType;
+
+                Children.Clear();
+                Children.TrimExcess();
+            }
+
+            if (IsArray)
+            {
+                ValueType = Children[1].ValueType == AssetValueType.UInt8 ? AssetValueType.ByteArray : AssetValueType.Array;
+            }
+        }
+
         public AssetTypeValueField MakeValue(AssetsFileReader reader)
         {
-            AssetTypeValueField valueField = new AssetTypeValueField();
-            valueField.templateField = this;
+            AssetTypeValueField valueField = new AssetTypeValueField
+            {
+                TemplateField = this
+            };
             valueField = ReadType(reader, valueField);
             return valueField;
         }
 
+        public AssetTypeValueField MakeValue(AssetsFileReader reader, long position)
+        {
+            reader.Position = position;
+            return MakeValue(reader);
+        }
+
         public AssetTypeValueField ReadType(AssetsFileReader reader, AssetTypeValueField valueField)
         {
-            if (valueField.templateField.isArray)
+            if (valueField.TemplateField.IsArray)
             {
-                if (valueField.templateField.childrenCount == 2)
+                int arrayChildCount = valueField.TemplateField.Children.Count;
+                if (arrayChildCount != 2)
+                    throw new Exception($"Expected array to have two children, found {arrayChildCount} instead!");
+
+                AssetValueType sizeType = valueField.TemplateField.Children[0].ValueType;
+
+                if (sizeType != AssetValueType.Int32 && sizeType != AssetValueType.UInt32)
+                    throw new Exception($"Expected int array size type, found {sizeType} instead!");
+
+                if (valueField.TemplateField.ValueType == AssetValueType.ByteArray)
                 {
-                    EnumValueTypes sizeType = valueField.templateField.children[0].valueType;
-                    if (sizeType == EnumValueTypes.Int32 ||
-                        sizeType == EnumValueTypes.UInt32)
-                    {
-                        if (valueField.templateField.valueType == EnumValueTypes.ByteArray)
-                        {
-                            valueField.childrenCount = 0;
-                            valueField.children = new AssetTypeValueField[0];
-                            int size = reader.ReadInt32();
-                            byte[] data = reader.ReadBytes(size);
-                            if (valueField.templateField.align) reader.Align();
-                            AssetTypeByteArray atba = new AssetTypeByteArray();
-                            atba.size = (uint)size;
-                            atba.data = data;
-                            valueField.value = new AssetTypeValue(EnumValueTypes.ByteArray, atba);
-                        }
-                        else
-                        {
-                            valueField.childrenCount = reader.ReadInt32();
-                            valueField.children = new AssetTypeValueField[valueField.childrenCount];
-                            for (int i = 0; i < valueField.childrenCount; i++)
-                            {
-                                valueField.children[i] = new AssetTypeValueField();
-                                valueField.children[i].templateField = valueField.templateField.children[1];
-                                valueField.children[i] = ReadType(reader, valueField.children[i]);
-                            }
-                            if (valueField.templateField.align) reader.Align();
-                            AssetTypeArray ata = new AssetTypeArray();
-                            ata.size = valueField.childrenCount;
-                            valueField.value = new AssetTypeValue(EnumValueTypes.Array, ata);
-                        }
-                    }
-                    else
-                    {
-                        throw new Exception("Invalid array value type! Found an unexpected " + sizeType.ToString() + " type instead!");
-                    }
+                    valueField.Children = new List<AssetTypeValueField>(0);
+
+                    int size = reader.ReadInt32();
+                    byte[] data = reader.ReadBytes(size);
+
+                    if (valueField.TemplateField.IsAligned)
+                        reader.Align();
+
+                    valueField.Value = new AssetTypeValue(AssetValueType.ByteArray, data);
                 }
                 else
                 {
-                    throw new Exception("Invalid array!");
+                    int size = reader.ReadInt32();
+                    valueField.Children = new List<AssetTypeValueField>(size);
+
+                    for (int i = 0; i < size; i++)
+                    {
+                        AssetTypeValueField childField = new AssetTypeValueField();
+                        childField.TemplateField = valueField.TemplateField.Children[1];
+                        valueField.Children.Add(ReadType(reader, childField));
+                    }
+
+                    valueField.Children.TrimExcess();
+
+                    if (valueField.TemplateField.IsAligned)
+                        reader.Align();
+
+                    AssetTypeArrayInfo arrayTypeInfo = new AssetTypeArrayInfo
+                    {
+                        size = size
+                    };
+
+                    valueField.Value = new AssetTypeValue(AssetValueType.Array, arrayTypeInfo);
                 }
             }
             else
             {
-                EnumValueTypes type = valueField.templateField.valueType;
-                if (type != 0) valueField.value = new AssetTypeValue(type, null);
-                if (type == EnumValueTypes.String)
+                AssetValueType type = valueField.TemplateField.ValueType;
+                if (type == AssetValueType.None)
                 {
-                    int length = reader.ReadInt32();
-                    valueField.value.Set(reader.ReadBytes(length));
-                    reader.Align();
+                    int childCount = valueField.TemplateField.Children.Count;
+                    valueField.Children = new List<AssetTypeValueField>(childCount);
+                    for (int i = 0; i < childCount; i++)
+                    {
+                        AssetTypeValueField childField = new AssetTypeValueField();
+                        childField.TemplateField = valueField.TemplateField.Children[i];
+                        valueField.Children.Add(ReadType(reader, childField));
+                    }
+                    valueField.Children.TrimExcess();
+                    valueField.Value = null;
+
+                    if (valueField.TemplateField.IsAligned)
+                        reader.Align();
                 }
                 else
                 {
-                    valueField.childrenCount = valueField.templateField.childrenCount;
-                    if (valueField.childrenCount == 0)
+                    if (type == AssetValueType.String)
                     {
-                        valueField.children = new AssetTypeValueField[0];
-                        switch (valueField.templateField.valueType)
-                        {
-                            case EnumValueTypes.Int8:
-                                valueField.value.Set(reader.ReadSByte());
-                                if (valueField.templateField.align) reader.Align();
-                                break;
-                            case EnumValueTypes.UInt8:
-                            case EnumValueTypes.Bool:
-                                valueField.value.Set(reader.ReadByte());
-                                if (valueField.templateField.align) reader.Align();
-                                break;
-                            case EnumValueTypes.Int16:
-                                valueField.value.Set(reader.ReadInt16());
-                                if (valueField.templateField.align) reader.Align();
-                                break;
-                            case EnumValueTypes.UInt16:
-                                valueField.value.Set(reader.ReadUInt16());
-                                if (valueField.templateField.align) reader.Align();
-                                break;
-                            case EnumValueTypes.Int32:
-                                valueField.value.Set(reader.ReadInt32());
-                                break;
-                            case EnumValueTypes.UInt32:
-                                valueField.value.Set(reader.ReadUInt32());
-                                break;
-                            case EnumValueTypes.Int64:
-                                valueField.value.Set(reader.ReadInt64());
-                                break;
-                            case EnumValueTypes.UInt64:
-                                valueField.value.Set(reader.ReadUInt64());
-                                break;
-                            case EnumValueTypes.Float:
-                                valueField.value.Set(reader.ReadSingle());
-                                break;
-                            case EnumValueTypes.Double:
-                                valueField.value.Set(reader.ReadDouble());
-                                break;
-                        }
+                        valueField.Children = new List<AssetTypeValueField>(0);
+                        int length = reader.ReadInt32();
+                        valueField.Value = new AssetTypeValue(reader.ReadBytes(length), true);
+                        reader.Align();
                     }
                     else
                     {
-                        valueField.children = new AssetTypeValueField[valueField.childrenCount];
-                        for (int i = 0; i < valueField.childrenCount; i++)
+                        int childCount = valueField.TemplateField.Children.Count;
+                        if (childCount == 0)
                         {
-                            valueField.children[i] = new AssetTypeValueField();
-                            valueField.children[i].templateField = valueField.templateField.children[i];
-                            valueField.children[i] = ReadType(reader, valueField.children[i]);
+                            valueField.Children = new List<AssetTypeValueField>(0);
+                            switch (valueField.TemplateField.ValueType)
+                            {
+                                case AssetValueType.Int8:
+                                    valueField.Value = new AssetTypeValue(reader.ReadSByte());
+                                    break;
+                                case AssetValueType.UInt8:
+                                    valueField.Value = new AssetTypeValue(reader.ReadByte());
+                                    break;
+                                case AssetValueType.Bool:
+                                    valueField.Value = new AssetTypeValue(reader.ReadBoolean());
+                                    break;
+                                case AssetValueType.Int16:
+                                    valueField.Value = new AssetTypeValue(reader.ReadInt16());
+                                    break;
+                                case AssetValueType.UInt16:
+                                    valueField.Value = new AssetTypeValue(reader.ReadUInt16());
+                                    break;
+                                case AssetValueType.Int32:
+                                    valueField.Value = new AssetTypeValue(reader.ReadInt32());
+                                    break;
+                                case AssetValueType.UInt32:
+                                    valueField.Value = new AssetTypeValue(reader.ReadUInt32());
+                                    break;
+                                case AssetValueType.Int64:
+                                    valueField.Value = new AssetTypeValue(reader.ReadInt64());
+                                    break;
+                                case AssetValueType.UInt64:
+                                    valueField.Value = new AssetTypeValue(reader.ReadUInt64());
+                                    break;
+                                case AssetValueType.Float:
+                                    valueField.Value = new AssetTypeValue(reader.ReadSingle());
+                                    break;
+                                case AssetValueType.Double:
+                                    valueField.Value = new AssetTypeValue(reader.ReadDouble());
+                                    break;
+                            }
+
+                            if (valueField.TemplateField.IsAligned)
+                                reader.Align();
                         }
-                        if (valueField.templateField.align) reader.Align();
+                        else if (valueField.TemplateField.ValueType != AssetValueType.None)
+                        {
+                            throw new Exception("Cannot read value of field with children!");
+                        }
                     }
                 }
+
             }
             return valueField;
         }
