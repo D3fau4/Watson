@@ -2,6 +2,7 @@
 using AssetsTools.NET.Extra;
 using AssetsView.Util;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -181,16 +182,21 @@ namespace AssetsView.Winforms
 
         private void PopulateDataGrid(AssetTypeValueField atvf, PGProperty node, AssetFileInfo info, string category, bool arrayChildren = false)
         {
-            if (atvf.Children == null || atvf.Children.Count == 0)
-                return;
-        
+            List<AssetTypeValueField> children;
+            if (atvf.Value != null && atvf.Value.ValueType == AssetValueType.ManagedReferencesRegistry)
+                children = atvf.Value.AsManagedReferencesRegistry.references.Select(r => r.data).ToList();
+            else
+                children = atvf.Children;
+                    
             string arrayName = string.Empty;
-            if (arrayChildren && atvf.Children.Count > 0)
-                arrayName = atvf.Children[0].TemplateField.Name;
+            if (atvf.Value != null && atvf.Value.ValueType == AssetValueType.ManagedReferencesRegistry) 
+                arrayName = atvf.TemplateField.Name;
+            else if (arrayChildren && children.Count > 0)
+                arrayName = children[0].TemplateField.Name;
         
-            for (int i = 0; i < atvf.Children.Count; i++)
+            for (int i = 0; i < children.Count; i++)
             {
-                AssetTypeValueField atvfc = atvf.Children[i];
+                AssetTypeValueField atvfc = children[i];
                 if (atvfc == null)
                     return;
         
@@ -232,15 +238,33 @@ namespace AssetsView.Winforms
                             SetSelectedStateIfSelected(info, prop);
                             node.Add(prop);
                         }
+                        else if (evt == AssetValueType.ManagedReferencesRegistry)
+                        {
+                            PGProperty childProps = new PGProperty("child", null, $"[size: {atvfc.Value.AsManagedReferencesRegistry.references.Count}]");
+                            PGProperty prop = new PGProperty(key, childProps, $"[size: {atvfc.Value.AsManagedReferencesRegistry.references.Count}]");
+                            prop.category = category;
+                            SetSelectedStateIfSelected(info, prop);
+                            node.Add(prop);
+                            PopulateDataGrid(atvfc, childProps, info, category, true);
+                        }
                     }
+                }
+                else if (atvfc.IsDummy && atvf.Value != null && atvf.Value.ValueType == AssetValueType.ManagedReferencesRegistry)
+                {
+                    PGProperty prop = new PGProperty(key, "null");
+                    prop.category = category;
+                    SetSelectedStateIfSelected(info, prop);
+                    node.Add(prop);
+                    PopulateDataGrid(atvfc, prop, info, category);
                 }
                 else
                 {
+                    List<AssetTypeValueField> childChildren = atvfc.Children;
                     PGProperty childProps;
-                    if (atvfc.Children.Count == 2)
+                    if (childChildren.Count == 2)
                     {
-                        AssetTypeValueField fileId = atvfc.Children[0];
-                        AssetTypeValueField pathId = atvfc.Children[1];
+                        AssetTypeValueField fileId = childChildren[0];
+                        AssetTypeValueField pathId = childChildren[1];
                         string fileIdName = fileId.TemplateField.Name;
                         string fileIdType = fileId.TemplateField.Type;
                         string pathIdName = pathId.TemplateField.Name;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace AssetsTools.NET.Extra
 {
@@ -78,6 +79,8 @@ namespace AssetsTools.NET.Extra
                     obj = new byte[0]; break;
                 case AssetValueType.Array:
                     obj = new AssetTypeArrayInfo(); break;
+                case AssetValueType.ManagedReferencesRegistry:
+                    obj = new ManagedReferencesRegistry(); break;
                 default:
                     obj = null; break;
             }

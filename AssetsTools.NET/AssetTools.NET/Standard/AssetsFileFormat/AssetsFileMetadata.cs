@@ -23,11 +23,13 @@ namespace AssetsTools.NET
         /// </summary>
         public List<TypeTreeType> TypeTreeTypes { get; set; }
         /// <summary>
-        /// List of asset infos. Do not modify this directly. Instead, use Write.
+        /// List of asset infos. Do not modify this directly. Instead, use
+        /// <see cref="AssetsFile.Write(AssetsFileWriter, long, List{AssetsReplacer}, ClassDatabaseFile)"/>.
         /// </summary>
         public List<AssetFileInfo> AssetInfos { get; set; }
         /// <summary>
-        /// List of script type pointers. This list should match up with ScriptTypeIndex in the type tree types list.
+        /// List of script type pointers. This list should match up with ScriptTypeIndex in the type
+        /// tree types list.
         /// </summary>
         public List<AssetPPtr> ScriptTypes { get; set; }
         /// <summary>
@@ -35,9 +37,9 @@ namespace AssetsTools.NET
         /// </summary>
         public List<AssetsFileExternal> Externals { get; set; }
         /// <summary>
-        /// List of reference types (unknown what this is for).
+        /// List of reference types.
         /// </summary>
-        public List<AssetsTypeReference> RefTypes { get; set; }
+        public List<TypeTreeType> RefTypes { get; set; }
         /// <summary>
         /// Unknown.
         /// </summary>
@@ -45,16 +47,34 @@ namespace AssetsTools.NET
 
         private Dictionary<long, int> _quickLookup = null;
 
+        /// <summary>
+        /// Read the <see cref="AssetsFileMetadata"/> with the provided reader and file header.
+        /// </summary>
+        /// <param name="reader">The reader to use.</param>
+        /// <param name="header">The header to use.</param>
         public void Read(AssetsFileReader reader, AssetsFileHeader header)
         {
             Read(reader, header.Version, header.DataOffset);
         }
 
+        /// <summary>
+        /// Read the <see cref="AssetsFileMetadata"/> with the provided reader and format version.
+        /// This version is not recommended since no data offset is provided, so
+        /// <see cref="AssetFileInfo.AbsoluteByteStart"/> is not set.
+        /// </summary>
+        /// <param name="reader">The reader to use.</param>
+        /// <param name="version">The version of the file.</param>
         public void Read(AssetsFileReader reader, uint version)
         {
             Read(reader, version, -1);
         }
 
+        /// <summary>
+        /// Read the <see cref="AssetsFileMetadata"/> with the provided reader and format version.
+        /// </summary>
+        /// <param name="reader">The reader to use.</param>
+        /// <param name="version">The version of the file.</param>
+        /// <param name="dataOffset">The version of the file.</param>
         public void Read(AssetsFileReader reader, uint version, long dataOffset)
         {
             _quickLookup = null;
@@ -70,9 +90,9 @@ namespace AssetsTools.NET
             TypeTreeTypes = new List<TypeTreeType>(fieldCount);
             for (int i = 0; i < fieldCount; i++)
             {
-                TypeTreeType type0d = new TypeTreeType();
-                type0d.Read(reader, version, TypeTreeEnabled);
-                TypeTreeTypes.Add(type0d);
+                TypeTreeType typeTreeType = new TypeTreeType();
+                typeTreeType.Read(reader, version, TypeTreeEnabled, false);
+                TypeTreeTypes.Add(typeTreeType);
             }
 
             int assetCount = reader.ReadInt32();
@@ -117,12 +137,12 @@ namespace AssetsTools.NET
             if (version >= 20)
             {
                 int refTypeCount = reader.ReadInt32();
-                RefTypes = new List<AssetsTypeReference>(refTypeCount);
+                RefTypes = new List<TypeTreeType>(refTypeCount);
                 for (int i = 0; i < refTypeCount; i++)
                 {
-                    AssetsTypeReference refType = new AssetsTypeReference();
-                    refType.Read(reader);
-                    RefTypes.Add(refType);
+                    TypeTreeType typeTreeType = new TypeTreeType();
+                    typeTreeType.Read(reader, version, TypeTreeEnabled, true);
+                    RefTypes.Add(typeTreeType);
                 }
             }
 
@@ -132,6 +152,11 @@ namespace AssetsTools.NET
             }
         }
 
+        /// <summary>
+        /// Write the <see cref="AssetsFileMetadata"/> with the provided reader and format version.
+        /// </summary>
+        /// <param name="writer">The writer to use.</param>
+        /// <param name="version">The version of the file.</param>
         public void Write(AssetsFileWriter writer, uint version)
         {
             writer.WriteNullTerminated(UnityVersion);
@@ -173,7 +198,7 @@ namespace AssetsTools.NET
                 writer.Write(RefTypes.Count);
                 for (int j = 0; j < RefTypes.Count; j++)
                 {
-                    RefTypes[j].Write(writer);
+                    RefTypes[j].Write(writer, version, TypeTreeEnabled);
                 }
             }
 
@@ -183,6 +208,11 @@ namespace AssetsTools.NET
             }
         }
 
+        /// <summary>
+        /// Get an <see cref="AssetFileInfo"/> from a path ID.
+        /// </summary>
+        /// <param name="pathId">The path ID to search for.</param>
+        /// <returns>An info for that path ID.</returns>
         public AssetFileInfo GetAssetInfo(long pathId)
         {
             if (_quickLookup != null)
@@ -206,7 +236,11 @@ namespace AssetsTools.NET
             return null;
         }
 
-        public void GenerateQuickLookupTree()
+        /// <summary>
+        /// Generate a dictionary lookup for assets instead of a brute force search.
+        /// Takes a little bit more memory but results in quicker lookups.
+        /// </summary>
+        public void GenerateQuickLookup()
         {
             _quickLookup = new Dictionary<long, int>();
             for (int i = 0; i < AssetInfos.Count; i++)
@@ -216,6 +250,11 @@ namespace AssetsTools.NET
             }
         }
 
+        /// <summary>
+        /// Get all assets of a specific type ID.
+        /// </summary>
+        /// <param name="typeId">The type ID to search for.</param>
+        /// <returns>A list of infos for that type ID.</returns>
         public List<AssetFileInfo> GetAssetsOfType(int typeId)
         {
             List<AssetFileInfo> infos = new List<AssetFileInfo>();
@@ -229,6 +268,13 @@ namespace AssetsTools.NET
             return infos;
         }
 
+        /// <summary>
+        /// Get all assets of a specific type ID and script index. The script index of an asset can be
+        /// found from <see cref="AssetsFile.GetScriptIndex(AssetFileInfo)"/> or <see cref="ScriptTypes"/>.
+        /// </summary>
+        /// <param name="typeId">The type ID to search for.</param>
+        /// <param name="scriptIndex">The script index to search for.</param>
+        /// <returns>A list of infos for that type ID and script index.</returns>
         public List<AssetFileInfo> GetAssetsOfType(int typeId, ushort scriptIndex)
         {
             List<AssetFileInfo> infos = new List<AssetFileInfo>();
@@ -267,17 +313,34 @@ namespace AssetsTools.NET
             }
             return infos;
         }
-
+        
+        /// <summary>
+        /// Get all assets of a specific type ID.
+        /// </summary>
+        /// <param name="typeId">The type ID to search for.</param>
+        /// <returns>A list of infos for that type ID.</returns>
         public List<AssetFileInfo> GetAssetsOfType(AssetClassID typeId)
         {
             return GetAssetsOfType((int)typeId);
         }
 
+        /// <summary>
+        /// Get all assets of a specific type ID and script index. The script index of an asset can be
+        /// found from <see cref="AssetsFile.GetScriptIndex(AssetFileInfo)"/> or <see cref="ScriptTypes"/>.
+        /// </summary>
+        /// <param name="typeId">The type ID to search for.</param>
+        /// <param name="scriptIndex">The script index to search for.</param>
+        /// <returns>A list of infos for that type ID and script index.</returns>
         public List<AssetFileInfo> GetAssetsOfType(AssetClassID typeId, ushort scriptIndex)
         {
             return GetAssetsOfType((int)typeId, scriptIndex);
         }
 
+        /// <summary>
+        /// Get the type tree type by type ID.
+        /// </summary>
+        /// <param name="id">The type ID to search for.</param>
+        /// <returns>The type tree type with this ID.</returns>
         public TypeTreeType FindTypeTreeTypeByID(int id)
         {
             foreach (TypeTreeType type in TypeTreeTypes)
@@ -288,6 +351,16 @@ namespace AssetsTools.NET
             return null;
         }
 
+        /// <summary>
+        /// Get the type tree type by type ID and script index. The script index of an asset can be
+        /// found from <see cref="AssetsFile.GetScriptIndex(AssetFileInfo)"/> or <see cref="ScriptTypes"/>.
+        /// For games before 5.5, <paramref name="scriptIndex"/> is ignored since this data is read
+        /// from the negative value of <paramref name="id"/>. In 5.5 and later, MonoBehaviours are always
+        /// 0x72, so <paramref name="scriptIndex"/> is used instead.
+        /// </summary>
+        /// <param name="id">The type ID to search for.</param>
+        /// <param name="scriptIndex">The script index to search for.</param>
+        /// <returns>The type tree type with this ID and script index.</returns>
         public TypeTreeType FindTypeTreeTypeByID(int id, ushort scriptIndex)
         {
             // todo: use metadata for better version checking
@@ -306,6 +379,12 @@ namespace AssetsTools.NET
             return null;
         }
 
+        /// <summary>
+        /// Get the type tree type by script index. The script index of an asset can be
+        /// found from <see cref="AssetsFile.GetScriptIndex(AssetFileInfo)"/> or <see cref="ScriptTypes"/>.
+        /// </summary>
+        /// <param name="scriptIndex">The script index to search for.</param>
+        /// <returns>The type tree type with this script index.</returns>
         public TypeTreeType FindTypeTreeTypeByScriptIndex(ushort scriptIndex)
         {
             foreach (TypeTreeType type in TypeTreeTypes)
@@ -316,11 +395,31 @@ namespace AssetsTools.NET
             return null;
         }
 
+        /// <summary>
+        /// Get the type tree type by name.
+        /// </summary>
+        /// <param name="name">The type name to search for.</param>
+        /// <returns>The type tree type with this name.</returns>
         public TypeTreeType FindTypeTreeTypeByName(string name)
         {
             foreach (TypeTreeType type in TypeTreeTypes)
             {
                 if (type.Nodes[0].GetTypeString(type.StringBuffer) == name)
+                    return type;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Get the type tree ref type by script index.
+        /// </summary>
+        /// <param name="scriptIndex">The script index to search for.</param>
+        /// <returns>The type tree ref type with this script index.</returns>
+        public TypeTreeType FindRefTypeByIndex(ushort scriptIndex)
+        {
+            foreach (TypeTreeType type in RefTypes)
+            {
+                if (type.ScriptTypeIndex == scriptIndex)
                     return type;
             }
             return null;

@@ -10,6 +10,10 @@ namespace AssetsTools.NET
         public int ClassId { get; set; }
         public List<KeyValuePair<UnityVersion, ClassPackageType>> Classes { get; set; }
 
+        /// <summary>
+        /// Read the <see cref="ClassPackageClassInfo"/> with the provided reader.
+        /// </summary>
+        /// <param name="reader">The reader to use.</param>
         public void Read(AssetsFileReader reader)
         {
             ClassId = reader.ReadInt32();
@@ -30,6 +34,10 @@ namespace AssetsTools.NET
             }
         }
 
+        /// <summary>
+        /// Write the <see cref="ClassPackageClassInfo"/> with the provided writer.
+        /// </summary>
+        /// <param name="writer">The writer to use.</param>
         public void Write(AssetsFileWriter writer)
         {
             writer.Write(ClassId);
@@ -50,6 +58,11 @@ namespace AssetsTools.NET
             }
         }
 
+        /// <summary>
+        /// Get the latest version of a type before or at a version.
+        /// </summary>
+        /// <param name="version">The version to get the type for.</param>
+        /// <returns>The type at that version.</returns>
         public ClassPackageType GetTypeForVersion(UnityVersion version)
         {
             if (Classes.Count == 0)
@@ -57,10 +70,19 @@ namespace AssetsTools.NET
                 return null;
             }
 
+            if (Classes[0].Key.ToUInt64() > version.ToUInt64())
+            {
+                return null;
+            }
+
             ClassPackageType lastType = Classes[0].Value;
             for (int i = 0; i < Classes.Count; i++)
             {
-                if (Classes[i].Key.ToUInt64() >= version.ToUInt64())
+                if (Classes[i].Key.ToUInt64() == version.ToUInt64())
+                {
+                    return Classes[i].Value;
+                }
+                if (Classes[i].Key.ToUInt64() > version.ToUInt64())
                 {
                     return lastType;
                 }

@@ -39,7 +39,6 @@ namespace AssetsView.Winforms
             rsrcDataAdded = false;
 
             helper = new AssetsManager();
-            helper.UpdateAfterLoad = false;
             if (!File.Exists("classdata.tpk"))
             {
                 MessageBox.Show("classdata.tpk could not be found. Make sure it exists and restart.", "Assets View");
@@ -152,7 +151,7 @@ namespace AssetsView.Winforms
         {
             if (currentFile == null || Path.GetFullPath(currentFile.path) != Path.GetFullPath(inst.path))
             {
-                inst.file.GenerateQuickLookupTree();
+                inst.file.GenerateQuickLookup();
                 helper.LoadClassDatabaseFromPackage(inst.file.Metadata.UnityVersion);
                 if (helper.ClassDatabase == null) // new v3: shouldn't happen anymore since this is automatic
                 {
@@ -687,7 +686,7 @@ namespace AssetsView.Winforms
         private void AssetTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             AssetsFileInstance inst = helper.Files[e.Node.Index];
-            inst.file.GenerateQuickLookupTree();
+            inst.file.GenerateQuickLookup();
             UpdateFileList();
             currentFile = inst;
             LoadGeneric(inst, false);

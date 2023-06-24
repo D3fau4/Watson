@@ -6,7 +6,7 @@ namespace AssetsTools.NET.Extra
 {
     public partial class AssetsManager
     {
-        public AssetExternal GetExtAsset(AssetsFileInstance relativeTo, int fileId, long pathId, bool onlyGetInfo = false, bool forceFromCldb = false)
+        public AssetExternal GetExtAsset(AssetsFileInstance relativeTo, int fileId, long pathId, bool onlyGetInfo = false, AssetReadFlags readFlags = AssetReadFlags.None)
         {
             AssetExternal ext = new AssetExternal
             {
@@ -33,7 +33,7 @@ namespace AssetsTools.NET.Extra
                     return ext;
 
                 if (!onlyGetInfo)
-                    ext.baseField = GetBaseField(dep, ext.info, forceFromCldb);
+                    ext.baseField = GetBaseField(dep, ext.info, readFlags);
                 else
                     ext.baseField = null;
 
@@ -48,7 +48,7 @@ namespace AssetsTools.NET.Extra
                     return ext;
 
                 if (!onlyGetInfo)
-                    ext.baseField = GetBaseField(relativeTo, ext.info, forceFromCldb);
+                    ext.baseField = GetBaseField(relativeTo, ext.info, readFlags);
                 else
                     ext.baseField = null;
 
@@ -56,26 +56,11 @@ namespace AssetsTools.NET.Extra
             }
         }
 
-        public AssetExternal GetExtAsset(AssetsFileInstance relativeTo, AssetTypeValueField pptrField, bool onlyGetInfo = false, bool forceFromCldb = false)
+        public AssetExternal GetExtAsset(AssetsFileInstance relativeTo, AssetTypeValueField pptrField, bool onlyGetInfo = false, AssetReadFlags readFlags = AssetReadFlags.None)
         {
             int fileId = pptrField["m_FileID"].AsInt;
             long pathId = pptrField["m_PathID"].AsLong;
-            return GetExtAsset(relativeTo, fileId, pathId, onlyGetInfo, forceFromCldb);
-        }
-
-        public AssetTypeValueField GetBaseField(AssetsFileInstance inst, AssetFileInfo info, bool forceFromCldb = false)
-        {
-            AssetTypeTemplateField tempField = GetTemplateBaseField(inst, info, forceFromCldb);
-            AssetTypeValueField valueField = tempField.MakeValue(inst.file.Reader, info.AbsoluteByteStart);
-            return valueField;
-        }
-
-        public AssetTypeValueField GetBaseField(AssetsFileInstance inst, long pathId, bool forceFromCldb = false)
-        {
-            AssetFileInfo info = inst.file.GetAssetInfo(pathId);
-            AssetTypeTemplateField tempField = GetTemplateBaseField(inst, info, forceFromCldb);
-            AssetTypeValueField valueField = tempField.MakeValue(inst.file.Reader, info.AbsoluteByteStart);
-            return valueField;
+            return GetExtAsset(relativeTo, fileId, pathId, onlyGetInfo, readFlags);
         }
     }
 }

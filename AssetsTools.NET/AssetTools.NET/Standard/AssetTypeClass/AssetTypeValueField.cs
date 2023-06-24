@@ -22,8 +22,32 @@ namespace AssetsTools.NET
 
         public bool IsDummy { get; set; }
 
-        public static readonly AssetTypeValueField DUMMY_FIELD = new AssetTypeValueField() { IsDummy = true };
+        /// <summary>
+        /// The field which indicates that a field that was accessed does not exist.
+        /// </summary>
+        public static readonly AssetTypeValueField DUMMY_FIELD = new AssetTypeValueField()
+        {
+            TemplateField = new AssetTypeTemplateField
+            {
+                Name = "DUMMY",
+                HasValue = false,
+                IsAligned = false,
+                IsArray = false,
+                Type = "DUMMY",
+                ValueType = AssetValueType.None,
+                Children = new List<AssetTypeTemplateField>(0)
+            },
+            Value = null,
+            IsDummy = true,
+            Children = new List<AssetTypeValueField>(0)
+        };
 
+        /// <summary>
+        /// Read the <see cref="AssetTypeValueField"/> from a value, template field, and children.
+        /// </summary>
+        /// <param name="value">The value to use.</param>
+        /// <param name="templateField">The template field to use.</param>
+        /// <param name="children">The children to use.</param>
         public void Read(AssetTypeValue value, AssetTypeTemplateField templateField, List<AssetTypeValueField> children)
         {
             Value = value;
@@ -55,6 +79,7 @@ namespace AssetsTools.NET
                             {
                                 foundChild = true;
                                 field = child;
+                                break;
                             }
                         }
 
@@ -137,12 +162,18 @@ namespace AssetsTools.NET
                     return AssetValueType.Array;
                 case "TypelessData":
                     return AssetValueType.ByteArray;
+                case "ManagedReferencesRegistry":
+                    return AssetValueType.ManagedReferencesRegistry;
                 default:
                     return AssetValueType.None;
             }
         }
 
-        public void Write(AssetsFileWriter writer, int depth = 0)
+        /// <summary>
+        /// Write the <see cref="AssetTypeValueField"/> with the provided writer.
+        /// </summary>
+        /// <param name="writer">The writer to use.</param>
+        public void Write(AssetsFileWriter writer)
         {
             if (TemplateField.IsArray)
             {
@@ -165,7 +196,7 @@ namespace AssetsTools.NET
                     writer.Write(arraySize);
                     for (int i = 0; i < arraySize; i++)
                     {
-                        this[i].Write(writer, depth + 1);
+                        this[i].Write(writer);
                     }
 
                     if (TemplateField.IsAligned)
@@ -243,13 +274,32 @@ namespace AssetsTools.NET
                             writer.Write(AsByteArray);
                             writer.Align();
                             break;
+                        case AssetValueType.ManagedReferencesRegistry:
+                            writer.Write(AsManagedReferencesRegistry.version);
+                            int childCount = AsManagedReferencesRegistry.references.Count;
+                            
+                            for (int i = 0; i < childCount; i++)
+                            {
+                                AssetTypeReferencedObject refdObject = AsManagedReferencesRegistry.references[i];
+                                if (AsManagedReferencesRegistry.version != 1)
+                                {
+                                    writer.Write(refdObject.rid);
+                                }
+                                refdObject.type.WriteAsset(writer);
+                                refdObject.data.Write(writer);
+                            }
+                            if (AsManagedReferencesRegistry.version == 1)
+                            {
+                                AssetTypeReference.TERMINUS.WriteAsset(writer);
+                            }
+                            break;
                     }
                 }
                 else
                 {
                     for (int i = 0; i < Children.Count; i++)
                     {
-                        this[i].Write(writer, depth + 1);
+                        this[i].Write(writer);
                     }
 
                     if (TemplateField.IsAligned)
@@ -260,6 +310,10 @@ namespace AssetsTools.NET
             }
         }
 
+        /// <summary>
+        /// Write the <see cref="AssetTypeValueField"/> with a new writer to a byte array.
+        /// </summary>
+        /// <param name="bigEndian">Write in big endian?</param>
         public byte[] WriteToByteArray(bool bigEndian = false)
         {
             byte[] data;
@@ -283,6 +337,14 @@ namespace AssetsTools.NET
             return Children.GetEnumerator();
         }
 
+        public override string ToString()
+        {
+            if (TemplateField != null)
+                return TemplateField.ToString();
+
+            return default;
+        }
+
         // for convenience
         public bool AsBool { get => Value.AsBool; set => Value.AsBool = value; }
         public sbyte AsSByte { get => Value.AsSByte; set => Value.AsSByte = value; }
@@ -299,6 +361,7 @@ namespace AssetsTools.NET
         public object AsObject { get => Value.AsObject; set => Value.AsObject = value; }
         public AssetTypeArrayInfo AsArray { get => Value.AsArray; set => Value.AsArray = value; }
         public byte[] AsByteArray { get => Value.AsByteArray; set => Value.AsByteArray = value; }
+        public ManagedReferencesRegistry AsManagedReferencesRegistry { get => Value.AsManagedReferencesRegistry; set => Value.AsManagedReferencesRegistry = value; }
 
         public string TypeName { get => TemplateField.Type; }
         public string FieldName { get => TemplateField.Name; }
