@@ -11,22 +11,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74c63f27-3af9-4ea9-804e-503c4fd5b288" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Assets/FolderManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Assets/I18Text.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Assets/I18n.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Enums/LanguageType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Watson.Lib/Utils/StringUtils.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.CLI/Utils/HandlerArgs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Utils/HandlerArgs.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.CLI/Watson.CLI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Watson.CLI.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/TMPFont_Importer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/TMPFont_Importer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b084ce74169e34cadce64cee46fd7d36df7ded3c9c5d0ac1c6793ad1b9e6ec/IFormat.cs" root0="SKIP_HIGHLIGHTING" />
@@ -35,6 +30,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectId" id="27sNMgbSonDHY6GQ6Uz84ih9L85" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -54,13 +50,13 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
     "rider.external.source.directories": [
-      "C:\\Users\\raul2\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\raul2\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\raul2\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\raul2\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
       "C:\\Users\\raul2\\AppData\\Local\\Symbols\\src"
     ]
   }
@@ -243,6 +239,7 @@
       <workItem from="1674948596388" duration="1887000" />
       <workItem from="1674986738024" duration="738000" />
       <workItem from="1675013119895" duration="4234000" />
+      <workItem from="1687713668133" duration="1765000" />
     </task>
     <servers />
   </component>

@@ -49,6 +49,7 @@ public static class TMPFont_Importer
                 tmpname = tmpname.Replace(oldsuffix, newsuffix);
             if (tmpname.Equals(fontold.Value.Item1))
             {
+                
                 /* Remplazar m_Script */
                 // Establece el FileID
                 font.Value.Item2["m_Script"]["m_FileID"].Value = fontold.Value.Item2["m_Script"]["m_FileID"].Value;
@@ -61,11 +62,23 @@ public static class TMPFont_Importer
                 // Establece el PathID
                 font.Value.Item2["material"]["m_PathID"].Value = fontold.Value.Item2["material"]["m_PathID"].Value;
 
-                /* Remplazar Atlas */
-                // Establece el FileID
-                font.Value.Item2["atlas"]["m_FileID"].Value = fontold.Value.Item2["atlas"]["m_FileID"].Value;
-                // Establece el PathID
-                font.Value.Item2["atlas"]["m_PathID"].Value = fontold.Value.Item2["atlas"]["m_PathID"].Value;
+                if (StringUtils.IsUnityVersionGreaterThan("2017.2.0", fontold.Value.Item4.file.Metadata.UnityVersion))
+                {
+                    /* Remplazar Atlas */
+                    // Establece el FileID
+                    font.Value.Item2["m_AtlasTextures"][0]["m_FileID"].Value = fontold.Value.Item2["m_AtlasTextures"][0]["m_FileID"].Value;
+                    // Establece el PathID
+                    font.Value.Item2["m_AtlasTextures"][0]["m_PathID"].Value = fontold.Value.Item2["m_AtlasTextures"][0]["m_PathID"].Value;
+                }
+                else
+                {
+                    /* Remplazar Atlas */
+                    // Establece el FileID
+                    font.Value.Item2["atlas"]["m_FileID"].Value = fontold.Value.Item2["atlas"]["m_FileID"].Value;
+                    // Establece el PathID
+                    font.Value.Item2["atlas"]["m_PathID"].Value = fontold.Value.Item2["atlas"]["m_PathID"].Value;
+                }
+                
 
                 var newMonoBytes = font.Value.Item2.WriteToByteArray();
 
