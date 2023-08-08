@@ -80,18 +80,7 @@ public class UnityAssetFile
 
         if (DataFolder != string.Empty)
         {
-            var type = Assembly.CheckGameBackEnd(DataFolder);
-
-            if (type == Assembly.AssemblyType.Mono)
-            {
-                AM.MonoTempGenerator  = new MonoCecilTempGenerator(Path.Combine(DataFolder, "Managed"));
-            }
-            else
-            {
-                var il2cppFiles = FindCpp2IlFiles.Find(DataFolder);
-                if (il2cppFiles.success)
-                    AM.MonoTempGenerator = new Cpp2IlTempGenerator(il2cppFiles.metaPath, il2cppFiles.asmPath);
-            }
+            AM.MonoTempGenerator = Assembly.LoadAssamblys(DataFolder);
         }
     }
 
