@@ -6,19 +6,17 @@ namespace Watson.Lib.Assets;
 
 public class TMPFont : IAsset
 {
-    private readonly Assembly m_DLL;
     public UnityAssetFile m_AssetFile;
     public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_FontNames;
     public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_FontTextures;
 
-    public TMPFont(UnityAssetFile FontBundle, Assembly assembly)
+    public TMPFont(UnityAssetFile FontBundle)
     {
         m_FontNames = new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>>();
         m_FontTextures =
             new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>>();
 
         m_AssetFile = FontBundle;
-        m_DLL = assembly;
         Load();
     }
 

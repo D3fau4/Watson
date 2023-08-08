@@ -54,8 +54,8 @@ public partial class TMPFontImportWindow : Form
             return;
         }
 
-        var m_tmpold = new TMPFont(new UnityAssetFile(OldAssettextBox.Text), new Assembly(OldDataFoldertextBox.Text));
-        var m_tmpnew = new TMPFont(new UnityAssetFile(NewAssettextBox.Text), new Assembly(NewDataFoldertextBox.Text));
+        var m_tmpold = new TMPFont(new UnityAssetFile(OldAssettextBox.Text, OldDataFoldertextBox.Text));
+        var m_tmpnew = new TMPFont(new UnityAssetFile(NewAssettextBox.Text, NewDataFoldertextBox.Text));
 
         var compression = AssetBundleCompressionType.None;
 

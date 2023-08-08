@@ -43,13 +43,13 @@ public class Game : IGame
 
         var fontbundle = Directory.GetFiles(Path.Combine(m_gamepath, $"{gamename}_Data", "StreamingAssets", "aa"), "fonts_assets_all*", SearchOption.AllDirectories)[0];
         
-        m_fonts = new TMPFont(new UnityAssetFile(fontbundle), new Assembly(Path.Combine(m_gamepath, $"{gamename}_Data")));
+        m_fonts = new TMPFont(new UnityAssetFile(fontbundle,  Path.Combine(m_gamepath, $"{gamename}_Data")));
         
         var Spritesbundle = Directory.GetFiles(Path.Combine(m_gamepath, $"{gamename}_Data", "StreamingAssets", "aa"), "*image*", SearchOption.AllDirectories);
         List<Sprites> list = new List<Sprites>();
         foreach (var spriteb in Spritesbundle)
         {
-            list.Add(new Sprites(new UnityAssetFile(spriteb)));
+            list.Add(new Sprites(new UnityAssetFile(spriteb, Path.Combine(m_gamepath, $"{gamename}_Data"))));
         }
         m_Sprites = list.ToArray();
     }

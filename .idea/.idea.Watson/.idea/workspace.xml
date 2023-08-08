@@ -11,12 +11,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74c63f27-3af9-4ea9-804e-503c4fd5b288" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Utils/TextureEncoderDecoder.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Utils/TextureImportExport.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Assets/TMPFont.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Assets/TMPFont.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/IO/Assembly.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/IO/Assembly.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson/WinForms/TMPFontImportWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/TMPFontImportWindow.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +28,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/078083485fa24018af1a0391ae6f852e6c880/_1c664/MediaTypeNames.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AssetsTools.NET/AssetsTools.NET.Cpp2IL/Cpp2IlTempGenerator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AssetsTools.NET/AssetsTools.NET.Cpp2IL/Extensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AssetsTools.NET/AssetsTools.NET.Cpp2IL/FindCpp2IlFiles.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AssetsTools.NET/AssetsTools.NET.Cpp2IL/TypeDefWithSelfRef.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Watson/Resource.Designer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -58,8 +62,8 @@
   },
   &quot;keyToStringList&quot;: {
     &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\raul2\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\raul2\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\raul2\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\raul2\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache&quot;,
       &quot;C:\\Users\\raul2\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
@@ -111,7 +115,7 @@
     </configuration>
     <configuration name="Watson PSYNC2" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0/Watson.CLI.exe" />
-      <option name="PROGRAM_PARAMETERS" value="-ai2 --gamepath &quot;D:\Games\AI The Somnium Files 2&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="-ai2 --gamepath &quot;C:\Program Files (x86)\Steam\steamapps\common\AI The Somnium Files 2&quot;" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Watson.CLI/bin/Debug/net7.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
@@ -244,6 +248,8 @@
       <workItem from="1675013119895" duration="4234000" />
       <workItem from="1687713668133" duration="1765000" />
       <workItem from="1687716120306" duration="4952000" />
+      <workItem from="1691521176000" duration="252000" />
+      <workItem from="1691521434539" duration="902000" />
     </task>
     <servers />
   </component>
@@ -291,28 +297,27 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Watson.Lib/Game/Windose/Game.cs</url>
           <line>471</line>
-          <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Game\Windose\Game.cs" initialLine="470" containingFunctionPresentation="method 'Export'">
-            <startOffsets>
-              <option value="28034" />
-            </startOffsets>
-            <endOffsets>
-              <option value="28065" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Game\Windose\Game.cs" initialLine="470" containingFunctionPresentation="method 'Export'" />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs</url>
           <line>76</line>
-          <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Game\AI_TheSomniumFiles2\Game.cs" initialLine="69" containingFunctionPresentation="Method 'listFonts'">
+          <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Game\AI_TheSomniumFiles2\Game.cs" initialLine="69" containingFunctionPresentation="Method 'listFonts'" />
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs</url>
+          <line>53</line>
+          <properties documentPath="C:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Game\AI_TheSomniumFiles2\Game.cs" initialLine="53" containingFunctionPresentation="method 'Load'">
             <startOffsets>
-              <option value="2373" />
+              <option value="1990" />
             </startOffsets>
             <endOffsets>
-              <option value="2413" />
+              <option value="2017" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="27" />
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
