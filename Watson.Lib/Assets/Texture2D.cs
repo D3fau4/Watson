@@ -6,16 +6,14 @@ namespace Watson.Lib.Assets;
 
 public class Texture2D : IAsset
 {
-    private readonly Assembly m_DLL;
     public UnityAssetFile m_AssetFile;
     public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_Textures2D;
 
-    public Texture2D(UnityAssetFile FontBundle, Assembly assembly)
+    public Texture2D(UnityAssetFile FontBundle)
     {
         m_Textures2D = new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>>();
 
         m_AssetFile = FontBundle;
-        m_DLL = assembly;
     }
 
     public void Load()

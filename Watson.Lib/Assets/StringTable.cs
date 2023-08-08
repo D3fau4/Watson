@@ -6,17 +6,15 @@ namespace Watson.Lib.Assets;
 
 public class StringTable : IAsset
 {
-    private readonly Assembly m_DLL;
     public UnityAssetFile m_AssetFile;
     public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_StringTables;
     public Dictionary<AssetTypeValueField, TableData[]> m_tableData = new();
 
-    public StringTable(UnityAssetFile StringTableBundle, Assembly assembly)
+    public StringTable(UnityAssetFile StringTableBundle)
     {
         m_StringTables =
             new Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>>();
         m_AssetFile = StringTableBundle;
-        m_DLL = assembly;
         Load();
     }
 
