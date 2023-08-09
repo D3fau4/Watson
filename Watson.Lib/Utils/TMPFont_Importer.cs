@@ -1,6 +1,7 @@
 ﻿using AssetsTools.NET;
 using AssetsTools.NET.Extra;
 using AssetsTools.NET.Texture;
+using Watson.Lib.Assets;
 using Watson.Lib.Utils.Helpers;
 
 namespace Watson.Lib.Utils;
@@ -8,14 +9,14 @@ namespace Watson.Lib.Utils;
 public static class TMPFont_Importer
 {
     public static List<string> GetToImportList(
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> NewFontNames,
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> OldFontNames,
+        TMPFont NewFontNames,
+        TMPFont OldFontNames,
         string oldsuffix = "", string newsuffix = "")
     {
         var ToImport = new List<string>();
         // Buscar fuentes compatibles para importar
-        foreach (var font in NewFontNames)
-        foreach (var fontold in OldFontNames)
+        foreach (var font in NewFontNames.m_FontNames)
+        foreach (var fontold in OldFontNames.m_FontNames)
         {
             var tmpname = font.Value.Item1;
             if (oldsuffix != string.Empty && newsuffix != string.Empty)
@@ -33,16 +34,13 @@ public static class TMPFont_Importer
     }
 
     // Esto es mas feo que pegar a un padre
-    public static List<AssetsReplacer> Import(
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> NewFontNames,
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> OldFontNames,
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> NewFontTextures2D,
-        Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> OldFontTextures2D,
+    public static TMPFont Import(
+        TMPFont NewFontNames,
+        TMPFont OldFontNames,
         string oldsuffix = "", string newsuffix = "")
     {
-        var m = new List<AssetsReplacer>();
-        foreach (var font in NewFontNames)
-        foreach (var fontold in OldFontNames)
+        foreach (var font in NewFontNames.m_FontNames)
+        foreach (var fontold in OldFontNames.m_FontNames)
         {
             var tmpname = font.Value.Item1;
             if (oldsuffix != string.Empty && newsuffix != string.Empty)
@@ -78,16 +76,12 @@ public static class TMPFont_Importer
                     // Establece el PathID
                     font.Value.Item2["atlas"]["m_PathID"].Value = fontold.Value.Item2["atlas"]["m_PathID"].Value;
                 }
-                
-
-                var newMonoBytes = font.Value.Item2.WriteToByteArray();
-
-                m.Add(new AssetsReplacerFromMemory(fontold.Value.Item4.file, fontold.Value.Item3, newMonoBytes));
+                fontold.Value.Item3.SetNewData(font.Value.Item2);
             }
         }
 
-        foreach (var font in NewFontTextures2D)
-        foreach (var fontold in OldFontTextures2D)
+        foreach (var font in NewFontNames.m_FontTextures)
+        foreach (var fontold in OldFontNames.m_FontTextures)
         {
             var tmpname = font.Value.Item1;
             if (oldsuffix != string.Empty && newsuffix != string.Empty)
@@ -111,12 +105,10 @@ public static class TMPFont_Importer
                 // TODO: Mirar que realmente esto funcione
                 font.Value.Item2["image data"].Value = image_data.Value;
 
-                var Texture2Data = font.Value.Item2.WriteToByteArray();
-
-                m.Add(new AssetsReplacerFromMemory(fontold.Value.Item4.file, fontold.Value.Item3, Texture2Data));
+                fontold.Value.Item3.SetNewData(font.Value.Item2);
             }
         }
 
-        return m;
+        return OldFontNames;
     }
 }

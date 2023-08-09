@@ -27,6 +27,8 @@ switch (arg.OperationMode)
             {
                 var psync2 = new Watson.Lib.Game.AI_TheSomniumFiles2.Game(arg.GamePath, LanguageType.en);
                 psync2.Load();
+                psync2.Proccess();
+                psync2.Export();
             });
         break;
     case HandlerArgs.Mode.Help:

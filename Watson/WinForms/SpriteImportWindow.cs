@@ -55,16 +55,9 @@ public partial class SpriteImportWindow : Form
                 compression = AssetBundleCompressionType.None;
         }
 
-        var m = Sprites_Importer.Import(m_new.m_Sprites, m_old.m_Sprites, m_new.m_Texture2D, m_old.m_Texture2D);
+        var m = Sprites_Importer.Import(m_new, m_old);
 
-        var tmp = new List<long>();
-        foreach (var a in m.ToList())
-            if (!tmp.Contains(a.GetPathID()))
-                tmp.Add(a.GetPathID());
-            else
-                m.RemoveAt(m.IndexOf(a));
-
-        AssetHelper.Save(m_old.m_AssetFile, m, compression);
+        AssetHelper.Save(m.m_AssetFile, compression);
 
         AssetHelper.Close(m_old.m_AssetFile);
         AssetHelper.Close(m_new.m_AssetFile);

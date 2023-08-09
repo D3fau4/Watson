@@ -12,44 +12,27 @@ public static class AssetHelper
         assetFile.Close();
     }
 
-    public static void Save(UnityAssetFile assetFile, List<AssetsReplacer> m,
+    public static void Save(UnityAssetFile assetFile,
         AssetBundleCompressionType Compression = AssetBundleCompressionType.None)
     {
-        //write changes to memory
-        byte[] newAssetData;
-        using (var stream = new MemoryStream())
-        using (var writer = new AssetsFileWriter(stream))
-        {
-            assetFile.Assets.file.Write(writer, 0, m);
-            newAssetData = stream.ToArray();
-        }
+
 
         if (assetFile.IsBundle)
         {
-            //rename this asset name from boring to cool when saving
-            var bunRepl = new BundleReplacerFromMemory(assetFile.Assets.name, null, true, newAssetData, 0);
-
-            var bunWriter = new AssetsFileWriter(File.OpenWrite("TMP.unity3d"));
-            assetFile.Bundle.file.Write(bunWriter, new List<BundleReplacer> { bunRepl });
-            bunWriter.Close();
-
-            if (Compression != AssetBundleCompressionType.None)
+            assetFile.Bundle.file.BlockAndDirInfo.DirectoryInfos[0].SetNewData(assetFile.Assets.file);
+            using (AssetsFileWriter writer = new AssetsFileWriter("TMP.unity3d"))
             {
-                var am = new AssetsManager();
-                var bun = am.LoadBundleFile("TMP.unity3d");
-                using (var stream = File.OpenWrite(assetFile.AssetName))
-                using (var writer = new AssetsFileWriter(stream))
-                {
-                    // hacer esto seleccionable
-                    bun.file.Pack(bun.file.Reader, writer, Compression);
-                    am.UnloadAll(true);
-                    File.Delete("TMP.unity3d");
-                }
+                assetFile.Bundle.file.Write(writer);
             }
+            assetFile.AM.UnloadAll(true);
+            File.Move("TMP.unity3d", assetFile.AssetName, true);
         }
         else
         {
-            File.WriteAllBytes(assetFile.AssetName, newAssetData);
+            using (AssetsFileWriter writer = new AssetsFileWriter(assetFile.AssetName))
+            {
+                assetFile.Assets.file.Write(writer);
+            }
         }
     }
 

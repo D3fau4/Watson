@@ -6,9 +6,9 @@ namespace Watson.Lib.Assets;
 
 public class Sprites : IAsset
 {
-    public UnityAssetFile m_AssetFile;
-    public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_Sprites;
-    public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_Texture2D;
+    public UnityAssetFile m_AssetFile { get; set; }
+    public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_Sprites { get; set; }
+    public Dictionary<long, Tuple<string, AssetTypeValueField, AssetFileInfo, AssetsFileInstance>> m_Texture2D { get; set; }
 
     public Sprites(UnityAssetFile SpriteBundle)
     {

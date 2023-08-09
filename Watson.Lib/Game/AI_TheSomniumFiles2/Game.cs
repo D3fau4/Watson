@@ -1,6 +1,6 @@
 ﻿using Watson.Lib.Game.AI_TheSomniumFiles2.Assets;
 using Watson.Lib.Game.AI_TheSomniumFiles2.Enums;
-using System.IO;
+using AssetsTools.NET.Texture;
 using Spectre.Console;
 using Watson.Lib.Assets;
 using Watson.Lib.IO;
@@ -69,6 +69,20 @@ public class Game : IGame
 
     public void Export(string outpath = "out")
     {
+        if (!Directory.Exists(outpath))
+            Directory.CreateDirectory(outpath);
+        
+        foreach (var sprite in m_Sprites)
+        {
+            foreach (var t in sprite.m_Texture2D)
+            {
+                var texture = TextureFile.ReadTextureFile(t.Value.Item2); // load base field into helper class
+                var textureBgraRaw = texture.GetTextureData(t.Value.Item4); // get the raw bgra32 data
+                var textureImage = Image.LoadPixelData<Bgra32>(textureBgraRaw, texture.m_Width, texture.m_Height); // use imagesharp to convert to image
+                textureImage.Mutate(i => i.Flip(FlipMode.Vertical)); // flip on x-axis (all textures in unity are stored flipped like this)
+                textureImage.SaveAsPng(Path.Combine(outpath, $"{t.Value.Item1}-{t.Key}.png"));
+            }
+        }
         throw new NotImplementedException();
     }
 

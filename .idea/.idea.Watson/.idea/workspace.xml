@@ -12,12 +12,11 @@
   <component name="ChangeListManager">
     <list default="true" id="74c63f27-3af9-4ea9-804e-503c4fd5b288" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/Assets/TMPFont.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Assets/TMPFont.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Assets/Sprites.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Assets/Sprites.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/IO/Assembly.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/IO/Assembly.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/Sprites_Importer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/Sprites_Importer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson/WinForms/TMPFontImportWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson/WinForms/TMPFontImportWindow.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,10 +27,19 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/AssetsTools.NET/AssetsTools.NET.Cpp2IL/Cpp2IlTempGenerator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/AssetsTools.NET/AssetsTools.NET.Cpp2IL/Extensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/AssetsTools.NET/AssetsTools.NET.Cpp2IL/FindCpp2IlFiles.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/AssetsTools.NET/AssetsTools.NET.Cpp2IL/TypeDefWithSelfRef.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15b9322df4b64caf8854f567456774dc30200/a6/c60c8288/AssetsManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15b9322df4b64caf8854f567456774dc30200/fe/0d877976/AssetFileInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/16447399d8f84e9b82726659b6af33c42f200/d8/ff1f51b1/AssetsFile.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/264d43eb14774541b4e2f15601bb64453c00/27/33005362/Cpp2IlTempGenerator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/73c963922aa4493796d12bb855eb39a61c800/08/eb7629c3/RgbConverter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/73c963922aa4493796d12bb855eb39a61c800/17/74b5468f/ColorExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/73c963922aa4493796d12bb855eb39a61c800/45/c330993e/ConversionUtilities.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/73c963922aa4493796d12bb855eb39a61c800/7d/c5b4a55c/IColor`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/812e517ac85c4741abeeb27dfece5744ac00/2d/907c8970/TextureFile.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/99797c42cbe84a8988901c88a715059a3400/34/2e07e5b8/Half.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ac31223208434cf89d6c25022e2e4dfc6c878/84/1e0d706b/MediaTypeNames.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/728053d286e1530c1e52643779fbecdacb1d7e7d933675c2ea9e69116e36/Half.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ac31223208434cf89d6c25022e2e4dfc6c878/_1c664/MediaTypeNames.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Watson/Resource.Designer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -249,7 +257,11 @@
       <workItem from="1687713668133" duration="1765000" />
       <workItem from="1687716120306" duration="4952000" />
       <workItem from="1691521176000" duration="252000" />
-      <workItem from="1691521434539" duration="902000" />
+      <workItem from="1691521434539" duration="2502000" />
+      <workItem from="1691523973827" duration="2821000" />
+      <workItem from="1691560266994" duration="1245000" />
+      <workItem from="1691562582603" duration="1047000" />
+      <workItem from="1691577357588" duration="2308000" />
     </task>
     <servers />
   </component>
@@ -278,19 +290,19 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Watson.Lib/Assets/StringTable.cs</url>
-          <line>37</line>
+          <line>35</line>
           <properties documentPath="C:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Assets\StringTable.cs" initialLine="37" containingFunctionPresentation="method 'Load'" />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Watson.Lib/Assets/StringTable.cs</url>
-          <line>38</line>
+          <line>36</line>
           <properties documentPath="C:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Assets\StringTable.cs" initialLine="38" containingFunctionPresentation="method 'Load'" />
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Watson.Lib/Assets/StringTable.cs</url>
-          <line>29</line>
+          <line>27</line>
           <properties documentPath="C:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Assets\StringTable.cs" initialLine="29" containingFunctionPresentation="method 'Load'" />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
@@ -302,22 +314,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs</url>
-          <line>76</line>
+          <line>90</line>
           <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Game\AI_TheSomniumFiles2\Game.cs" initialLine="69" containingFunctionPresentation="Method 'listFonts'" />
           <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs</url>
-          <line>53</line>
-          <properties documentPath="C:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Game\AI_TheSomniumFiles2\Game.cs" initialLine="53" containingFunctionPresentation="method 'Load'">
-            <startOffsets>
-              <option value="1990" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2017" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -72,24 +72,16 @@ public partial class TMPFontImportWindow : Form
                 compression = AssetBundleCompressionType.None;
         }
 
-        var m = TMPFont_Importer.GetToImportList(m_tmpnew.m_FontNames, m_tmpold.m_FontNames, newsuffix.Text,
+        var m = TMPFont_Importer.GetToImportList(m_tmpnew, m_tmpold, newsuffix.Text,
             oldsuffix.Text);
 
         var msg = "Fuentes a importar: ";
         foreach (var fontsnames in m) msg += $"\n{fontsnames}";
         MessageBox.Show(msg);
 
-        var asset = TMPFont_Importer.Import(m_tmpnew.m_FontNames, m_tmpold.m_FontNames, m_tmpnew.m_FontTextures,
-            m_tmpold.m_FontTextures, newsuffix.Text, oldsuffix.Text);
+        var asset = TMPFont_Importer.Import(m_tmpnew, m_tmpold);
 
-        var tmp = new List<long>();
-        foreach (var a in asset.ToList())
-            if (!tmp.Contains(a.GetPathID()))
-                tmp.Add(a.GetPathID());
-            else
-                asset.RemoveAt(asset.IndexOf(a));
-
-        AssetHelper.Save(m_tmpold.m_AssetFile, asset, compression);
+        AssetHelper.Save(asset.m_AssetFile, compression);
 
         AssetHelper.Close(m_tmpold.m_AssetFile);
         AssetHelper.Close(m_tmpnew.m_AssetFile);
