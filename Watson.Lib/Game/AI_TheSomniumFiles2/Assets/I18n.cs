@@ -13,6 +13,6 @@ public class I18n
         this.filename = filename;
         options = MessagePackSerializerOptions.Standard.WithCompression(MessagePackCompression.Lz4BlockArray);
 
-        cache = new I18Text(MessagePackSerializer.Deserialize<Dictionary<string, string>>(file, options));
+        cache = new I18Text(MessagePackSerializer.Deserialize<Dictionary<string, string>>(file, options), this.filename);
     }
 }

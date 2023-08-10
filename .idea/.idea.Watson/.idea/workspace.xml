@@ -10,15 +10,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74c63f27-3af9-4ea9-804e-503c4fd5b288" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Converters/I18n2Po.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.CLI/Utils/HandlerArgs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Utils/HandlerArgs.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Assets/I18Text.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Assets/I18Text.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Assets/I18n.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Assets/I18n.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs" afterDir="false" />
-    </list>
+    <list default="true" id="74c63f27-3af9-4ea9-804e-503c4fd5b288" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -268,7 +260,7 @@
       <workItem from="1691577357588" duration="2308000" />
       <workItem from="1691611471809" duration="3964000" />
       <workItem from="1691657410106" duration="3801000" />
-      <workItem from="1691661905794" duration="2494000" />
+      <workItem from="1691661905794" duration="3586000" />
     </task>
     <servers />
   </component>
@@ -321,19 +313,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs</url>
-          <line>129</line>
+          <line>128</line>
           <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Game\AI_TheSomniumFiles2\Game.cs" initialLine="69" containingFunctionPresentation="Method 'listFonts'" />
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Converters/I18n2Po.cs</url>
-          <line>23</line>
+          <line>21</line>
           <properties documentPath="C:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Game\AI_TheSomniumFiles2\Converters\I18n2Po.cs" initialLine="23" containingFunctionPresentation="method 'Convert'">
             <startOffsets>
-              <option value="675" />
+              <option value="623" />
             </startOffsets>
             <endOffsets>
-              <option value="761" />
+              <option value="623" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="32" />

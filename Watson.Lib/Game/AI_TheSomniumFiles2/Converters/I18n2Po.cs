@@ -29,7 +29,7 @@ public class I18n2Po : IConverter<I18Text, Po>
             po.Add(new PoEntry
             {
                 Original = ori,
-                Context = $"{entry.Key}"
+                Context = $"{entry.Key}_{source.filename}"
             });
         }
 
