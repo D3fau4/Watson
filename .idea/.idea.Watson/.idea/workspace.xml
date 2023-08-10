@@ -13,9 +13,8 @@
     <list default="true" id="74c63f27-3af9-4ea9-804e-503c4fd5b288" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Watson/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.CLI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/Assets/Sprites.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Assets/Sprites.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Watson.CLI/Watson.CLI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.CLI/Watson.CLI.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Watson.Lib/Utils/Sprites_Importer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Utils/Sprites_Importer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Watson.Lib/Watson.Lib.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +28,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15b9322df4b64caf8854f567456774dc30200/a6/c60c8288/AssetsManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/15b9322df4b64caf8854f567456774dc30200/fe/0d877976/AssetFileInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/16447399d8f84e9b82726659b6af33c42f200/26/13b2ed88/AssetFileInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/16447399d8f84e9b82726659b6af33c42f200/d8/ff1f51b1/AssetsFile.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/264d43eb14774541b4e2f15601bb64453c00/27/33005362/Cpp2IlTempGenerator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/73c963922aa4493796d12bb855eb39a61c800/08/eb7629c3/RgbConverter.cs" root0="SKIP_HIGHLIGHTING" />
@@ -38,7 +38,9 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/812e517ac85c4741abeeb27dfece5744ac00/2d/907c8970/TextureFile.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/99797c42cbe84a8988901c88a715059a3400/34/2e07e5b8/Half.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ac31223208434cf89d6c25022e2e4dfc6c878/84/1e0d706b/MediaTypeNames.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5b92574433232d5c5ed533393d2853774e0233c2af2d910367761c50592d/KeyValuePair.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/728053d286e1530c1e52643779fbecdacb1d7e7d933675c2ea9e69116e36/Half.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/80bbeda04f1e9776c81db5e7a71ee537ff88e08969ee21735ced3b63c5ec462/Tuple.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ac31223208434cf89d6c25022e2e4dfc6c878/_1c664/MediaTypeNames.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Watson/Resource.Designer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -78,7 +80,7 @@
 }</component>
   <component name="RunManager" selected=".NET Project.Watson PSYNC2">
     <configuration name="Publish Watson.CLI to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
-      <riderPublish configuration="Release" delete_existing_files="true" platform="Any CPU" ready_to_run="true" runtime="win-x64" self_contained="true" target_folder="$PROJECT_DIR$/Watson.CLI/bin/Release/net7.0/win-x64/publish" target_framework="net7.0" uuid_high="230379160390094602" uuid_low="-9075046313692763487" />
+      <riderPublish configuration="Release" delete_existing_files="true" include_native_libs_for_self_extract="true" platform="Any CPU" produce_single_file="true" ready_to_run="true" runtime="win-x64" self_contained="true" target_folder="$PROJECT_DIR$/Watson.CLI/bin/Release/net7.0/win-x64/publish" target_framework="net7.0" trim_unused_assemblies="true" uuid_high="230379160390094602" uuid_low="-9075046313692763487" />
       <method v="2" />
     </configuration>
     <configuration name="Publish Watson.Program to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
@@ -262,6 +264,8 @@
       <workItem from="1691560266994" duration="1245000" />
       <workItem from="1691562582603" duration="1047000" />
       <workItem from="1691577357588" duration="2308000" />
+      <workItem from="1691611471809" duration="3964000" />
+      <workItem from="1691657410106" duration="3100000" />
     </task>
     <servers />
   </component>
@@ -314,9 +318,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Watson.Lib/Game/AI_TheSomniumFiles2/Game.cs</url>
-          <line>90</line>
+          <line>105</line>
           <properties documentPath="D:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Game\AI_TheSomniumFiles2\Game.cs" initialLine="69" containingFunctionPresentation="Method 'listFonts'" />
           <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Watson.Lib/Assets/Sprites.cs</url>
+          <line>25</line>
+          <properties documentPath="C:\Users\raul2\Documents\GitHub\Watson\Watson.Lib\Assets\Sprites.cs" initialLine="25" containingFunctionPresentation="method 'Load'">
+            <startOffsets>
+              <option value="927" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1001" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

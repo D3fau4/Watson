@@ -6,8 +6,6 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
-        <PublishAot>true</PublishAot>
-        <StripSymbols>true</StripSymbols>
     </PropertyGroup>
 
     <ItemGroup>
@@ -15,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Spectre.Console" Version="0.47.1-preview.0.11" />
+      <PackageReference Include="Spectre.Console" Version="0.47.0" />
     </ItemGroup>
 
 </Project>

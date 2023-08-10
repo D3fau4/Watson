@@ -22,13 +22,24 @@ switch (arg.OperationMode)
             });
         break;
     case HandlerArgs.Mode.Psync2:
-        AnsiConsole.Progress()
-            .Start(ctx => 
+        AnsiConsole.MarkupLine("[green]Juego - AI: The Somnium Files - Nirvana Initiative[/]");
+        AnsiConsole.Status()
+            .AutoRefresh(true)
+            .Start("Iniciando...", ctx => 
             {
-                var psync2 = new Watson.Lib.Game.AI_TheSomniumFiles2.Game(arg.GamePath, LanguageType.en);
+                // Simulate some work
+                ctx.Status("Leyendo carpeta del juego...");
+                ctx.Spinner(Spinner.Known.Circle);
+                ctx.SpinnerStyle(Style.Parse("yellow"));
+                var psync2 = new Watson.Lib.Game.AI_TheSomniumFiles2.Game(arg.GamePath, LanguageType.en, ctx);
+                
+        
+                // Update the status and spinner
+                ctx.Status("Procesando Archivos...");
                 psync2.Load();
+
+                // Simulate some work
                 psync2.Proccess();
-                psync2.Export();
             });
         break;
     case HandlerArgs.Mode.Help:

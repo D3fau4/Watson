@@ -15,20 +15,23 @@ public class Game : IGame
     private List<I18n> m_Texts = new List<I18n>();
     private TMPFont m_fonts;
     private Sprites[] m_Sprites;
+    private StatusContext? ctx;
 
-    public Game(string gamePath, LanguageType lan)
+    public Game(string gamePath, LanguageType lan, StatusContext ctx = null)
     {
         m_gamepath = gamePath;
         m_languageType = lan;
+        this.ctx = ctx;
     }
 
     public void Load()
     {
+        ctx.Status("Buscando texto...");
         foreach (var f in Directory.EnumerateFiles(
                      Path.Combine(m_gamepath, $"{gamename}_Data", "StreamingAssets", "Text", m_languageType.ToString()), "*",
                      SearchOption.AllDirectories))
         {
-            AnsiConsole.WriteLine($"Leyendo: {f}");
+            //AnsiConsole.WriteLine($"Leyendo: {f}");
             try
             {
                 var text = new I18n(new FileStream(File.OpenHandle(f), FileAccess.Read));
@@ -36,15 +39,16 @@ public class Game : IGame
             }
             catch (Exception e)
             {
-                AnsiConsole.MarkupLine($"[red]Fallo al leer: {f}[/]");
+                //AnsiConsole.MarkupLine($"[red]Fallo al leer: {f}[/]");
             }
         }
 
-
+        ctx.Status("Buscando fuentes...");
         var fontbundle = Directory.GetFiles(Path.Combine(m_gamepath, $"{gamename}_Data", "StreamingAssets", "aa"), "fonts_assets_all*", SearchOption.AllDirectories)[0];
         
         m_fonts = new TMPFont(new UnityAssetFile(fontbundle,  Path.Combine(m_gamepath, $"{gamename}_Data")));
         
+        ctx.Status("Buscando sprites...");
         var Spritesbundle = Directory.GetFiles(Path.Combine(m_gamepath, $"{gamename}_Data", "StreamingAssets", "aa"), "*image*", SearchOption.AllDirectories);
         List<Sprites> list = new List<Sprites>();
         foreach (var spriteb in Spritesbundle)
@@ -56,6 +60,7 @@ public class Game : IGame
 
     public void Proccess()
     {
+        ctx.Status("Procesando sprites...");
         foreach (var sprite in m_Sprites)
         {
             sprite.Load();
@@ -72,15 +77,25 @@ public class Game : IGame
         if (!Directory.Exists(outpath))
             Directory.CreateDirectory(outpath);
         
+        ctx.Status("Exportando sprites...");
         foreach (var sprite in m_Sprites)
         {
             foreach (var t in sprite.m_Texture2D)
             {
+                //AnsiConsole.MarkupLine($"Exportando: {t.Value.Item1}");
+                if (!Directory.Exists(Path.Combine(outpath, "Sprites",
+                        sprite.m_AssetFile.Bundle.name.Replace(".bundle", ""))))
+                    Directory.CreateDirectory(Path.Combine(outpath, "Sprites",
+                        sprite.m_AssetFile.Bundle.name.Replace(".bundle", "")));
+                
                 var texture = TextureFile.ReadTextureFile(t.Value.Item2); // load base field into helper class
                 var textureBgraRaw = texture.GetTextureData(t.Value.Item4); // get the raw bgra32 data
                 var textureImage = Image.LoadPixelData<Bgra32>(textureBgraRaw, texture.m_Width, texture.m_Height); // use imagesharp to convert to image
                 textureImage.Mutate(i => i.Flip(FlipMode.Vertical)); // flip on x-axis (all textures in unity are stored flipped like this)
-                textureImage.SaveAsPng(Path.Combine(outpath, $"{t.Value.Item1}-{t.Key}.png"));
+                textureImage.SaveAsPng(Path.Combine(outpath, "Sprites",
+                    sprite.m_AssetFile.Bundle.name.Replace(".bundle", ""), $"{t.Value.Item1}-{t.Key}.png"));
+                /*AnsiConsole.MarkupLine($"[green]¡Exportado!: {Path.Combine(outpath, "Sprites",
+                    sprite.m_AssetFile.Bundle.name.Replace(".bundle", ""), $"{t.Value.Item1}-{t.Key}.png")}[/]");*/
             }
         }
         throw new NotImplementedException();
