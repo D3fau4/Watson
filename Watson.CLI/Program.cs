@@ -2,7 +2,7 @@
 using Watson.Lib.Game.AI_TheSomniumFiles2.Enums;
 using Watson.Program.Utils;
 
-AnsiConsole.Markup("[purple]Welcome to Watson![/] - [yellow]v1.0.0[/]\n");
+AnsiConsole.Markup("[purple]Welcome to Watson![/] - [yellow]v1.1.0[/]\n");
 var arg = new HandlerArgs(args);
 
 switch (arg.OperationMode)
@@ -40,6 +40,11 @@ switch (arg.OperationMode)
 
                 // Simulate some work
                 psync2.Proccess();
+
+                if (arg.extract)
+                {
+                    psync2.Export(arg.OutPut);
+                }
             });
         break;
     case HandlerArgs.Mode.Help:

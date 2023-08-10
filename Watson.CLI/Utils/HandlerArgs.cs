@@ -29,9 +29,6 @@ public class HandlerArgs
             new(new[] { "--gamepath" }, x => GamePath = x),
             new(new[] { "--output", "-o" }, x => OutPut = x),
             new(new[] { "--extract", "-x" }, () => extract = true)
-            /*new(new[] { "--input", "-i" }, x => FilePath = x),
-            new(new[] { "--output", "-o" }, x => OutPut = x),
-            new(new[] { "--dev" }, () => devserver = true),*/
         };
 
         for (var i = 0; i < raw_args.Length; ++i)
@@ -47,7 +44,7 @@ public class HandlerArgs
 
     public Mode? OperationMode { get; private set; }
     public string? GamePath { get; private set; }
-    public string? OutPut { get; private set; }
+    public string? OutPut { get; private set; } = "out";
     public bool extract { get; private set; }
 
     public static void PrintInfo()

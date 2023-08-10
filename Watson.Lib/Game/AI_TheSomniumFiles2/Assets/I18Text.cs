@@ -4,8 +4,6 @@ namespace Watson.Lib.Game.AI_TheSomniumFiles2.Assets;
 
 public class I18Text : IFormat
 {
-    public Dictionary<string, string> File;
-
     public I18Text(Dictionary<string, string> f)
     {
         File = f;
@@ -15,4 +13,6 @@ public class I18Text : IFormat
     {
         File = new Dictionary<string, string>();
     }
+
+    public Dictionary<string, string> File { get; set; }
 }
