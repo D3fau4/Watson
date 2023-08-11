@@ -6,7 +6,7 @@
         <LangVersion>latest</LangVersion>
         <PublishAot>true</PublishAot>
         <StripSymbols>true</StripSymbols>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFrameworks>net8.0;net7.0</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
