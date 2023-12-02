@@ -1,4 +1,7 @@
 ﻿using AssetsTools.NET.Texture;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 using Spectre.Console;
 using Watson.Lib.Assets;
 using Watson.Lib.Game.AI_TheSomniumFiles2.Assets;
