@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Watson.Lib", "Watson.Lib\Watson.Lib.csproj", "{F9A993DE-ACC3-45C0-B8EE-70390FA61800}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Watson.CLI", "Watson.CLI\Watson.CLI.csproj", "{033278A0-32B4-4F0A-820E-F575981FEAA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Watson.Test", "Watson.Test\Watson.Test.csproj", "{5F8E03E7-D6B9-4159-B500-9602B551E83E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9A993DE-ACC3-45C0-B8EE-70390FA61800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9A993DE-ACC3-45C0-B8EE-70390FA61800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9A993DE-ACC3-45C0-B8EE-70390FA61800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9A993DE-ACC3-45C0-B8EE-70390FA61800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{033278A0-32B4-4F0A-820E-F575981FEAA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{033278A0-32B4-4F0A-820E-F575981FEAA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{033278A0-32B4-4F0A-820E-F575981FEAA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{033278A0-32B4-4F0A-820E-F575981FEAA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F8E03E7-D6B9-4159-B500-9602B551E83E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F8E03E7-D6B9-4159-B500-9602B551E83E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F8E03E7-D6B9-4159-B500-9602B551E83E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F8E03E7-D6B9-4159-B500-9602B551E83E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {94ECCAF6-711E-4352-9E81-E918BD61688E}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,11 @@
+- name: Guides
+  href: articles/
+
+- name: API
+  href: api/
+
+- name: Changelog
+  href: articles/changelog.md
+
+- name: GitHub
+  href: https://github.com/pleonex/template-csharp

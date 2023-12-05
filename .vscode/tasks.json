@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "run",
+                "--project",
+                "build/orchestrator/",
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$msCompile"],
+            "label": "Build"
+        },
+        {
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+            "run",
+            "--project",
+            "build/orchestrator/",
+            "--",
+            "--target=Bundle"
+            ],
+            "group": {
+            "kind": "build",
+            },
+            "problemMatcher": ["$msCompile"],
+            "label": "Bundle"
+        },
+    ]
+}
