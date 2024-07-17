@@ -1,6 +1,5 @@
-# .NET project template
+# Watson
 
-<!-- markdownlint-disable MD033 -->
 <p align="center">
   <a href="https://dev.azure.com/benito356/NetDevOpsTest/_packaging?_a=package&feed=e3acf8ba-ec70-46f0-b1a5-da1ce3dd5d9f&package=b8696a32-e71a-4479-9b0e-002997b8d8ef&preferRelease=true">
     <img alt="Stable version" src="https://feeds.dev.azure.com/benito356/339c91a8-9d6c-4082-8b1a-93c2ae76b637/_apis/public/Packaging/Feeds/e3acf8ba-ec70-46f0-b1a5-da1ce3dd5d9f/Packages/b8696a32-e71a-4479-9b0e-002997b8d8ef/Badge" />
@@ -20,36 +19,19 @@
   &nbsp;
 </p>
 
-Repository template for .NET projects with a complete DevOps workflow. It uses
-the build system and best-practices from
-[PleOps.Cake](https://www.pleonex.dev/PleOps.Cake/).
+Watson.Lib is a C# library designed for modifying Unity-based games by providing tools for asset management, game logic customization, and utility functions. This library supports various games, offering specific implementations and tools required for each game.
 
-- ♻️ DevOps best practices for a software project
-- 🔧 Build, test and release .NET projects
-- 📚 Documentation
-- 🤖 Continuous integration
+## Supported Games
 
-## Tech stack
-
-- **Projects**: C# / .NET
-- **Documentation**: DocFX, GitHub page
-- **CI**: GitHub Actions
-- **Release deployment**: NuGet feeds, GitHub
-
-## Get started
-
-Follow the
-[setup guide started guide from PleOps.Cake](https://www.pleonex.dev/PleOps.Cake/docs/getting-started/setup-template.html)
-to adapt this template to your project.
-
-Feel free to ask any question in the
-[PleOps.Cake project discussion](https://github.com/pleonex/PleOps.Cake/discussions).
+- **AI: The Somnium Files 2**
+- **Neptunia: Sisters vs Sisters**
+- **Windose**
 
 ## Build
 
-The project requires to build .NET 8.0 SDK.
+The project requires .NET 8.0 SDK to build.
 
-To build, test and generate artifacts run:
+To build, test, and generate artifacts, run:
 
 ```sh
 # Build and run tests (with code coverage!)
