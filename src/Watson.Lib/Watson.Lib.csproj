@@ -13,12 +13,12 @@
         <PackageReference Include="AssetsTools.NET.Cpp2IL" Version="1.0.0" />
         <PackageReference Include="AssetsTools.NET.MonoCecil" Version="1.0.0" />
         <PackageReference Include="AssetsTools.NET.Texture" Version="1.0.0" />
-        <PackageReference Include="CsvHelper" Version="30.0.1" />
-        <PackageReference Include="MessagePack" Version="2.6.100-alpha" />
+        <PackageReference Include="CsvHelper" Version="33.0.1" />
+        <PackageReference Include="MessagePack" Version="3.0.111-alpha" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="SixLabors.ImageSharp" Version="3.1.4" />
-        <PackageReference Include="Spectre.Console" Version="0.48.1-preview.0.5" />
-        <PackageReference Include="Yarhl" Version="4.0.0-preview.185" />
+        <PackageReference Include="Spectre.Console" Version="0.49.2-preview.0.10" />
+        <PackageReference Include="Yarhl" Version="4.0.1-preview.4" />
         <PackageReference Include="Yarhl.Media" Version="4.0.0-preview.157" />
     </ItemGroup>
     
