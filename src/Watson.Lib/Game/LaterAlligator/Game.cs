@@ -76,7 +76,7 @@ public class Game : IGame
             var arrayString2Po = new ArrayString2Po(keyValuePair.Key, "Say");
             var po = arrayString2Po.Convert(keyValuePair.Value);
             var po2Binary = new Po2Binary();
-            po2Binary.Convert(po).Stream?.WriteTo(Path.Combine(outpath, $"{keyValuePair.Key}.po"));
+            po2Binary.Convert(po).Stream?.WriteTo(Path.Combine(outpath, $"{keyValuePair.Key}.Say.po"));
         }
     }
 }

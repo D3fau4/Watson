@@ -62,7 +62,7 @@ switch (arg.OperationMode)
             });
         break;
     case HandlerArgs.Mode.CocoDrilo:
-        AnsiConsole.MarkupLine("[green]Juego - CocoDrilo[/]");
+        AnsiConsole.MarkupLine("[green]Juego - Later Alligator[/]");
         AnsiConsole.Status()
             .AutoRefresh(true)
             .Start("Iniciando...", ctx =>

@@ -29,7 +29,7 @@ public class ArrayString2Po : IConverter<string[], Po>
         };
 
         for (int i = 0; i < source.Length; i++) {
-            var txt = (source[i] ?? string.Empty).Replace(string.Empty, "{EMPTY}");
+            var txt = !source[i].Equals(string.Empty) ? source[i] : "{EMPTY}";
             po.Add(new PoEntry
             {
                 Original = txt,
