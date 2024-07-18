@@ -4,6 +4,8 @@ using AssetsTools.NET.Extra;
 
 namespace Watson.Lib.IO;
 
+using Spectre.Console;
+
 public class UnityAssetFile
 {
     public AssetsManager AM;
@@ -30,7 +32,7 @@ public class UnityAssetFile
         }
         catch (Exception ex)
         {
-            // Si recibe un error de que el archivo es muy pequeño intentar abrir como AssetBundle. 
+            // Si recibe un error de que el archivo es muy pequeño intentar abrir como AssetBundle.
             if (ex.Message.Contains("too small") || ex.Message.Contains("Unable to read beyond the end"))
             {
                 // Descargar lo que haya conseguido cargar.
@@ -61,7 +63,7 @@ public class UnityAssetFile
         }
         catch (Exception ex)
         {
-            // Si recibe un error de que el archivo es muy pequeño intentar abrir como AssetBundle. 
+            // Si recibe un error de que el archivo es muy pequeño intentar abrir como AssetBundle.
             if (ex.Message.Contains("too small") || ex.Message.Contains("Unable to read beyond the end"))
             {
                 // Descargar lo que haya conseguido cargar.
@@ -81,6 +83,40 @@ public class UnityAssetFile
         if (DataFolder != string.Empty)
         {
             AM.MonoTempGenerator = Assembly.LoadAssamblys(DataFolder);
+        }
+    }
+
+    public static void LoadAndExtractUnity3D(string path, string OutPut = "out")
+    {
+        var AM = new AssetsManager();
+        var a = AM.LoadBundleFile(path, true);
+        try
+        {
+            Directory.CreateDirectory(OutPut);
+            for (int i = 0; i < 10000; i++)
+            {
+                AM.LoadAssetsFileFromBundle(a, i, false);
+                foreach (AssetsFileInstance assetsFileInstance in a.loadedAssetsFiles)
+                {
+                    var filePath = Path.Combine(OutPut, assetsFileInstance.name);
+                    if (File.Exists(filePath)) continue;
+                    AnsiConsole.MarkupLine($"[yellow]Procesando Archivo: [/] {assetsFileInstance.name}");
+                    using (var fileStream = File.Create(filePath))
+                    {
+                        if (assetsFileInstance.AssetsStream.CanSeek)
+                        {
+                            assetsFileInstance.AssetsStream.Position = 0;
+                        }
+                        assetsFileInstance.AssetsStream.CopyTo(fileStream);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+#if DEBUG
+            AnsiConsole.MarkupLine($"[red]Error: [/] {e.Message}");
+#endif
         }
     }
 
