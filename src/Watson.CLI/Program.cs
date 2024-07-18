@@ -61,6 +61,22 @@ switch (arg.OperationMode)
                 UnityAssetFile.LoadAndExtractUnity3D(arg.filePath);
             });
         break;
+    case HandlerArgs.Mode.CocoDrilo:
+        AnsiConsole.MarkupLine("[green]Juego - CocoDrilo[/]");
+        AnsiConsole.Status()
+            .AutoRefresh(true)
+            .Start("Iniciando...", ctx =>
+            {
+                ctx.Spinner(Spinner.Known.Circle);
+                ctx.SpinnerStyle(Style.Parse("yellow"));
+                var cocodrilo = new Watson.Lib.Game.LaterAlligator.Game(arg.GamePath, ctx);
+                cocodrilo.Proccess();
+                if (arg.extract)
+                {
+                    cocodrilo.Export(arg.OutPut);
+                }
+            });
+        break;
     case HandlerArgs.Mode.Help:
     default:
         HandlerArgs.PrintInfo();

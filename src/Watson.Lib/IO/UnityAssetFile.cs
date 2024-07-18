@@ -100,7 +100,7 @@ public class UnityAssetFile
                 {
                     var filePath = Path.Combine(OutPut, assetsFileInstance.name);
                     if (File.Exists(filePath)) continue;
-                    AnsiConsole.MarkupLine($"[yellow]Procesando Archivo: [/] {assetsFileInstance.name}");
+                    AnsiConsole.MarkupLine($"[yellow]Extrayendo archivo: [/] {assetsFileInstance.name}");
                     using (var fileStream = File.Create(filePath))
                     {
                         if (assetsFileInstance.AssetsStream.CanSeek)
