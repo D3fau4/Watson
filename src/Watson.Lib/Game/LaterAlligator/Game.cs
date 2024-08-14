@@ -14,7 +14,6 @@ public class Game : IGame
     public string gamepath { get; set; }
     private string gamedatapath { get; set; }
     private string assemblyFolder { get; set; }
-    private string m_assetfilepath { get; set; } = "data.unity3d";
     private string ExtractedAssetsFolder { get; set; }
     private StatusContext ctx { get; set; }
 
@@ -31,34 +30,34 @@ public class Game : IGame
     {
         gamedatapath = Path.Combine(gamepath, "LaterAlligator_Data");
         assemblyFolder = Path.Combine(gamedatapath, "Managed");
-        m_assetfilepath = Path.Combine(gamedatapath, "data.unity3d");
         ExtractedAssetsFolder = TempDirectory.CreateTempDirectory();
         ctx.Status("Extrayendo Archivos...");
-        UnityAssetFile.LoadAndExtractUnity3D(m_assetfilepath, ExtractedAssetsFolder);
-
     }
 
     public void Proccess()
     {
         ctx.Status("Leyendo Archivos...");
-        foreach (string filePath in Directory.GetFiles(ExtractedAssetsFolder)) {
+        foreach (string filePath in Directory.GetFiles(gamedatapath, "*.bundle", SearchOption.AllDirectories)) {
             AnsiConsole.MarkupLine("[yellow]Leyendo Archivo:[/] " + Path.GetFileName(filePath));
             var m_assetfile = new UnityAssetFile(filePath, gamedatapath);
-            List<string> txt = new List<string>();
+            List<string> storyTexts = new List<string>();
             foreach (AssetFileInfo m_monobehaviour in m_assetfile.GetAssetsOfType(AssetClassID.MonoBehaviour)) {
                 var deserialized =
                     m_assetfile.AM.GetBaseField(m_assetfile.Assets, m_monobehaviour);
-                var m_Script = m_assetfile.AM.GetExtAsset(m_assetfile.Assets, deserialized["m_Script"]).baseField;
-                if (m_Script.Get("m_ClassName").Value.AsString.Equals("Say")) {
-                    txt.Add(deserialized.Get("storyText").Value.AsString);
+                try
+                {
+                    storyTexts.Add(deserialized.Get("storyText").Value.AsString);
+                } catch (Exception e) {
+#if DEBUG
+                    AnsiConsole.WriteException(e);
+#endif
                 }
             }
-            if (txt.Count > 0)
-                Say.Add(Path.GetFileName(filePath), txt.ToArray());
+            if (storyTexts.Count > 0)
+                Say.Add(Path.GetFileName(filePath), storyTexts.ToArray());
+            
             m_assetfile.Close();
         }
-
-        Directory.Delete(ExtractedAssetsFolder, true);
     }
 
     public void Import()
@@ -66,17 +65,15 @@ public class Game : IGame
         throw new NotImplementedException();
     }
 
-    public void Export(string outpath = "out")
+    public void Export(string outputPath = "out")
     {
         ctx.Status("Exportando Archivos...");
-        if (!Directory.Exists(outpath))
-            Directory.CreateDirectory(outpath);
-        foreach (KeyValuePair<string,string[]> keyValuePair in Say) {
-            AnsiConsole.MarkupLine("[yellow]Exportando Archivo:[/] " + keyValuePair.Key);
-            var arrayString2Po = new ArrayString2Po(keyValuePair.Key, "Say");
-            var po = arrayString2Po.Convert(keyValuePair.Value);
-            var po2Binary = new Po2Binary();
-            po2Binary.Convert(po).Stream?.WriteTo(Path.Combine(outpath, $"{keyValuePair.Key}.Say.po"));
+        Directory.CreateDirectory(outputPath);
+        foreach (var (fileName, texts) in Say)
+        {
+            AnsiConsole.MarkupLine($"[yellow]Exportando Archivo:[/] {fileName}");
+            var po = new ArrayString2Po(fileName, "Say").Convert(texts);
+            new Po2Binary().Convert(po).Stream?.WriteTo(Path.Combine(outputPath, $"{fileName}.Say.po"));
         }
     }
 }

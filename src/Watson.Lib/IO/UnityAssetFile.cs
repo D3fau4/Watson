@@ -72,10 +72,15 @@ public class UnityAssetFile
                 Bundle = AM.LoadBundleFile(file);
 
                 // Siempre index 0 ya que es el que contiene todos los archivos
-                Assets = AM.LoadAssetsFileFromBundle(Bundle, 0, true);
+                foreach (string fileName in Bundle.file.GetAllFileNames()) {
+                    if (!fileName.Contains(".sharedAssets") && Bundle.file.BlockAndDirInfo.DirectoryInfos[Bundle.file.GetFileIndex(fileName)].Flags == 4) {
+                        Assets = AM.LoadAssetsFileFromBundle(Bundle, Bundle.file.GetFileIndex(fileName), true);
+                        break;
+                    }
+                }
 
                 AM.LoadClassPackage(new MemoryStream(Resources.Resources.classdata));
-                AM.LoadClassDatabaseFromPackage(Assets.file.Metadata.UnityVersion);
+                AM.LoadClassDatabaseFromPackage(Bundle.file.Header.EngineVersion);
                 IsBundle = true;
             }
         }
