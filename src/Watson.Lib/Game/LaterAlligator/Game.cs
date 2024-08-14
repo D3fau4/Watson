@@ -18,6 +18,7 @@ public class Game : IGame
     private StatusContext ctx { get; set; }
 
     private Dictionary<string, string[]> Say = new Dictionary<string, string[]>();
+    private Dictionary<string, string[]> InvokeNextLineAsync = new Dictionary<string, string[]>();
 
     public Game(string gamepath, StatusContext ctx)
     {
@@ -38,24 +39,41 @@ public class Game : IGame
     {
         ctx.Status("Leyendo Archivos...");
         foreach (string filePath in Directory.GetFiles(gamedatapath, "*.bundle", SearchOption.AllDirectories)) {
+            /*if (!filePath.Contains("scenes_scenes_locationgirlsgirlsgirls.bundle"))
+                continue;*/
+
             AnsiConsole.MarkupLine("[yellow]Leyendo Archivo:[/] " + Path.GetFileName(filePath));
             var m_assetfile = new UnityAssetFile(filePath, gamedatapath);
             List<string> storyTexts = new List<string>();
+            List<string> nextLineAsync = new List<string>();
             foreach (AssetFileInfo m_monobehaviour in m_assetfile.GetAssetsOfType(AssetClassID.MonoBehaviour)) {
                 var deserialized =
                     m_assetfile.AM.GetBaseField(m_assetfile.Assets, m_monobehaviour);
                 try
                 {
-                    storyTexts.Add(deserialized.Get("storyText").Value.AsString);
+                    if (!deserialized["targetMethod"].IsDummy &&
+                        deserialized["targetMethod"].Value.AsString == "NextLineAsync") {
+                        foreach (AssetTypeValueField objValue in deserialized["methodParameters.Array"]) {
+                            if (objValue["objValue"].IsDummy || objValue["objValue"]["stringValue"].IsDummy)
+                                continue;
+                            nextLineAsync.Add(objValue["objValue"]["stringValue"].Value.AsString);
+                        }
+                    }
+
+                    if (!deserialized["storyText"].IsDummy)
+                        storyTexts.Add(deserialized.Get("storyText").Value.AsString);
                 } catch (Exception e) {
 #if DEBUG
                     AnsiConsole.WriteException(e);
 #endif
                 }
             }
+
             if (storyTexts.Count > 0)
                 Say.Add(Path.GetFileName(filePath), storyTexts.ToArray());
-            
+            if (nextLineAsync.Count > 0)
+                InvokeNextLineAsync.Add(Path.GetFileName(filePath), nextLineAsync.ToArray());
+
             m_assetfile.Close();
         }
     }
@@ -74,6 +92,12 @@ public class Game : IGame
             AnsiConsole.MarkupLine($"[yellow]Exportando Archivo:[/] {fileName}");
             var po = new ArrayString2Po(fileName, "Say").Convert(texts);
             new Po2Binary().Convert(po).Stream?.WriteTo(Path.Combine(outputPath, $"{fileName}.Say.po"));
+        }
+
+        foreach (var (fileName, texts) in InvokeNextLineAsync) {
+            AnsiConsole.MarkupLine($"[yellow]Exportando Archivo:[/] {fileName}");
+            var po = new ArrayString2Po(fileName, "InvokeNextLineAsync").Convert(texts);
+            new Po2Binary().Convert(po).Stream?.WriteTo(Path.Combine(outputPath, $"{fileName}.InvokeNextLineAsync.po"));
         }
     }
 }
