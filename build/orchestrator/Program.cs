@@ -1,3 +1,5 @@
+using System;
+using System.Runtime.InteropServices;
 using Cake.Core;
 using Cake.Frosting;
 using Cake.Frosting.PleOps.Recipe;
@@ -16,7 +18,7 @@ public sealed class BuildLifetime : FrostingLifetime<PleOpsBuildContext>
         // HERE you can set default values overridable by command-line
         // TODO EXAMPLE: context.WarningsAsErrors = false;
         context.DotNetContext.ApplicationProjects.Add(new ProjectPublicationInfo(
-            "./src/Watson.CLI", new[] { "win-x64", "linux-x64", "osx-x64" }, "net8.0"));
+            "./src/Watson.CLI", new[] { $"{GetOsPlatform()}-{GetArchitecture()}" }, "net8.0"));
 
         context.WarningsAsErrors = false;
 
@@ -35,6 +37,43 @@ public sealed class BuildLifetime : FrostingLifetime<PleOpsBuildContext>
     {
         // Save the info from the existing artifacts for the next execution (e.g. deploy job)
         context.DeliveriesContext.Save();
+    }
+
+    static string GetOsPlatform()
+    {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            return "win";
+        }
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        {
+            return "linux";
+        }
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            return "osx";
+        }
+        else
+        {
+            return "unknown";
+        }
+    }
+
+    static string GetArchitecture()
+    {
+        switch (RuntimeInformation.OSArchitecture)
+        {
+            case Architecture.X64:
+                return "x64";
+            case Architecture.X86:
+                return "x86";
+            case Architecture.Arm:
+                return "arm";
+            case Architecture.Arm64:
+                return "arm64";
+            default:
+                return "unknown";
+        }
     }
 }
 
