@@ -11,7 +11,8 @@ public class HandlerArgs
         HoloError,
         Windose,
         SVS,
-        Psync2
+        Psync2,
+        PARANORMASIGHT
     }
 
     public HandlerArgs(string[] raw_args)
@@ -24,11 +25,13 @@ public class HandlerArgs
             new( new[] { "--windose" }, () => OperationMode = Mode.Windose),
             new( new[] {  "--NeptuniaSVS", "-svs" }, () => OperationMode = Mode.SVS),
             new( new[] {  "--AI2", "-ai2" }, () => OperationMode = Mode.Psync2),
+            new( new[] {  "--PARANORMASIGHT", "-pnor" }, () => OperationMode = Mode.PARANORMASIGHT),
 
             // Args
             new(new[] { "--gamepath" }, x => GamePath = x),
             new(new[] { "--output", "-o" }, x => OutPut = x),
-            new(new[] { "--extract", "-x" }, () => extract = true)
+            new(new[] { "--extract", "-x" }, () => extract = true),
+            new( new[] { "--fonts"}, x => fontFilePath = x)
         };
 
         for (var i = 0; i < raw_args.Length; ++i)
@@ -44,6 +47,7 @@ public class HandlerArgs
 
     public Mode? OperationMode { get; private set; }
     public string? GamePath { get; private set; }
+    public string? fontFilePath { get; private set; }
     public string? OutPut { get; private set; } = "out";
     public bool extract { get; private set; }
 

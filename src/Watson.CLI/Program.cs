@@ -9,11 +9,11 @@ switch (arg.OperationMode)
 {
     case HandlerArgs.Mode.SVS:
         AnsiConsole.Progress()
-            .Start(ctx => 
+            .Start(ctx =>
             {
                 var svs = new Watson.Lib.Game.neptunia_sisters_vs_sisters.Game(arg.GamePath, ctx);
                 svs.Proccess();
-        
+
                 // Extract to Po
                 if (arg.extract)
                 {
@@ -25,15 +25,15 @@ switch (arg.OperationMode)
         AnsiConsole.MarkupLine("[green]Juego - AI: The Somnium Files - Nirvana Initiative[/]");
         AnsiConsole.Status()
             .AutoRefresh(true)
-            .Start("Iniciando...", ctx => 
+            .Start("Iniciando...", ctx =>
             {
                 // Simulate some work
                 ctx.Status("Leyendo carpeta del juego...");
                 ctx.Spinner(Spinner.Known.Circle);
                 ctx.SpinnerStyle(Style.Parse("yellow"));
                 var psync2 = new Watson.Lib.Game.AI_TheSomniumFiles2.Game(arg.GamePath, LanguageType.en, ctx);
-                
-        
+
+
                 // Update the status and spinner
                 ctx.Status("Procesando Archivos...");
                 psync2.Load();
@@ -45,6 +45,22 @@ switch (arg.OperationMode)
                 {
                     psync2.Export(arg.OutPut);
                 }
+            });
+        break;
+    case HandlerArgs.Mode.PARANORMASIGHT:
+        AnsiConsole.MarkupLine("[green]Juego - PARANORMASIGHT[/]");
+        AnsiConsole.Status()
+            .AutoRefresh(true)
+            .Start("Iniciando...", ctx =>
+            {
+                // Simulate some work
+                ctx.Status("Leyendo carpeta del juego...");
+                ctx.Spinner(Spinner.Known.Circle);
+                ctx.SpinnerStyle(Style.Parse("yellow"));
+                var pnorm = new Watson.Lib.Game.PARANORMASIGHT.Game(ctx, arg.GamePath);
+                pnorm.Load();
+                pnorm.ImportF(arg.fontFilePath);
+                pnorm.Export();
             });
         break;
     case HandlerArgs.Mode.Help:

@@ -22,25 +22,29 @@ public class TMPFont : IAsset
 
     public void Load()
     {
-        // Listar todas las fuentes
-        foreach (var m_Asset in m_AssetFile.GetAssetsOfType(AssetClassID.MonoBehaviour))
-        {
-            var deserialized =
-                m_AssetFile.AM.GetBaseField(m_AssetFile.Assets, m_Asset);
-            var asset = deserialized.Get("m_fontInfo");
-            if (asset != null)
-                // Almacenar el nombre de asset que contiene la fuente.
-                m_FontNames.Add(m_Asset.PathId,
-                    Tuple.Create(deserialized.Get("m_Name").Value.AsString, deserialized, m_Asset,
-                        m_AssetFile.Assets));
-        }
+        LoadFonts();
+        LoadTextures();
+    }
 
-        // Buscar Texture2D
-        foreach (var m_Texture in m_AssetFile.GetAssetsOfType(AssetClassID.Texture2D))
+    private void LoadFonts()
+    {
+        foreach (var asset in m_AssetFile.GetAssetsOfType(AssetClassID.MonoBehaviour))
         {
-            var baseField = m_AssetFile.AM.GetBaseField(m_AssetFile.Assets, m_Texture);
-            m_FontTextures.Add(m_Texture.PathId,
-                Tuple.Create(baseField["m_Name"].Value.AsString, baseField, m_Texture, m_AssetFile.Assets));
+            var baseField = m_AssetFile.AM.GetBaseField(m_AssetFile.Assets, asset);
+            var fontInfo = baseField.Get("m_fontInfo");
+            if (!fontInfo.IsDummy)
+            {
+                m_FontNames.Add(asset.PathId, Tuple.Create(baseField.Get("m_Name").Value.AsString, baseField, asset, m_AssetFile.Assets)!);
+            }
+        }
+    }
+
+    private void LoadTextures()
+    {
+        foreach (var texture in m_AssetFile.GetAssetsOfType(AssetClassID.Texture2D))
+        {
+            var baseField = m_AssetFile.AM.GetBaseField(m_AssetFile.Assets, texture);
+            m_FontTextures.Add(texture.PathId, Tuple.Create(baseField["m_Name"].Value.AsString, baseField, texture, m_AssetFile.Assets)!);
         }
     }
 

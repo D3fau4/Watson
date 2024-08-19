@@ -25,7 +25,6 @@ public static class TMPFont_Importer
             if (tmpname.Equals(fontold.Value.Item1))
             {
                 ToImport.Add(font.Value.Item1);
-                break;
             }
         }
 
@@ -47,7 +46,7 @@ public static class TMPFont_Importer
                 tmpname = tmpname.Replace(oldsuffix, newsuffix);
             if (tmpname.Equals(fontold.Value.Item1))
             {
-                
+
                 /* Remplazar m_Script */
                 // Establece el FileID
                 font.Value.Item2["m_Script"]["m_FileID"].Value = fontold.Value.Item2["m_Script"]["m_FileID"].Value;
