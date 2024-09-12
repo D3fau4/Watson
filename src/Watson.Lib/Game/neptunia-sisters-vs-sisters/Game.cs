@@ -39,7 +39,7 @@ public class Game : IGame
         AnsiConsole.Markup("[yellow]Neptunia: Sisters VS Sisters mode![/]\n");
         var task = ctx?.AddTask("[green]Searching assets[/]");
         gamedatapath = Path.Combine(gamepath, $"{gamename}_Data");
-        
+
         foreach (var files in Directory.GetFiles(gamedatapath, "*.*", SearchOption.AllDirectories)
                      .Where(file => Regex.IsMatch(file, CSV_REGEX)))
             csvassets.Add(files);
@@ -48,13 +48,13 @@ public class Game : IGame
 
     public void Proccess()
     {
-        
+
         var task = ctx?.AddTask("[green]Processing assets[/]");
         float proInc = 100.0f / (csvassets.Count -1);
         foreach (var file in csvassets)
         {
             var am = new UnityAssetFile(file, gamedatapath);
-            
+
             // CSV
             var text = new TextAsset(am);
             text.Load();
@@ -125,15 +125,15 @@ public class Game : IGame
                         csventry.unk_4 = entrys[14];
                         csvs.Add(csventry);
                     }
-                
+
                 var arr = csvs.ToArray();
                 if (arr.Length <= 0)
                     continue;
                     csvfiles.Add(csv.Value.Item2["m_Name"].AsString, arr);
             }
-            
+
             // String DB
-                
+
             var dbobject = new DbStringObject(am);
             dbobject.Load();
 
@@ -156,23 +156,23 @@ public class Game : IGame
                             s.krText_ = test["krText_"].AsString;
                             s.tag_ = test["tag_"].AsString;
                             s.extend_ = new DbExtendString(test["extend_"]["Comment_"].AsString);
-                            
+
                             list.Add(s);
                         }
                     }
                 }
-                
+
                 var arr = list.ToArray();
                 if (arr.Length <= 0)
                     continue;
                 dbstrings.Add(dbobjets.Value.Item2["m_Name"].AsString, arr);
             }
-            
+
             task?.Increment(proInc);
         }
     }
 
-    public void Import()
+    public void Import(string poPath = "")
     {
         throw new NotImplementedException();
     }
@@ -180,9 +180,9 @@ public class Game : IGame
     public void Export(string outpath = "out")
     {
         var task = ctx?.AddTask("[green]Converting to po[/]");
-        
+
         float proInc = 100.0f / (csvfiles.Count + dbstrings.Count);
-        
+
         if (!Directory.Exists(outpath))
             Directory.CreateDirectory(outpath);
 

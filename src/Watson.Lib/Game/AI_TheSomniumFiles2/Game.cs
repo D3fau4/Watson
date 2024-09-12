@@ -70,7 +70,7 @@ public class Game : IGame
         foreach (var sprite in m_Sprites) sprite.Load();
     }
 
-    public void Import()
+    public void Import(string poPath)
     {
         throw new NotImplementedException();
     }

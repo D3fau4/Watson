@@ -25,7 +25,12 @@ public static class AssetHelper
                 assetFile.Bundle.file.Write(writer);
             }
             assetFile.AM.UnloadAll(true);
-            File.Move("TMP.unity3d", assetFile.AssetName, true);
+
+            //Create directory output
+                if (!Directory.Exists("out_assets"))
+                    Directory.CreateDirectory("out_assets");
+
+            File.Move("TMP.unity3d", Path.Combine("out_assets", assetFile.AssetName), true);
         }
         else
         {

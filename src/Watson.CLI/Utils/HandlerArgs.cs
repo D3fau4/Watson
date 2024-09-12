@@ -33,6 +33,7 @@ public class HandlerArgs
             new(new[] { "--gamepath" }, x => GamePath = x),
             new(new[] { "--output", "-o" }, x => OutPut = x),
             new(new[] { "--extract", "-x" }, () => extract = true),
+            new(new[] { "--import", "-i" }, x => PoPath = x),
             new(new[] { "--file", "-f" }, x => filePath = x)
         };
 
@@ -45,13 +46,18 @@ public class HandlerArgs
             else
                 handler.Invoke(handler.RequiresArg ? raw_args[++i] : null!);
         }
+
+        if (import && string.IsNullOrEmpty(PoPath))
+            throw new Exception("Import requires a Po file path");
     }
 
     public Mode? OperationMode { get; private set; }
     public string? GamePath { get; private set; }
     public string? filePath { get; private set; }
     public string? OutPut { get; private set; } = "out";
+    public string? PoPath { get; private set; }
     public bool extract { get; private set; }
+    public bool import { get; private set; }
 
     public static void PrintInfo()
     {

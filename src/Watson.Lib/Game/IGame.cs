@@ -6,7 +6,7 @@ public interface IGame
 
     public void Proccess();
 
-    public void Import();
+    public void Import(string poPath = "");
 
     public void Export(string outpath = "out");
 }

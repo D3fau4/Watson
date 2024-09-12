@@ -39,8 +39,8 @@ public class Game : IGame
     {
         ctx.Status("Leyendo Archivos...");
         foreach (string filePath in Directory.GetFiles(gamedatapath, "*.bundle", SearchOption.AllDirectories)) {
-            /*if (!filePath.Contains("scenes_scenes_locationgirlsgirlsgirls.bundle"))
-                continue;*/
+            if (!filePath.Contains("scenes_scenes_ending-credits.bundle"))
+                continue;
 
             AnsiConsole.MarkupLine("[yellow]Leyendo Archivo:[/] " + Path.GetFileName(filePath));
             var m_assetfile = new UnityAssetFile(filePath, gamedatapath);
@@ -78,9 +78,79 @@ public class Game : IGame
         }
     }
 
-    public void Import()
+    public void Import(string poPath)
     {
-        throw new NotImplementedException();
+        ctx.Status("Importando Archivos...");
+        foreach (string filePath in Directory.GetFiles(gamedatapath, "*.bundle", SearchOption.AllDirectories)) {
+
+            if (!File.Exists(Path.Combine(poPath, $"{Path.GetFileName(filePath)}.InvokeNextLineAsync.po")) && !File.Exists(Path.Combine(poPath, $"{Path.GetFileName(filePath)}.Say.po")))
+                continue;
+
+            AnsiConsole.MarkupLine("[yellow]Leyendo Archivo:[/] " + Path.GetFileName(filePath));
+            UnityAssetFile m_assetfile = new UnityAssetFile(filePath, gamedatapath);
+
+            if (File.Exists(Path.Combine(poPath, $"{Path.GetFileName(filePath)}.InvokeNextLineAsync.po"))) {
+                using var Po = NodeFactory.FromFile(Path.Combine(poPath, $"{Path.GetFileName(filePath)}.InvokeNextLineAsync.po"), FileOpenMode.Read);
+                Po.TransformWith(new Binary2Po());
+                var po = Po.GetFormatAs<Po>();
+                int index = 0;
+                foreach (AssetFileInfo m_monobehaviour in m_assetfile.GetAssetsOfType(AssetClassID.MonoBehaviour)) {
+
+                    var deserialized = m_assetfile.AM.GetBaseField(m_assetfile.Assets, m_monobehaviour);
+
+                    try {
+                        if (!deserialized["targetMethod"].IsDummy &&
+                            deserialized["targetMethod"].Value.AsString == "NextLineAsync") {
+                            foreach (AssetTypeValueField objValue in deserialized["methodParameters.Array"]) {
+                                if (objValue["objValue"].IsDummy || objValue["objValue"]["stringValue"].IsDummy)
+                                    continue;
+
+                                objValue["objValue"]["stringValue"].Value.AsString =
+                                    !string.IsNullOrEmpty(po.Entries[index].Translated)
+                                        ? po.Entries[index].Translated
+                                        : po.Entries[index].Original;
+
+                                m_monobehaviour.SetNewData(objValue);
+                                index++;
+                            }
+                        }
+                    } catch (Exception e) {
+                        // ignored
+                    }
+                }
+            }
+
+            if (File.Exists(Path.Combine(poPath, $"{Path.GetFileName(filePath)}.Say.po"))) {
+                using var Po = NodeFactory.FromFile(Path.Combine(poPath, $"{Path.GetFileName(filePath)}.Say.po"), FileOpenMode.Read);
+                Po.TransformWith(new Binary2Po());
+                var po = Po.GetFormatAs<Po>();
+                int index = 0;
+                foreach (AssetFileInfo m_monobehaviour in m_assetfile.GetAssetsOfType(AssetClassID.MonoBehaviour)) {
+
+                    var deserialized = m_assetfile.AM.GetBaseField(m_assetfile.Assets, m_monobehaviour);
+
+                    try {
+                        if (!deserialized["storyText"].IsDummy) {
+                            deserialized.Get("storyText").Value.AsString =
+                                !string.IsNullOrEmpty(po.Entries[index].Translated)
+                                    ? po.Entries[index].Translated
+                                    : po.Entries[index].Original;
+                            m_monobehaviour.SetNewData(deserialized);
+                            index++;
+                        }
+
+
+
+                    } catch (Exception e) {
+
+                    }
+                }
+            }
+
+            // Save the file
+            Utils.Helpers.AssetHelper.Save(m_assetfile);
+            m_assetfile.Close();
+        }
     }
 
     public void Export(string outputPath = "out")

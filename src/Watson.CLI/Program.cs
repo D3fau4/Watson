@@ -70,11 +70,14 @@ switch (arg.OperationMode)
                 ctx.Spinner(Spinner.Known.Circle);
                 ctx.SpinnerStyle(Style.Parse("yellow"));
                 var cocodrilo = new Watson.Lib.Game.LaterAlligator.Game(arg.GamePath, ctx);
-                cocodrilo.Proccess();
+
                 if (arg.extract)
                 {
+                    cocodrilo.Proccess();
                     cocodrilo.Export(arg.OutPut);
                 }
+
+                cocodrilo.Import(arg.PoPath);
             });
         break;
     case HandlerArgs.Mode.Help:

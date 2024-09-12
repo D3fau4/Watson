@@ -461,7 +461,7 @@ public class Game : IGame
         }
     }
 
-    public void Import()
+    public void Import(string poPath = "")
     {
         throw new NotImplementedException();
     }
