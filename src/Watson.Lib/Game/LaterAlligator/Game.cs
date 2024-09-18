@@ -39,8 +39,8 @@ public class Game : IGame
     {
         ctx.Status("Leyendo Archivos...");
         foreach (string filePath in Directory.GetFiles(gamedatapath, "*.bundle", SearchOption.AllDirectories)) {
-            if (!filePath.Contains("scenes_scenes_ending-credits.bundle"))
-                continue;
+            /*if (!filePath.Contains("scenes_scenes_ending-credits.bundle"))
+                continue;*/
 
             AnsiConsole.MarkupLine("[yellow]Leyendo Archivo:[/] " + Path.GetFileName(filePath));
             var m_assetfile = new UnityAssetFile(filePath, gamedatapath);
@@ -107,8 +107,8 @@ public class Game : IGame
 
                                 objValue["objValue"]["stringValue"].Value.AsString =
                                     !string.IsNullOrEmpty(po.Entries[index].Translated)
-                                        ? po.Entries[index].Translated
-                                        : po.Entries[index].Original;
+                                        ? po.Entries[index].Translated.Replace("\n", "\r\n")
+                                        : po.Entries[index].Original.Replace("\n", "\r\n");
 
                                 m_monobehaviour.SetNewData(objValue);
                                 index++;
@@ -126,15 +126,15 @@ public class Game : IGame
                 var po = Po.GetFormatAs<Po>();
                 int index = 0;
                 foreach (AssetFileInfo m_monobehaviour in m_assetfile.GetAssetsOfType(AssetClassID.MonoBehaviour)) {
-
-                    var deserialized = m_assetfile.AM.GetBaseField(m_assetfile.Assets, m_monobehaviour);
-
                     try {
+
+                        var deserialized = m_assetfile.AM.GetBaseField(m_assetfile.Assets, m_monobehaviour);
+
                         if (!deserialized["storyText"].IsDummy) {
                             deserialized.Get("storyText").Value.AsString =
                                 !string.IsNullOrEmpty(po.Entries[index].Translated)
-                                    ? po.Entries[index].Translated
-                                    : po.Entries[index].Original;
+                                    ? po.Entries[index].Translated.Replace("\n", "\r\n")
+                                    : po.Entries[index].Original.Replace("\n", "\r\n");
                             m_monobehaviour.SetNewData(deserialized);
                             index++;
                         }

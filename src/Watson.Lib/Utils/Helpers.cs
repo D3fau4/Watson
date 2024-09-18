@@ -19,7 +19,7 @@ public static class AssetHelper
 
         if (assetFile.IsBundle)
         {
-            assetFile.Bundle.file.BlockAndDirInfo.DirectoryInfos[0].SetNewData(assetFile.Assets.file);
+            assetFile.Bundle.file.BlockAndDirInfo.DirectoryInfos[assetFile.Bundle.file.GetFileIndex(assetFile.Assets.name)].SetNewData(assetFile.Assets.file);
             using (AssetsFileWriter writer = new AssetsFileWriter("TMP.unity3d"))
             {
                 assetFile.Bundle.file.Write(writer);

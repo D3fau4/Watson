@@ -32,7 +32,7 @@ public class ArrayString2Po : IConverter<string[], Po>
             var txt = !source[i].Equals(string.Empty) ? source[i] : "{EMPTY}";
             po.Add(new PoEntry
             {
-                Original = txt,
+                Original = txt.Replace("\r\n", "\n"),
                 Context = $"{Name}.{preContext}.{i}"
             });
         }
