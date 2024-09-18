@@ -4,6 +4,8 @@ using AssetsTools.NET.Extra;
 
 namespace Watson.Lib.IO;
 
+using Spectre.Console;
+
 public class UnityAssetFile
 {
     public AssetsManager AM;
@@ -30,7 +32,7 @@ public class UnityAssetFile
         }
         catch (Exception ex)
         {
-            // Si recibe un error de que el archivo es muy pequeño intentar abrir como AssetBundle. 
+            // Si recibe un error de que el archivo es muy pequeño intentar abrir como AssetBundle.
             if (ex.Message.Contains("too small") || ex.Message.Contains("Unable to read beyond the end"))
             {
                 // Descargar lo que haya conseguido cargar.
@@ -61,7 +63,7 @@ public class UnityAssetFile
         }
         catch (Exception ex)
         {
-            // Si recibe un error de que el archivo es muy pequeño intentar abrir como AssetBundle. 
+            // Si recibe un error de que el archivo es muy pequeño intentar abrir como AssetBundle.
             if (ex.Message.Contains("too small") || ex.Message.Contains("Unable to read beyond the end"))
             {
                 // Descargar lo que haya conseguido cargar.
@@ -70,10 +72,15 @@ public class UnityAssetFile
                 Bundle = AM.LoadBundleFile(file);
 
                 // Siempre index 0 ya que es el que contiene todos los archivos
-                Assets = AM.LoadAssetsFileFromBundle(Bundle, 0, true);
+                foreach (string fileName in Bundle.file.GetAllFileNames()) {
+                    if (!fileName.Contains(".sharedAssets") && Bundle.file.BlockAndDirInfo.DirectoryInfos[Bundle.file.GetFileIndex(fileName)].Flags == 4) {
+                        Assets = AM.LoadAssetsFileFromBundle(Bundle, Bundle.file.GetFileIndex(fileName), true);
+                        break;
+                    }
+                }
 
                 AM.LoadClassPackage(new MemoryStream(Resources.Resources.classdata));
-                AM.LoadClassDatabaseFromPackage(Assets.file.Metadata.UnityVersion);
+                AM.LoadClassDatabaseFromPackage(Bundle.file.Header.EngineVersion);
                 IsBundle = true;
             }
         }
@@ -81,6 +88,40 @@ public class UnityAssetFile
         if (DataFolder != string.Empty)
         {
             AM.MonoTempGenerator = Assembly.LoadAssamblys(DataFolder);
+        }
+    }
+
+    public static void LoadAndExtractUnity3D(string path, string OutPut = "out")
+    {
+        var AM = new AssetsManager();
+        var a = AM.LoadBundleFile(path, true);
+        try
+        {
+            Directory.CreateDirectory(OutPut);
+            for (int i = 0; i < 10000; i++)
+            {
+                AM.LoadAssetsFileFromBundle(a, i, false);
+                foreach (AssetsFileInstance assetsFileInstance in a.loadedAssetsFiles)
+                {
+                    var filePath = Path.Combine(OutPut, assetsFileInstance.name);
+                    if (File.Exists(filePath)) continue;
+                    AnsiConsole.MarkupLine($"[yellow]Extrayendo archivo: [/] {assetsFileInstance.name}");
+                    using (var fileStream = File.Create(filePath))
+                    {
+                        if (assetsFileInstance.AssetsStream.CanSeek)
+                        {
+                            assetsFileInstance.AssetsStream.Position = 0;
+                        }
+                        assetsFileInstance.AssetsStream.CopyTo(fileStream);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+#if DEBUG
+            AnsiConsole.MarkupLine($"[red]Error: [/] {e.Message}");
+#endif
         }
     }
 

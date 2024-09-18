@@ -19,13 +19,18 @@ public static class AssetHelper
 
         if (assetFile.IsBundle)
         {
-            assetFile.Bundle.file.BlockAndDirInfo.DirectoryInfos[0].SetNewData(assetFile.Assets.file);
+            assetFile.Bundle.file.BlockAndDirInfo.DirectoryInfos[assetFile.Bundle.file.GetFileIndex(assetFile.Assets.name)].SetNewData(assetFile.Assets.file);
             using (AssetsFileWriter writer = new AssetsFileWriter("TMP.unity3d"))
             {
                 assetFile.Bundle.file.Write(writer);
             }
             assetFile.AM.UnloadAll(true);
-            File.Move("TMP.unity3d", assetFile.AssetName, true);
+
+            //Create directory output
+                if (!Directory.Exists("out_assets"))
+                    Directory.CreateDirectory("out_assets");
+
+            File.Move("TMP.unity3d", Path.Combine("out_assets", assetFile.AssetName), true);
         }
         else
         {

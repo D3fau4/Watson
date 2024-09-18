@@ -11,7 +11,9 @@ public class HandlerArgs
         HoloError,
         Windose,
         SVS,
-        Psync2
+        Psync2,
+        CocoDrilo,
+        Unity3D
     }
 
     public HandlerArgs(string[] raw_args)
@@ -24,11 +26,15 @@ public class HandlerArgs
             new( new[] { "--windose" }, () => OperationMode = Mode.Windose),
             new( new[] {  "--NeptuniaSVS", "-svs" }, () => OperationMode = Mode.SVS),
             new( new[] {  "--AI2", "-ai2" }, () => OperationMode = Mode.Psync2),
+            new( new[] {  "--coco" }, () => OperationMode = Mode.CocoDrilo),
+            new( new[] {  "--unity" }, () => OperationMode = Mode.Unity3D),
 
             // Args
             new(new[] { "--gamepath" }, x => GamePath = x),
             new(new[] { "--output", "-o" }, x => OutPut = x),
-            new(new[] { "--extract", "-x" }, () => extract = true)
+            new(new[] { "--extract", "-x" }, () => extract = true),
+            new(new[] { "--import", "-i" }, x => PoPath = x),
+            new(new[] { "--file", "-f" }, x => filePath = x)
         };
 
         for (var i = 0; i < raw_args.Length; ++i)
@@ -40,30 +46,22 @@ public class HandlerArgs
             else
                 handler.Invoke(handler.RequiresArg ? raw_args[++i] : null!);
         }
+
+        if (import && string.IsNullOrEmpty(PoPath))
+            throw new Exception("Import requires a Po file path");
     }
 
     public Mode? OperationMode { get; private set; }
     public string? GamePath { get; private set; }
+    public string? filePath { get; private set; }
     public string? OutPut { get; private set; } = "out";
+    public string? PoPath { get; private set; }
     public bool extract { get; private set; }
+    public bool import { get; private set; }
 
     public static void PrintInfo()
     {
         AnsiConsole.Markup("[purple]Watson.CLI.exe[/] [red](MODE)[/] [yellow](OPTIONS)[/]");
-        /*cmdutils.print("Operation Modes:");
-        cmdutils.print("    --Hololy                        Download and decrypt Hololy models.");
-        cmdutils.print("    --HoloEarth                     Download HoloEarths.");
-        cmdutils.print("    --HololiveError                 Decrypt HololiveError bundles.");
-        cmdutils.print("General options: ");
-        cmdutils.print("    --output, -o                    Set the output folder.");
-        cmdutils.print("Hololive Error options:");
-        cmdutils.print("    --input, -i                     Set the input file to decrypt.");
-        cmdutils.print("    --hash                          Set the hash of the bundle");
-        cmdutils.print("Hololy options:");
-        cmdutils.print("    --dev                           Set the dev server");
-        cmdutils.print("    --list, -l                      List the models");
-        cmdutils.print("    --download, -d                  Download the models");
-        cmdutils.print("    --model                         Download the model by name");*/
     }
 
     private class Handler
